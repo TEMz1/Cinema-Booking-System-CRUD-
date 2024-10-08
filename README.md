@@ -39,6 +39,5 @@ Admin's System on the other hand doesn't have any registration so you must use e
 
 ![image](https://github.com/user-attachments/assets/6de5310b-e8b5-44be-9285-60db2a68ffed)
 
-![image](https://github.com/user-attachments/assets/ce64cb68-d7a6-41bb-9d87-8ab6faa89549)
 
 
