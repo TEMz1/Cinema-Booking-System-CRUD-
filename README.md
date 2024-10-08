@@ -33,3 +33,12 @@ Admin's System on the other hand doesn't have any registration so you must use e
 **Screenshots of the system:**
 ![image](https://github.com/user-attachments/assets/06201621-a05f-4ab9-a84f-ae3b807fe285)
 
+![image](https://github.com/user-attachments/assets/af3111a9-1a4f-4c7e-9801-4ed378d4ea90)
+
+![image](https://github.com/user-attachments/assets/500bbf71-54e3-42f0-91ec-50a619c6af25)
+
+![image](https://github.com/user-attachments/assets/6de5310b-e8b5-44be-9285-60db2a68ffed)
+
+![image](https://github.com/user-attachments/assets/ce64cb68-d7a6-41bb-9d87-8ab6faa89549)
+
+
