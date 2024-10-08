@@ -29,3 +29,7 @@ If Admin(Manager/Clerk) system:-
 
 10th Step: You can login into Customer's System by using existing account or register for a new one through phpmyadmin. 
 Admin's System on the other hand doesn't have any registration so you must use existing account by referring to the table Clerk or Manager respectively in the database.
+
+Screenshots of the system:
+![image](https://github.com/user-attachments/assets/06201621-a05f-4ab9-a84f-ae3b807fe285)
+
