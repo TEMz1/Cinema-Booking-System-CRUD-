@@ -83,72 +83,108 @@
                 }
             ?>
         </div>
+
     </body>
 
     <style>
-        body{
-			background-color: #BF0885;
-		}
-
-		.container{
-            margin: 50px;
-			text-align: center;
-			color: black;
-			border-radius: 50px;
+        body {
+            background-color: #F9F0FF;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
         }
+.container {
+    margin: 30px auto;
+    max-width: 90%;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-		h1{
-			font-size: 50px;
-			background-color: pink;
-			border-radius: 50px;
-		}
+h1 {
+    font-size: 40px;
+    font-weight: bold;
+    color: #BF0885;
+    background-color: #FFE6FF;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    text-align:center;
+}
 
-		.add{
-			padding: 5px;
-			background: purple;
-			text-decoration: none;
-			float: right;
-			margin-top: -20px;
-			border-radius: 2px;
-			font-size: 20px;
-			font-weight: 500;
-			color: #fff;
-			border-radius: 30px;
-		}
-		
-		.container h1{
-			text-align: center;
-		}
-		
-		table, th{
-			background-color: #84056B;
-			font-size: 20px;
-			border: 3px solid black;
-			text-align: center;
-			height:50px;
-			color: white;
-			border-radius: 30px;
-		}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: center;
+    background-color: #ffffff;
+}
 
-		table, td{
-			font-size: 20px;
-			border: 3px solid black;
-			text-align: center;
-			width:1400px;
-			height:50px;
-			background-color: pink;
-			color: black;
-			border-radius: 30px;
-		}
+table, th, td {
+    border: 1px solid #BF0885;
+    text-align: center;
+    padding: 15px;
+}
 
-		.sum{
-			background-color: pink;
-			float:left;
-			color: black;
-			font-size: 30px;
-			font-weight: bold;
-			margin-top: 100px;
-			border-radius: 10px;
-		}
+th {
+    background-color: #BF0885;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+td {
+    color: #333333;
+    font-weight: 500;
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.sum {
+    background-color: #28a745;
+    color: #ffffff;
+    padding: 20px;
+    font-size: 22px;
+    font-weight: bold;
+    margin: 20px auto;
+    text-align: center;
+    border-radius: 5px;
+    max-width: 300px;
+}
+
+.add {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    display: inline-block;
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.add:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 28px;
+    }
+
+    table {
+        font-size: 16px;
+    }
+
+    .sum {
+        font-size: 18px;
+    }
+}
+
     </style>
 </html>

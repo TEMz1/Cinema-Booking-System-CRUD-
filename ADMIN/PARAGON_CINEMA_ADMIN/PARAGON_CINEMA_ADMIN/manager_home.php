@@ -37,20 +37,53 @@ $row = mysqli_fetch_assoc($sendsql)
     </body>
 
 	<style>
-		body{
-			background-color: #BF0885;
-		}
+		body {
+        background-color: #F9F0FF;
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
 
-		.container{
-			background-color: pink;
-            margin: 50px;
-			text-align: center;
-			color: black;
-			border-radius: 50px;
+    .container {
+        margin: 50px;
+        text-align: center;
+        background-color: #FFF3FB;
+        color: #333333;
+        border-radius: 15px;
+        padding: 40px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        font-size: 50px;
+        font-weight: bold;
+        color: #BF0885;
+        background-color: #FFE6FF;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    h2 {
+        font-size: 24px;
+        font-weight: normal;
+        color: #BF0885;
+        margin: 15px 0;
+    }
+
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 36px;
         }
 
-		h1{
-			font-size: 50px;
-		}
+        h2 {
+            font-size: 18px;
+        }
+
+        .container {
+            padding: 20px;
+        }
+    }
 	</style>
 </html>

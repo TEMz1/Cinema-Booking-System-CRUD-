@@ -76,51 +76,104 @@
     </body>
 
     <style>
-        body{
-			background-color: #BF0885;
-		}
+       body {
+    background-color: #F9F0FF; /* Soft, light pastel pink for the background */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
 
-		.container{
-			background-color: pink;
-            margin: 50px;
-			text-align: center;
-			color: black;
-			border-radius: 50px;
-        }
+.container {
+    background-color: #FFF3FB; /* Lighter shade of pink for the container */
+    margin: 50px auto;
+    padding: 40px;
+    text-align: center;
+    color: #333;
+    border-radius: 20px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    width: 60%;
+}
 
-		h1{
-			text-align: center;
-			color: black;
-            margin: 30px;
-            font-size: 50px;
-            font-family: Poppins;
-		}
+h1 {
+    font-size: 48px;
+    color: #BF0885; /* Rich pink for the header */
+    background-color: #FFE6FF; /* Light pastel pink for the background of the heading */
+    padding: 20px;
+    border-radius: 12px;
+    margin: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Poppins, sans-serif; /* Clean font for header */
+}
 
-        .form-group {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            margin-bottom: 10px;
-            margin-left: 400px;
-        }
+form {
+    margin-top: 20px;
+}
 
-        .form-group label {
-            width: 150px;
-            text-align: right;
-            margin-right: 10px;
-        }
+.form-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 15px;
+    justify-content: center; /* Centers the form-group for better alignment */
+}
 
-        .form-group input[type="text"] {
-            width: 280px;
-        }
+.form-group label {
+    width: 150px;
+    text-align: right;
+    margin-right: 10px;
+    font-size: 18px;
+}
 
-		input{
-			width: 20%;
-			border: 1px;
-			border-radius: 5px;
-			padding: 8px 15px 8px 15px;
-			margin: 10px 0px 15px 0px;
-			box-shadow: 1px 1px 2px 1px grey;
-		}
+.form-group input[type="text"] {
+    width: 250px; /* Adjust width for form inputs */
+    padding: 10px;
+    font-size: 16px;
+}
+
+input, textarea {
+    width: 250px;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #D1D1D1;
+    margin: 12px 0;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+}
+
+input[type="submit"] {
+    background-color: #BF0885;
+    color: white;
+    font-size: 18px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #a60471; /* Darker pink on hover */
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 80%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+
+    .form-group {
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .form-group label, .form-group input {
+        width: 80%;
+    }
+}
+
     </style>
 </html>

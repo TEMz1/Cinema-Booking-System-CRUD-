@@ -76,33 +76,78 @@
 	    </body>
 
 	<style>
-		body{
-			background-color: #BF0885;
-		}
+		body {
+    background-color: #F4E1FF; /* Soft pastel purple background for a more calming feel */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
 
-		.container{
-			background-color: pink;
-            margin: 50px;
-			text-align: center;
-			color: black;
-			border-radius: 50px;
-        }
+.container {
+    background-color: #FFFFFF; /* White background for the form container for better contrast */
+    margin: 50px auto;
+    padding: 40px;
+    width: 60%;
+    text-align: center;
+    color: #333;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
 
-		h1{
-            font-family: Poppins;
-			text-align: center;
-			color: black;
-            margin: 30px;
-            font-size: 50px;
-		}
+h1 {
+    font-size: 48px;
+    color: #BF0885; /* Bold pink color for headings */
+    margin: 0;
+    padding: 20px 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #FFE6F0; /* Very light pink background for the header */
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-		input{
-			width: 20%;
-			border: 1px;
-			border-radius: 5px;
-			padding: 8px 15px 8px 15px;
-			margin: 10px 0px 15px 0px;
-			box-shadow: 1px 1px 2px 1px grey;
-		}
+form {
+    margin-top: 20px;
+}
+
+input {
+    width: 80%; /* Makes the input fields wider */
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #D1D1D1;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    margin: 15px 0;
+}
+
+input[type="submit"] {
+    background-color: #BF0885; /* Strong pink color for the button */
+    color: white;
+    font-size: 18px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #a60471; /* Slightly darker pink on hover for interactive feel */
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 80%; /* Makes the container adapt better on smaller screens */
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+
+    input {
+        width: 100%; /* Makes input fields full width on smaller screens */
+    }
+}
+
 	</style>
 </html>
