@@ -173,8 +173,8 @@ function getTrailerLinkFromDatabase($conn, $movieID)
                         if ($now < $dateTime || $minuteDiff <= 10) {
                 ?>
                         <div class="col-12 col-lg-3 px->i;-4 text-center mt-4">
-                            <a->i; href="booking_seat.php?SESS_ID=<?php echo $row['session_id']; ?>&HALL_ID=<?php echo $row['hallNo']; ?>
-                            " class="btn showtime-btn"><?php echo $formattedDateTime; ?></a->
+                            <a i; href="booking_seat.php?SESS_ID=<?php echo $row['session_id']; ?>&HALL_ID=<?php echo $row['hallNo']; ?>
+                            " class="btn showtime-btn"><?php echo $formattedDateTime; ?></a>
                         </div>
                 <?php
                     } else { // Waktu tayang sudah berjalan lebih dari 10 menit
