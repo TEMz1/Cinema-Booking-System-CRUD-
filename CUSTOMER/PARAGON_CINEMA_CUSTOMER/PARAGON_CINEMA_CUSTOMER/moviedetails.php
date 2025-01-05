@@ -165,6 +165,7 @@ function getTrailerLinkFromDatabase($conn, $movieID)
                         $formattedDateTime = $dateTime->format('d M Y, H:i');
 
                         // hitung waktu sekarang
+                        date_default_timezone_set('Asia/Jakarta'); // Sesuaikan timezone di sini
                         $now = new DateTime();
                         $interval = $now->diff($dateTime);
                         $minuteDiff = ($interval->days * 24 * 60) + ($interval->h * 60) + $interval->i;
@@ -194,8 +195,6 @@ function getTrailerLinkFromDatabase($conn, $movieID)
             </div>
         </div>
     </div>
-
-
 
 
     <!-- FOOTER SECTION -->
