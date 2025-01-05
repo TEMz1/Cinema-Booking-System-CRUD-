@@ -70,52 +70,90 @@
 	    </body>
 
 	<style>
-		body{
-			background-color: #BF0885;
-		}
+		body {
+    background-color: #F9F0FF;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
 
-		.container{
-			background-color: pink;
-            margin: 50px;
-			text-align: center;
-			color: black;
-			border-radius: 50px;
-        }
+.container {
+    background-color: #FFF3FB;
+    margin: 50px auto;
+    padding: 40px;
+    text-align: center;
+    color: #333;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    width: 50%;
+}
 
-		h1{
-			text-align: center;
-			color: black;
-            margin: 30px;
-            font-size: 50px;
-            font-family: Poppins;
-		}
+h1 {
+    font-size: 48px;
+    color: #BF0885;
+    background-color: #FFE6FF;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
 
-        .form-group {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            margin-bottom: 10px;
-            margin-left: 400px;
-        }
+.form-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
 
-        .form-group label {
-            width: 150px;
-            text-align: right;
-            margin-right: 10px;
-        }
+.form-group label {
+    width: 150px;
+    text-align: right;
+    margin-right: 20px;
+    font-weight: bold;
+    color: #BF0885;
+}
 
-        .form-group input[type="text"],
-        .form-group input[type="number"] {
-            width: 250px;
-        }
+.form-group input[type="text"],
+.form-group input[type="number"] {
+    width: 250px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #D1D1D1;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    margin: 5px 0;
+}
 
-		input{
-			width: 20%;
-			border: 1px;
-			border-radius: 5px;
-			padding: 8px 15px 8px 15px;
-			margin: 10px 0px 15px 0px;
-			box-shadow: 1px 1px 2px 1px grey;
-		}
+input[type="submit"] {
+    background-color: #BF0885;
+    color: white;
+    font-size: 18px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #a60471;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 80%;
+        padding: 20px;
+    }
+
+    .form-group label {
+        width: 120px;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="number"] {
+        width: 200px;
+    }
+}
+
 	</style>
 </html>

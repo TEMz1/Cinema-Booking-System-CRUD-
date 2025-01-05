@@ -82,33 +82,83 @@
 	    </body>
 
 	<style>
-		body{
-			background-color: #BF0885;
-		}
+		body {
+    background-color: #F9F0FF; /* Soft light pink background for the page */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
 
-		.container{
-			background-color: pink;
-            margin: 50px;
-			text-align: center;
-			color: black;
-			border-radius: 50px;
-        }
+.container {
+    background-color: #FFF3FB; /* Light pink background for the container */
+    margin: 50px auto;
+    padding: 40px;
+    text-align: center;
+    color: #333;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    width: 60%;
+}
 
-		h1{
-            font-family: Poppins;
-			text-align: center;
-			color: black;
-            margin: 30px;
-            font-size: 50px;
-		}
+h1 {
+    font-size: 48px;
+    color: #BF0885; /* Strong purple/pink color */
+    background-color: #FFE6FF; /* Pastel pink background for the title */
+    padding: 20px;
+    border-radius: 10px;
+    margin: 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
 
-		input, textarea{
-			width: 20%;
-			border: 1px;
-			border-radius: 5px;
-			padding: 8px 15px 8px 15px;
-			margin: 10px 0px 15px 0px;
-			box-shadow: 1px 1px 2px 1px grey;
-		}
+form {
+    margin-top: 20px;
+}
+
+input, textarea {
+    width: 250px;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #D1D1D1;
+    margin: 10px 0;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+}
+
+input[type="submit"] {
+    background-color: #BF0885;
+    color: white;
+    font-size: 18px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #a60471; /* Darker purple for hover effect */
+}
+
+textarea {
+    width: 80%; /* Wider input field for description */
+    resize: vertical; /* Allows the user to resize the textarea vertically */
+    height: 100px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 80%;
+        padding: 20px;
+    }
+
+    input, textarea {
+        width: 80%; /* Adjust the width for mobile responsiveness */
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+}
+
 	</style>
 </html>

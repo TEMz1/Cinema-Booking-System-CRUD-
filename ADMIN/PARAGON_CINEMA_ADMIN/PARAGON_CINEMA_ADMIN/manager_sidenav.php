@@ -27,7 +27,8 @@
 			margin: 0;
 			padding: 0;
 			overflow: hidden;
-			background-color: purple;
+			background-color: black;
+			
 		}
 
 		li{
@@ -44,7 +45,7 @@
 		}
 
 		li a:hover{
-			background-color: #61016E;
+			background-color:rgb(68, 68, 68);
 			border-radius: 30px;
 		}
 				

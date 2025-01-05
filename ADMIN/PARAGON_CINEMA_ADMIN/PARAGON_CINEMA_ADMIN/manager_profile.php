@@ -66,60 +66,109 @@
     </body>
 
 	<style>
-		body{
-			background-color: #BF0885;
-		}
+		body {
+    background-color: #F9F0FF;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
 
-		.container{
-			background-color: pink;
-            margin: 50px;
-			text-align: center;
-			color: black;
-			border-radius: 50px;
-        }
+.container {
+    background-color: #FFFFFF;
+    margin: 30px auto;
+    max-width: 800px;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
 
-		h1{
-			text-align: center;
-            margin: 30px;
-            font-size: 50px;
-		}
-        
-        table, th{
-			background-color: #84056B;
-			font-size: 20px;
-			border: 3px solid black;
-			text-align: center;
-			height:50px;
-            width:300px;
-            color: white;
-            font-weight: bold;
-            margin-left: 10px;
-            border-radius: 30px;
-		}
+h1 {
+    font-size: 35px;
+    font-weight: bold;
+    color: #BF0885;
+    background-color: #FFE6FF;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-		table, td{
-			font-size: 20px;
-			border: 3px solid black;
-			text-align: center;
-			width:1400px;
-			height:50px;
-			background-color: purple;
-            color: white;
-            border-radius: 30px;
-		}
-        
-        .edit{
-            padding: 3px;
-			background: purple;
-			text-decoration: none;
-			float: right;
-            margin-right: 20px;
-			margin-top: -20px;
-			border-radius: 5px;
-			font-size: 20px;
-			font-weight: 300;
-			color: #fff;
-            border-radius: 15px;
-        }
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #FFF1FB;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+th, td {
+    border: 1px solid #BF0885;
+    text-align: left;
+    padding: 10px 15px;
+    color: #333333;
+}
+
+th {
+    background-color: #BF0885;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+td {
+    background-color: #FFE6FF;
+    color: #333333;
+    font-weight: 500;
+}
+
+tr:nth-child(even) td {
+    background-color: #FBEAFF;
+}
+
+tr:hover td {
+    background-color: #F5D1EF;
+    transition: 0.3s;
+}
+
+.edit {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #BF0885;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s;
+    margin-bottom: 20px;
+}
+
+.edit:hover {
+    background-color: #99076B;
+    transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    table, th, td {
+        font-size: 14px;
+    }
+
+    .edit {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+}
+
 	</style>
 </html>
