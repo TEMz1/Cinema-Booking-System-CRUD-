@@ -155,14 +155,7 @@ if (!empty($bookingdata)) {
 
 $_SESSION['seat'] = implode(', ',$seats);
     ?>
-<?php 
-echo $transaction_id;
-echo $hallno;
-echo $formattedDate;
-echo $formattedtime;
-echo implode(', ',$seats)
 
-?>
     <script>
     function confirmBooking() {
         // Menampilkan notifikasi berhasil booking
