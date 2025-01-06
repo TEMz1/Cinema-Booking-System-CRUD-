@@ -1,6 +1,12 @@
 <?php
+session_start();
 include 'dbConnect.php';
 
+if (isset($_SESSION['USER_ID'])) {
+    header("location: index.php");
+    exit();
+  }
+  
 if (isset($_POST['submit'])) {
     $Username = $_POST['Username'];
     $Email = $_POST['Email'];

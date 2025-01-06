@@ -1,10 +1,36 @@
 <?php
+define('APP_ACCESS', true);
+?>
+
+<?php
 session_start();
 include 'dbConnect.php';
 
 if (!isset($_SESSION['USER_ID'])) {
     header("location:login.php");
     exit();
+}
+
+if (!isset($_GET['movieid']) || empty($_GET['movieid'])) {
+    header("location:index.php"); // Redirect to home if no movie ID
+    exit();
+}
+
+if (!empty($_SESSION)) {
+    // Simpan hanya USER_ID dan username
+    $userId = $_SESSION['USER_ID'] ?? null;
+    $username = $_SESSION['USER_NAME'] ?? null;
+
+    // Hapus semua data sesi
+    session_unset();
+
+    // Kembalikan USER_ID dan username ke sesi
+    if ($userId !== null) {
+        $_SESSION['USER_ID'] = $userId;
+    }
+    if ($username !== null) {
+        $_SESSION['USER_NAME']= $username;
+    }
 }
 
 $movieID = $_GET["movieid"];
@@ -78,7 +104,8 @@ function getTrailerLinkFromDatabase($conn, $movieID)
 
 <body>
     <!-- HEADER SECTION -->
-    <?php include('header.php') ?>
+    <?php include('header.php') 
+    ?>
 
     <?php
 
@@ -164,8 +191,7 @@ function getTrailerLinkFromDatabase($conn, $movieID)
                         $dateTime = new DateTime($showtimeStart);
                         $formattedDateTime = $dateTime->format('d M Y, H:i');
 
-                        // hitung waktu sekarang
-                        date_default_timezone_set('Asia/Jakarta'); // Sesuaikan timezone di sini
+                         // hitung waktu sekarang
                         $now = new DateTime();
                         $interval = $now->diff($dateTime);
                         $minuteDiff = ($interval->days * 24 * 60) + ($interval->h * 60) + $interval->i;
@@ -174,15 +200,16 @@ function getTrailerLinkFromDatabase($conn, $movieID)
                         if ($now < $dateTime || $minuteDiff <= 10) {
                 ?>
                         <div class="col-12 col-lg-3 px->i;-4 text-center mt-4">
-                            <a i; href="booking_seat.php?SESS_ID=<?php echo $row['session_id']; ?>&HALL_ID=<?php echo $row['hallNo']; ?>
-                            " class="btn showtime-btn"><?php echo $formattedDateTime; ?></a>
+                            <a i; href="booking_seat.php?SESS_ID=<?php echo $row['session_id']; ?>&HALL_ID=<?php echo $row['hallNo'];?>
+                            &SESS_SHOW=<?php echo $formattedDateTime;?>"
+                             class="btn showtime-btn"><?php echo $formattedDateTime; ?></a>
                         </div>
                 <?php
                     } else { // Waktu tayang sudah berjalan lebih dari 10 menit
                 ?>
                     <!-- Tombol tidak aktif -->
                     <div class="col-12 col-lg-3 px-4 text-center mt-4">
-                            <button class="btn btn-secondary" disabled><?php echo $formattedDateTime; ?> - Booking Closed</button>
+                            <button class="btn btn-secondary" disabled><?php echo $formattedDateTime; ?></button>
                         </div>
                 <?php 
                         }

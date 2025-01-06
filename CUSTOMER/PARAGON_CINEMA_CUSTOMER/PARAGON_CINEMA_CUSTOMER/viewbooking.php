@@ -1,4 +1,7 @@
 <?php
+define('APP_ACCESS', true);
+?>
+<?php
 session_start();
 include 'dbConnect.php';
 
@@ -9,13 +12,13 @@ if (!isset($_SESSION['USER_ID'])) {
 
 $userid = $_SESSION['USER_ID'];
 
-$query = "SELECT * FROM invoice where custid = '$userid'";
+// Query hanya untuk data pada hari ini
+$query = "SELECT * FROM invoice WHERE custid = '$userid' AND date = CURDATE()";
 $result = mysqli_query($conn, $query);
 
 
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 

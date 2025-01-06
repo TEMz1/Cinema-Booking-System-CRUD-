@@ -4,6 +4,11 @@ include 'dbConnect.php';
 
 $msg = "";
 
+if (isset($_SESSION['USER_ID'])) {
+  header("location: index.php");
+  exit();
+}
+
 if (isset($_POST['login'])) {
     $Username = mysqli_real_escape_string($conn, $_POST['Username']);
     $Password = mysqli_real_escape_string($conn, $_POST['Password']);

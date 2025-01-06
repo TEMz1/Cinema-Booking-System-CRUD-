@@ -1,3 +1,12 @@
+<?php
+// Cek apakah APP_ACCESS sudah didefinisikan
+if (!defined('APP_ACCESS')) {
+    // Berikan respons error (status HTTP 403) atau redirect
+    header("HTTP/1.0 403 Forbidden");
+    exit();
+}
+?>
+
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark">
     <div class="container-fluid">
         <div class="image-container">
@@ -18,24 +27,16 @@
                 <li class="nav-item">
                     <a class="nav-link <?php if (basename($_SERVER['PHP_SELF']) == 'faq.php') echo 'active'; ?>" href="faq.php">FAQ</a>
                 </li>
-                <?php
-                $userid = $_SESSION['USER_ID'];
-                $query04 = "SELECT bookid FROM bookings WHERE custid = '$userid'";
-                $result04 = mysqli_query($conn, $query04);
-                $rowCount = mysqli_num_rows($result04);
-
-                if ($rowCount > 0) {
-                ?>
+                
                     <li class="nav-item">
                         <a style="color:#FF9AA2;" class="nav-link <?php if (basename($_SERVER['PHP_SELF']) == 'viewbooking.php') echo 'active'; ?>" href="viewbooking.php">View Booking</a>
                     </li>
-                <?php
-                }
-                ?>
+                
 
-                <?php if (isset($_SESSION['USER_ID'])) { ?>
+                <?php if (isset($_SESSION['USER_ID' ])) { ?>
                     <li class="nav-item ml-2">
-                        <a style="color:#111111" class="nav-link sign-in-btn" href="logout.php">Sign Out</a>
+                    <a style="color:#111111" class="nav-link sign-in-btn" href="javascript:void(0);" 
+                    onclick="confirmLogout()">Sign Out</a>
                     </li>
                 <?php } else { ?>
                     <li class="nav-item ml-2">
@@ -46,3 +47,11 @@
         </div>
     </div>
 </nav>
+<script>
+function confirmLogout() {
+    let confirmAction = confirm("Apakah Anda yakin ingin logout?");
+    if (confirmAction) {
+        window.location.href = "logout.php"; // Redirect ke halaman logout
+    }
+}
+</script>

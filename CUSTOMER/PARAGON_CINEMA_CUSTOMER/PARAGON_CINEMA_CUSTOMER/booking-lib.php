@@ -56,29 +56,29 @@ function get($sessid)
 }
 
   // (D) GET SEATS FOR GIVEN SESSION
-  function getseatchosen($userid)
-  {
+  function getseatchosen($userid, $transaction_id) {
     $this->query(
-      "SELECT b.seatNo, se.showtime_start, b.hallNo, m.title 
-      FROM bookings b
-      LEFT JOIN sessions se USING(session_id)
-      LEFT JOIN movie m USING(movieid)
-      WHERE b.custid = ?",
-      [$userid]
+        "SELECT b.seatNo, se.showtime_start, b.hallNo, m.title 
+        FROM bookings b 
+        LEFT JOIN sessions se USING(session_id) 
+        LEFT JOIN movie m USING(movieid) 
+        WHERE b.custid = ? AND b.transaction_id = ?",
+        [$userid, $transaction_id]
     );
+
     $bookdata = $this->stmt->fetchAll();
     return $bookdata;
-  }
+}
 
 
   // (E) SAVE RESERVATION
-  function save($sessid, $userid, $hallno, $seats)
+  function save($sessid, $userid, $hallno, $seats, $transaction)
   {
-    $sql = "INSERT INTO bookings (session_id, custid, hallNo, seatNo) VALUES ";
+    $sql = "INSERT INTO bookings (session_id, custid, hallNo, seatNo, transaction_id) VALUES ";
     $data = [];
     foreach ($seats as $seat) {
-      $sql .= "(?,?,?,?),";
-      array_push($data, $sessid, $userid, $hallno,$seat);
+      $sql .= "(?,?,?,?,?),";
+      array_push($data, $sessid, $userid, $hallno, $seat, $transaction);
     }
     $sql = substr($sql, 0, -1);
     $this->query($sql, $data);

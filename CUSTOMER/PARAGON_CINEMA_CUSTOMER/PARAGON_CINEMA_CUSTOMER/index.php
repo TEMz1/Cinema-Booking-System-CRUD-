@@ -1,4 +1,8 @@
 <?php
+define('APP_ACCESS', true);
+?>
+
+<?php
 session_start();
 include 'dbConnect.php';
 
@@ -7,7 +11,34 @@ if (!isset($_SESSION['USER_ID'])) {
     exit();
 }
 
+// Jika terdapat sesi transaction_id, hapus data terkait di database
+if (isset($_SESSION['transaction_id'])) {
+    $transaction_id = $_SESSION['transaction_id'];
 
+    // Hapus data di database berdasarkan transaction_id
+    $query = "DELETE FROM invoice WHERE transaction_id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "s", $transaction_id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+}
+
+if (!empty($_SESSION)) {
+    // Simpan hanya USER_ID dan username
+    $userId = $_SESSION['USER_ID'] ?? null;
+    $username = $_SESSION['USER_NAME'] ?? null;
+
+    // Hapus semua data sesi
+    session_unset();
+
+    // Kembalikan USER_ID dan username ke sesi
+    if ($userId !== null) {
+        $_SESSION['USER_ID'] = $userId;
+    }
+    if ($username !== null) {
+        $_SESSION['USER_NAME'] = $username;
+    }
+}
 
 ?>
 

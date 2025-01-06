@@ -7,12 +7,25 @@ if (!isset($_SESSION['USER_ID'])) {
     exit();
 }
 
+// Pastikan `transaction_id` dan `hall_id` ada
+if (!isset($_SESSION['transaction_id']) || empty($_SESSION['transaction_id'])) {
+    header("location:booking_seat.php");
+    exit();
+}
+if (!isset($_SESSION['hall_id']) || empty($_SESSION['hall_id'])) {
+    header("location:booking_seat.php");
+    exit();
+}
+
 // (A) LOAD LIBRARY
 require "booking-lib.php";
 
 // GET BOOKING SEAT DATA
 $userid = $_SESSION['USER_ID'];
-$bookingdata = $_RSV->getseatchosen($userid);
+$transaction_id = $_SESSION['transaction_id'];
+$hallno = $_SESSION['hall_id'];
+$bookingdata = $_RSV->getseatchosen($userid, $transaction_id);
+//$_SESSION['seat'] = implode(', ',$seats);
 
 // Access individual booking details
 if (!empty($bookingdata)) {
@@ -118,17 +131,18 @@ if (!empty($bookingdata)) {
                         <td>
                             <?php
                             $seats = array_column($bookingdata, 'seatNo');
-                            echo implode(', ', $seats);
+                             echo implode(', ', $seats);
                             ?>
                         </td>
                     </tr>
                     <tr>
                         <td scope="row">Amount</td>
                         <td>RM <?php echo count($seats) * 20; ?></td>
+                        
                     </tr>
                 </tbody>
             </table>
-            <button id="saveBtn" class="btn btn-primary btn-lg mt-2 btncarousel">Confirm</button>
+            <button  class="btn btn-primary btn-lg mt-2 btncarousel" onclick="confirmBooking()">Confirm</button>
         </div>
     </section>
 
@@ -137,35 +151,26 @@ if (!empty($bookingdata)) {
     <!-- Include the Bootstrap JavaScript library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script>
 
+     <?php
 
+$_SESSION['seat'] = implode(', ',$seats);
+    ?>
+<?php 
+echo $transaction_id;
+echo $hallno;
+echo $formattedDate;
+echo $formattedtime;
+echo implode(', ',$seats)
+
+?>
     <script>
-        function showPopupAndNavigate() {
-            alert("Booking successful!");
-            window.location.href = "index.php";
-        }
-        $(document).ready(function() {
-            // Add a click event listener to the save button
-            $('#saveBtn').click(function() {
-                // Perform an AJAX request to the bookingInsert.php page
-                $.ajax({
-                    url: 'bookingSuccess.php',
-                    method: 'POST',
-                    data: {
-                        // Pass the necessary data to the bookingInsert.php page
-                        theater: '<?php echo addslashes("Paragon Cinema - KTCC Mall"); ?>',
-                        hallNo: '<?php echo addslashes($hallno); ?>',
-                        date: '<?php echo addslashes($formattedDate); ?>',
-                        showtime: '<?php echo addslashes($formattedtime); ?>',
-                        seatsChosen: '<?php echo addslashes(implode(', ', $seats)); ?>',
-                        amount: '<?php echo count($seats) * 20; ?>'
-                    },
-                    success: function(response) {
-                        showPopupAndNavigate(); // Call the function to show the alert and navigate
-                    }
-                });
-            });
-        });
-    </script>
+    function confirmBooking() {
+        // Menampilkan notifikasi berhasil booking
+        alert("Booking Successful!")
+        // Redirect langsung ke bookingsuccess.php
+        window.location.href = "bookingsuccess.php";
+    }
+</script>
 </body>
 
 </html>

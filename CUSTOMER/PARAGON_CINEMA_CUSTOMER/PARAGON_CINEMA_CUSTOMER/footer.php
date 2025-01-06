@@ -1,3 +1,11 @@
+<?php
+// Cek apakah APP_ACCESS sudah didefinisikan
+if (!defined('APP_ACCESS')) {
+    // Berikan respons error (status HTTP 403) atau redirect
+    header("HTTP/1.0 403 Forbidden");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 

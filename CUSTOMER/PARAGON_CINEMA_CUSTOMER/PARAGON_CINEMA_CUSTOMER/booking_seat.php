@@ -7,11 +7,44 @@ if (!isset($_SESSION['USER_ID'])) {
   exit();
 }
 
+if (!isset($_GET['SESS_ID']) || empty($_GET['SESS_ID']) || !isset($_GET['HALL_ID']) || empty($_GET['HALL_ID'])) {
+  header("location:moviedetails.php"); // Redirect to movie details if parameters are invalid
+  exit();
+}
 
 
+$_SESSION['SHOWTIME'] = $_GET['SESS_SHOW'];
 $hallno = $_GET["HALL_ID"];
 $sessid = $_GET["SESS_ID"];
 $userid = $_SESSION['USER_ID'];
+$_SESSION['SESS_ID'] = $sessid;
+
+// Buat Transaction ID unik untuk sesi ini
+if (!isset($_SESSION['transaction_id'])) {
+  $_SESSION['transaction_id'] = uniqid("TRANS_", true); // Contoh: TRANS_5ff4e8d132fdc
+}
+$transaction_id = $_SESSION['transaction_id']; // Ambil ID dari sesi
+
+// Validasi session
+if (isset($_SESSION['hall_id']) && isset($_SESSION['transaction_id'])) {
+  $hall_no = $_SESSION['hall_id'];           // Ambil dari session
+  $transaction_id = $_SESSION['transaction_id']; // Ambil dari session
+
+ // Query untuk menghapus data
+ $sql = "DELETE FROM bookings WHERE transaction_id = ? AND hallNo = ?";
+ $stmt = mysqli_prepare($conn, $sql);
+
+ if ($stmt) {
+     // Bind parameter
+     mysqli_stmt_bind_param($stmt, "ss", $transaction_id, $hall_no);
+
+     // Eksekusi query
+     mysqli_stmt_execute($stmt);
+ }
+  // Hapus session terkait (Opsional)
+  unset($_SESSION['hall_id']);
+  unset($_SESSION['transaction_id']);
+}
 
 // (B) GET SESSION SEATS
 require "booking-lib.php";
@@ -110,6 +143,7 @@ $seats = $_RSV->get($sessid);
         <input type="hidden" name="sessid" value="<?= $sessid ?>">
         <input type="hidden" name="userid" value="<?= $userid ?>">
         <input type="hidden" name="hallno" value="<?= $hallno ?>">
+        <input type="hidden" name="transaction" value="<?= $transaction_id ?>">
       </form>
       <button class="btn btn-outline btn-lg mt-3 btncarousel" id="go" onclick="reserve.save()">Book</button>
 

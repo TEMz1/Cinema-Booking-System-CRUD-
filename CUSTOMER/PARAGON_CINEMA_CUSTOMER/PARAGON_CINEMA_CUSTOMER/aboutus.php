@@ -1,4 +1,8 @@
 <?php
+define('APP_ACCESS', true);
+?>
+
+<?php
 session_start();
 include 'dbConnect.php';
 
@@ -8,7 +12,7 @@ if (!isset($_SESSION['USER_ID'])) {
 }
 
 ?>
-
+ 
 <!DOCTYPE html>
 <html>
 
