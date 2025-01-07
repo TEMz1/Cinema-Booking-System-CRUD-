@@ -35,12 +35,12 @@ if (!defined('APP_ACCESS')) {
 
                 <?php if (isset($_SESSION['USER_ID' ])) { ?>
                     <li class="nav-item ml-2">
-                    <a style="color:#111111" class="nav-link sign-in-btn" href="javascript:void(0);" 
+                    <a style="color: #111111" class="nav-link sign-in-btn" href="javascript:void(0);" 
                     onclick="confirmLogout()">Sign Out</a>
                     </li>
                 <?php } else { ?>
                     <li class="nav-item ml-2">
-                        <a style="color:#111111" class="nav-link sign-in-btn <?php if (basename($_SERVER['PHP_SELF']) == 'login.php') echo 'active'; ?>" href="login.php">Sign In</a>
+                        <a style="color: #111111" class="nav-link sign-in-btn <?php if (basename($_SERVER['PHP_SELF']) == 'login.php') echo 'active'; ?>" href="login.php">Sign In</a>
                     </li>
                 <?php } ?>
             </ul>

@@ -185,63 +185,115 @@ function getTrailerLinkFromDatabase($conn, $movieID)
         <div class="container overflow-hidden text-center">
             <div class="row">
                 <h1 class="fw-bold font-xxl mb-0 text-center">Showtimes</h1>
+                <!-- Date Container -->
+                <div class="date-container d-flex justify-content-center gap-2 my-3">
                 <?php
-                if (mysqli_num_rows($result02) > 0) {
-                    foreach ($result02 as $row) {
-                        $showtimeStart = $row["showtime_start"];
-                        $dateTime = new DateTime($showtimeStart);
-                        $formattedDateTime = $dateTime->format('d M Y, H:i');
-
-                         // hitung waktu sekarang
-                        $now = new DateTime();
-                        $interval = $now->diff($dateTime);
-                        $minuteDiff = ($interval->days * 24 * 60) + ($interval->h * 60) + $interval->i;
-                        
-                        //Tentukan ShowTime sudah lewat 10 menit atau belum
-                        if ($now < $dateTime || $minuteDiff <= 10) {
-                ?>
-                        <div class="col-12 col-lg-3 px->i;-4 text-center mt-4">
-                            <a i; href="booking_seat.php?SESS_ID=<?php echo $row['session_id']; ?>&HALL_ID=<?php echo $row['hallNo'];?>
-                            &SESS_SHOW=<?php echo $formattedDateTime;?>"
-                             class="btn showtime-btn"><?php echo $formattedDateTime; ?></a>
-                        </div>
-                <?php
-                    } else { // Waktu tayang sudah berjalan lebih dari 10 menit
-                ?>
-                    <!-- Tombol tidak aktif -->
-                    <div class="col-12 col-lg-3 px-4 text-center mt-4">
-                            <button class="btn btn-secondary" disabled><?php echo $formattedDateTime; ?></button>
-                        </div>
-                <?php 
-                        }
-                    }
-                } else {
-                    //jika tidak ada yang tersedia
-                    echo '<h4 class="text-center my-3">No showtimes available.</h4>';
+                $now = new DateTime();
+                for ($i = 0; $i < 7; $i++) {
+                    $currentDate = $now->format('Y-m-d');
+                    $dayName = $now->format('D'); // Mendapatkan 3 huruf nama hari (e.g., Mon, Tue)
+                    $displayDate = $now->format('d M');
+                    $activeClass = ($i === 0) ? "active" : ""; // Default tanggal pertama sebagai aktif
+                    echo "<button class='btn btn-sm btn-outline-light date-btn $activeClass' data-date='$currentDate'>$dayName, $displayDate</button>";
+                    $now->modify('+1 day');
                 }
                 ?>
             </div>
+
+        <!-- Showtime Container -->
+        <div class="data-container">
+            <!-- Data showtime akan diisi menggunakan JavaScript -->
         </div>
     </div>
+</div>
 
+<script>
+    $(document).ready(function () {
+        // Data PHP (contoh format JSON)
+        const sessionData = <?php
+            $sessions = [];
+            if (mysqli_num_rows($result02) > 0) {
+                foreach ($result02 as $row) {
+                    $sessions[] = [
+                        'date' => (new DateTime($row['showtime_start']))->format('Y-m-d'),
+                        'time' => (new DateTime($row['showtime_start']))->format('H:i'),
+                        'hall' => $row['hallNo'],
+                        'session_id' => $row['session_id'],
+                        'formatted_datetime' => (new DateTime($row['showtime_start']))->format('d M Y, H:i'),
+                    ];
+                }
+            }
+            echo json_encode($sessions);
+        ?>;
 
-    <!-- FOOTER SECTION -->
-    <?php include('footer.php') ?>
-    
-    <script>
-        $(document).ready(function() {
-            $(".watch-trailer").click(function() {
-                var trailerLink = "<?php echo getTrailerLinkFromDatabase($conn, $movieID); ?>";
-                $("#trailer-iframe").attr("src", trailerLink);
-                $("#trailer-modal").show();
+        // Fungsi untuk mendapatkan data showtime berdasarkan tanggal
+        function getShowtimeByDate(date) {
+            const dataByDate = sessionData.filter(session => session.date === date);
+            const groupedByHall = dataByDate.reduce((acc, session) => {
+                if (!acc[session.hall]) acc[session.hall] = [];
+                acc[session.hall].push(session);
+                return acc;
+            }, {});
+            return groupedByHall;
+        }
+
+        // Fungsi untuk menampilkan data showtime ke data-container
+        function renderShowtime(date) {
+    const groupedShowtimes = getShowtimeByDate(date);
+    const dataContainer = $(".data-container");
+    dataContainer.empty();
+
+    const now = new Date(); // Waktu saat ini
+
+    if (Object.keys(groupedShowtimes).length > 0) {
+        Object.entries(groupedShowtimes).forEach(([hall, showtimes]) => {
+            const hallElement = $(`
+                <div class="mt-4">
+                    <h4 class="text-white">${hall}</h4> <br>
+                    <div class="d-flex flex-wrap gap-2 justify-content-center"></div>
+                </div>
+            `);
+            const showtimeContainer = hallElement.find("div");
+
+            showtimes.forEach(showtime => {
+                const showtimeDate = new Date(`${showtime.date}T${showtime.time}`);
+                const diffMinutes = (showtimeDate - now) / (1000 * 60); // Selisih waktu dalam menit
+
+                // Tentukan kelas dan atribut berdasarkan waktu
+                const isDisabled = diffMinutes <= -10; // Jika sudah lebih dari 10 menit dari showtime
+                const btnClass = isDisabled ? 'btn-secondary disabled' : 'showtime-btn';
+                const btnAttributes = isDisabled ? 'style="pointer-events: none;"' : '';
+
+                const showtimeButton = `
+                    <a href="booking_seat.php?SESS_ID=${showtime.session_id}&HALL_ID=${showtime.hall}&SESS_SHOW=${showtime.formatted_datetime}"
+                       class="btn ${btnClass}" ${btnAttributes}>${showtime.time}</a>
+                `;
+                showtimeContainer.append(showtimeButton);
             });
 
-            $("#trailer-modal").click(function() {
-                $("#trailer-modal").hide();
-                $("#trailer-iframe").attr("src", "");
-            });
+            dataContainer.append(hallElement);
         });
-    </script>
+    } else {
+        dataContainer.html('<p class="text-white overflow-hidden text-center mt-4">No showtimes available for this date.</p>');
+    }
+}
+
+        // Event klik tombol tanggal
+        $(".date-btn").click(function () {
+            const selectedDate = $(this).data("date");
+
+            // Aktifkan tombol yang dipilih
+            $(".date-btn").removeClass("active");
+            $(this).addClass("active");
+
+            // Render data showtime berdasarkan tanggal
+            renderShowtime(selectedDate);
+        });
+
+        // Pilih tanggal pertama secara default
+        $(".date-btn.active").trigger("click");
+    });
+</script>
 
     <!-- Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script>
@@ -250,5 +302,105 @@ function getTrailerLinkFromDatabase($conn, $movieID)
     mysqli_close($conn);
     ?>
 </body>
+
+<style>
+    /* Container styling */
+.date-container {
+    margin-bottom: 20px;
+}
+
+.data-container {
+    margin-top: 20px;
+}
+
+
+
+/* Button styling */
+.date-btn {
+    border: 1px solid #ccc;
+    background-color: #f8f9fa;
+    color: #111111;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+    font-weight: 650;
+}
+
+.date-btn:hover {
+    background-color: rgb(255, 163, 177);
+    color:  #111111;
+    border-color: rgb(255, 163, 177);
+}
+
+.date-btn.active {
+    background-color: rgb(255, 163, 177);
+    color: #111111;
+    border-color: rgb(180, 85, 99);
+}
+
+/* Showtime button styles */
+.showtime-btn {
+    background-color: #f8f9fa; /* Green for active showtimes */
+    color: #111111;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: none;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.showtime-btn:hover {
+    background-color:rgb(255, 163, 177);
+    color: #111111;
+}
+
+/* Disabled button styling */
+.btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+/* Hall container styling */
+.hall-container {
+    margin-top: 30px;
+    padding: 10px;
+    background-color: #343a40;
+    border-radius: 8px;
+}
+
+.hall-container h4 {
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.hall-container .d-flex {
+    justify-content: center;
+    gap: 10px;
+}
+
+.data-container {
+    margin-top: 10px; /* Tambahkan jarak lebih besar */
+    text-align: center;
+}
+
+/* General styling for responsiveness */
+@media (max-width: 768px) {
+    .date-btn, .showtime-btn, .btn-secondary {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    .hall-container h4 {
+        font-size: 14px;
+    }
+}
+
+</style>
 
 </html>
