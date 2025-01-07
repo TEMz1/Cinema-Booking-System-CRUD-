@@ -1,92 +1,100 @@
+<?php
+session_name('admin_session');
+// validate
+define('APP_ACCESS', true); 
+session_start();
+include 'dbConnect.php';
+
+    echo "<pre>"; // Menampilkan hasil lebih rapi
+    print_r($_SESSION); // Menampilkan semua data dalam session
+    echo "</pre>";
+
+if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'Clerk') {
+    header("Location: login.php");
+    exit();
+}
+
+$nama = $_SESSION['nama'];
+
+?>
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-      <title>Clerk Paragon</title>
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
-        <link href="css/index.css" rel="stylesheet" type="text/css">
+	<head>
+		<title>CLERK | PARAGON</title>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="shortcut icon" href="img/paragon_logo.png" type="image/png">
 	</head>
-  
-  <body>
-    <div class="login">
+	
+	<?php include "sidenav.php"; ?>
+    <body>
+        <div class="container">
+			<h1>Welcome</h1>
+			<?php
+				echo "<h2>". $nama . "</h2>";
+			?>
+			<h2>To the Paragon Clerk Management</h2>
+			<br>
+		</div>
+    </body>
 
-      <h1>CLERK</h1>
-      <form action="" method="post">
+	<style>
+		body {
+    background-color: #F9F0FF;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
 
-        <label for="username">
-          <i class="fas fa-user"></i>
-        </label>
-        <input type="text" name="username" placeholder="Username" id="username" required>
+.container {
+    background-color: #FFF3FB;
+    margin: 50px auto;
+    padding: 40px;
+    text-align: center;
+    color: #333;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
 
-        <label for="password">
-          <i class="fas fa-lock"></i>
-        </label>
-        <input type="password" name="password" placeholder="Password" id="password" required>
+h1 {
+    font-size: 60px;
+    font-weight: bold;
+    color: #BF0885;
+    background-color: #FFE6FF;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 0;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
 
-        <div class="checkbox">
-          <input type="checkbox" id="password" onclick="myFunction()">   Show password
-        </div>
+h2 {
+    font-size: 24px;
+    color: #BF0885;
+    margin-top: 15px;
+}
 
-        <div>
-          <a href="manager_login.php" class="button">Manager  <i class='fas fa-arrow-circle-right'></i></a>
-        </div>
-        
-        <input type="submit" value="Login" name="login">
-      
-      </form>
-    </div>
+.container h2 {
+    font-size: 26px;
+    color: #333333;
+    font-weight: 500;
+    padding: 15px;
+    background-color: #FFF5FB;
+    border-radius: 10px;
+}
 
-    <?php
-      if(isset($_POST["login"])){
-        
-        $hostname = "localhost";
-				$user = "root";
-				$password = "";
-				$dbname = "paragoncinemadb";
-		
-				$connect = mysqli_connect($hostname, $user, $password, $dbname) OR DIE ("Connection failed");
-					
-				$username = $_POST["username"];
-				$password = $_POST["password"];
+@media (max-width: 768px) {
+    h1 {
+        font-size: 50px;
+    }
 
-				$sqlcheck = "SELECT * FROM clerk WHERE username = '$username' AND password = '$password'";
-					
-				$result = mysqli_query($connect,$sqlcheck);	
-					
-				if ($result){
-          if (mysqli_num_rows($result) > 0){
-            $_SESSION["username"] = $username;
-            ?><script>
-            alert("You have successfuly logged in. Please press OK to proceed.");
-            window.location = "home.php";
-            </script><?php
-          }
-          else{
-            ?><script>
-            alert("Username or password invalid. Please try again");
-            window.location = "index.php";
-            </script><?php
-          }
-				}
-        
-        session_start();
-        $_SESSION["username"] = $username;
-			}
-				
-		?>
+    h2 {
+        font-size: 20px;
+    }
 
-    <script>
-      function myFunction(){
-        var x = document.getElementById("password");
-        if (x.type === "password") {
-        x.type = "text";
-        } else {
-        x.type = "password";
-        }
-      }
-		</script>
+    .container {
+        padding: 25px;
+    }
+}
 
-  </body>
-  
+	</style>
 </html>

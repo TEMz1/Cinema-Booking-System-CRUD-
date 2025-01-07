@@ -1,18 +1,25 @@
 <?php
+// validate
+define('APP_ACCESS', true);
+session_name('admin_session');  
 session_start();
 
-$hostname = "localhost";
-$username = "root";
-$dbname = "paragoncinemadb";
+if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'Clerk') {
+    header("Location: login.php");
+    exit();
+}
+
+include 'dbConnect.php';
 			
-$connect = mysqli_connect($hostname, $username) OR DIE ("Connection failed!");
-$selectdb = mysqli_select_db($connect, $dbname) OR DIE ("Database cannot be accessed");
-			
+echo "<pre>"; // Menampilkan hasil lebih rapi
+    print_r($_SESSION); // Menampilkan semua data dalam session
+    echo "</pre>";
+
 $username = $_SESSION["username"];
 			
 $sql = "SELECT * FROM CLERK WHERE username = '$username' ";  
 	
-$sendsql = mysqli_query($connect, $sql) OR DIE("CONNECTION ERROR");	
+$sendsql = mysqli_query($conn, $sql) OR DIE("CONNECTION ERROR");	
 			
 $row = mysqli_fetch_assoc($sendsql)		
 
@@ -33,18 +40,13 @@ $row = mysqli_fetch_assoc($sendsql)
                 <a href="add_hall.php" class="add"><i class="fa fa-plus"></i> New Hall</a>
 		    </div><br>
 
-			<?php
-				$hostname = "localhost";
-				$username = "root";
-				$password = "";
-				$dbname = "paragoncinemadb";
-
-				$connect = mysqli_connect($hostname, $username, $password, $dbname) OR DIE ("Connection failed");
-
+            <?php
+				// Mengambil data dari tabel hall
 				$sql = "SELECT * FROM hall";
-				$sendsql = mysqli_query($connect,$sql);
+				$sendsql = mysqli_query($conn, $sql);
 
-				if($sendsql){
+				// Periksa apakah query berhasil
+				if ($sendsql && mysqli_num_rows($sendsql) > 0) {
 					echo "<table>
 					<tr>
                         <th>Hall Number</th>
@@ -52,19 +54,21 @@ $row = mysqli_fetch_assoc($sendsql)
 						<th>Action</th>
 					</tr>";
 
-				foreach($sendsql as $row)
-				{
-					echo "<tr>";
-                        echo "<td>". $row["hallNo"] ."</td>";
-						echo "<td>". $row["hallName"] ."</td>";
-						echo "<td><a href='edit_hall.php?hallNo=". $row["hallNo"] ."'><i class='fa fa-edit'></i></a></td>";
-					echo "</tr>";
-				}
+					// Loop untuk menampilkan data hall
+					while ($row = mysqli_fetch_assoc($sendsql)) {
+						echo "<tr>";
+                        echo "<td>" . $row["hallNo"] . "</td>";
+						echo "<td>" . $row["hallName"] . "</td>";
+						echo "<td>
+								<a href='edit_hall.php?hallNo=" . $row["hallNo"] . "' class='edit-btn'><i class='fa fa-edit'></i></a>
+							  </td>";
+						echo "</tr>";
+					}
 
-				echo "</table>";
-				
-				}else{
-					echo "<p>Failed.</p>";
+					echo "</table>";
+				} else {
+					// Jika tidak ada data
+					echo "<p>No hall data available.</p>";
 				}
 			?>
 		</div>

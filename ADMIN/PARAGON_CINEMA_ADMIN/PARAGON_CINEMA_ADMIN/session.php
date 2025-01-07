@@ -1,6 +1,15 @@
 <?php
+    // validate
+    define('APP_ACCESS', true);
+    // activate session
+    session_name('admin_session');
 	session_start();
 
+    if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'Clerk') {
+        header("Location: index.php");
+        exit();
+    }
+    
 	$hostname = "localhost";
 	$username = "root";
 	$dbname = "paragoncinemadb";

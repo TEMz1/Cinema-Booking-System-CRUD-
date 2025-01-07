@@ -1,4 +1,12 @@
 <?php
+    define('APP_ACCESS', true);
+    include 'movie.process.php';
+    
+    if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'Clerk') {
+        header("Location: login.php");
+        exit();
+    }
+
     session_start();
 
     $hostname = "localhost";

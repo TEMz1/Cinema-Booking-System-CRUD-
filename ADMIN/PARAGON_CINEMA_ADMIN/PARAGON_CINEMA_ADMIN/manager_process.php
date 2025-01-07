@@ -1,4 +1,7 @@
 <?php
+    // validate
+    define('APP_ACCESS', true);
+    session_name('admin_session');
     session_start();
 
     $hostname = "localhost";

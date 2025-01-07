@@ -3,8 +3,13 @@ define('APP_ACCESS', true);
 ?>
 
 <?php
+session_name('cust');
 session_start();
 include 'dbConnect.php';
+
+echo "<pre>"; // Menampilkan hasil lebih rapi
+    print_r($_SESSION); // Menampilkan semua data dalam session
+    echo "</pre>";
 
 if (!isset($_SESSION['USER_ID'])) {
     header("location:login.php");

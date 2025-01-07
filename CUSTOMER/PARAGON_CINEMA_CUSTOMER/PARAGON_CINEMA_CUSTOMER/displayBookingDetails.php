@@ -1,4 +1,5 @@
 <?php
+session_name('cust');
 session_start();
 include 'dbConnect.php';
 

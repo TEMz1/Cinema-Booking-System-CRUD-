@@ -1,3 +1,12 @@
+<?php
+// Cek apakah APP_ACCESS sudah didefinisikan
+if (!defined('APP_ACCESS')) {
+    // Berikan respons error (status HTTP 403) atau redirect
+    header("HTTP/1.0 403 Forbidden");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 	<head>
@@ -10,14 +19,14 @@
 	
 	<body>
 		<ul>
-			<li><a href="home.php">Home</a></li>
+			<li><a href="index.php">Home</a></li>
 			<li><a href="profile.php">Profile</a></li>
 			<li><a href="movie.php">Movies</a></li>
 			<li><a href="hall.php">Hall</a></li>
 			<li><a href="session.php">Session</a></li>
 		</ul>
 		
-		<a href="index.php" id="logout_btn" class="fa fa-sign-out"></a>
+		<a href="javascript:void(0);" id="logout_btn" class="fa fa-sign-out" onclick="logoutConfirm();"></a>
 		
 	</body>
 
@@ -59,4 +68,14 @@
 			color: #fff;
 		}
 	</style>
+	<script>
+		function logoutConfirm() {
+			// Konfirmasi sebelum logout
+			var confirmLogout = confirm("Apakah Anda yakin ingin logout?");
+			if (confirmLogout) {
+				// Redirect ke halaman logout.php untuk menghapus sesi
+				window.location.href = 'logout.php';
+			}
+		}
+	</script>
 </html>

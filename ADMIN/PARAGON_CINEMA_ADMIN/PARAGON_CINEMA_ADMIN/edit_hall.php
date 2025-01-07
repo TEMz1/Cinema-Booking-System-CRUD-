@@ -1,4 +1,6 @@
 <?php
+
+    session_name('admin_session');
     session_start();
 
     $hostname = "localhost";
@@ -28,7 +30,7 @@
             exit();
         }
     } else {
-        echo "Invalid hall number.";
+        header("Location: index.php");
         exit();
     }
 

@@ -1,4 +1,9 @@
 <?php
+    if (!defined('APP_ACCESS')) {
+        // Berikan respons error (status HTTP 403) atau redirect
+        header("HTTP/1.0 403 Forbidden");
+        exit();
+    }
     session_start();
 
     $hostname = "localhost";

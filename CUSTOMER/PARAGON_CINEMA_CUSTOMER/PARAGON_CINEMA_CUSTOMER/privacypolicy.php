@@ -3,6 +3,7 @@ define('APP_ACCESS', true);
 ?>
 
 <?php
+session_name('cust');
 session_start();
 include 'dbConnect.php';
 

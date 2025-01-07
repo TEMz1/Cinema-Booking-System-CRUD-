@@ -1,18 +1,25 @@
 <?php
+define('APP_ACCESS', true);
+session_name('admin_session');
 session_start();
 
-$hostname = "localhost";
-$username = "root";
-$dbname = "paragoncinemadb";
-			
-$connect = mysqli_connect($hostname, $username) OR DIE ("Connection failed!");
-$selectdb = mysqli_select_db($connect, $dbname) OR DIE ("Database cannot be accessed");
+if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'Manager') {
+    header("Location: login.php");
+    exit();
+}
+
+    echo "<pre>"; // Menampilkan hasil lebih rapi
+    print_r($_SESSION); // Menampilkan semua data dalam session
+    echo "</pre>";
+    
+include 'dbConnect.php';
+$selectdb = mysqli_select_db($conn, $database) OR DIE ("Database cannot be accessed");
 			
 $username = $_SESSION["username"];
 			
 $sql = "SELECT * FROM manager WHERE username = '$username' ";  
 	
-$sendsql = mysqli_query($connect, $sql) OR DIE("CONNECTION ERROR");	
+$sendsql = mysqli_query($conn, $sql) OR DIE("CONNECTION ERROR");	
 			
 $row = mysqli_fetch_assoc($sendsql)		
 
@@ -30,15 +37,9 @@ $row = mysqli_fetch_assoc($sendsql)
 			<h1>Customer Details</h1>
 
 			<?php
-				$hostname = "localhost";
-				$username = "root";
-				$password = "";
-				$dbname = "paragoncinemadb";
-
-				$connect = mysqli_connect($hostname, $username, $password, $dbname) OR DIE ("Connection failed");
 
 				$sql = "SELECT * FROM customer";
-				$sendsql = mysqli_query($connect,$sql);
+				$sendsql = mysqli_query($conn,$sql);
 
 				if($sendsql){
 					echo "<table>

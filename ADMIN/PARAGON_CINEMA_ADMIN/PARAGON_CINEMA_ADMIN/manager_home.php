@@ -1,5 +1,17 @@
 <?php
+ // validate
+ define('APP_ACCESS', true);
+ session_name('admin_session');
 session_start();
+
+if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'Manager') {
+    header("Location: index.php");
+    exit();
+}
+
+echo "<pre>"; // Menampilkan hasil lebih rapi
+    print_r($_SESSION); // Menampilkan semua data dalam session
+    echo "</pre>";
 
 $hostname = "localhost";
 $username = "root";

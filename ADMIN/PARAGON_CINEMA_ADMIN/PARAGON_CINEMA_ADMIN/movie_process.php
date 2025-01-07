@@ -1,12 +1,12 @@
 <?php
+    if (!defined('APP_ACCESS')) {
+        header("HTTP/1.0 403 Forbidden"); // Kirim respon 403 Forbidden
+        exit(); // Hentikan eksekusi
+    }
+    
     session_start();
 
-    $hostname = "localhost";
-    $username = "root";
-    $dbname = "paragoncinemadb";
-
-    $connect = mysqli_connect($hostname, $username) OR DIE("Connection failed!");
-    $selectdb = mysqli_select_db($connect, $dbname) OR DIE("Database cannot be accessed");
+    include 'dbConnect.php';
 
     if (isset($_POST["update"])) {
         $movieId = $_POST["movieid"];

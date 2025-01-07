@@ -1,5 +1,11 @@
 <?php
+    session_name('admin_Session');
     session_start();
+
+    if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'Manager') {
+        header("Location: login.php");
+        exit();
+    }
 
     $hostname = "localhost";
     $username = "root";
