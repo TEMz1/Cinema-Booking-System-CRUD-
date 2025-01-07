@@ -10,10 +10,6 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'Clerk') {
 }
 
 include 'dbConnect.php';
-			
-echo "<pre>"; // Menampilkan hasil lebih rapi
-    print_r($_SESSION); // Menampilkan semua data dalam session
-    echo "</pre>";
 
 $username = $_SESSION["username"];
 			

@@ -8,10 +8,6 @@
         header("Location: index.php");
         exit();
     }
-    
-    echo "<pre>"; // Menampilkan hasil lebih rapi
-    print_r($_SESSION); // Menampilkan semua data dalam session
-    echo "</pre>";
 
 	$hostname = "localhost";
 	$username = "root";

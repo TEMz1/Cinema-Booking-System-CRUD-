@@ -66,10 +66,6 @@
 //     exit();
 // }
 
-    echo "<pre>"; // Menampilkan hasil lebih rapi
-    print_r($_SESSION); // Menampilkan semua data dalam session
-    echo "</pre>";
-
       if(isset($_POST["login"])){
         
       //   $hostname = "localhost";

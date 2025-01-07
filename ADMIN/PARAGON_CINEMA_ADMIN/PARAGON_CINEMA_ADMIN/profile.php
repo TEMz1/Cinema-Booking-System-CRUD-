@@ -4,10 +4,6 @@
     session_name('admin_session');
     session_start();
 
-    echo "<pre>"; // Menampilkan hasil lebih rapi
-    print_r($_SESSION); // Menampilkan semua data dalam session
-    echo "</pre>";
-
     if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'Clerk') {
         header("Location: index.php");
         exit();

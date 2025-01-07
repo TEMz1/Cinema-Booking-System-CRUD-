@@ -5,10 +5,6 @@ define('APP_ACCESS', true);
 session_start();
 include 'dbConnect.php';
 
-    echo "<pre>"; // Menampilkan hasil lebih rapi
-    print_r($_SESSION); // Menampilkan semua data dalam session
-    echo "</pre>";
-
 if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'Clerk') {
     header("Location: login.php");
     exit();

@@ -7,10 +7,6 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'Manager') {
     header("Location: login.php");
     exit();
 }
-
-    echo "<pre>"; // Menampilkan hasil lebih rapi
-    print_r($_SESSION); // Menampilkan semua data dalam session
-    echo "</pre>";
     
 include 'dbConnect.php';
 $selectdb = mysqli_select_db($conn, $database) OR DIE ("Database cannot be accessed");
