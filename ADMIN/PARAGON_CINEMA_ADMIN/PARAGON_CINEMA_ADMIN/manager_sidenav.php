@@ -21,6 +21,7 @@ if (!defined('APP_ACCESS')) {
 		<ul>
 			<li><a href="manager_home.php">Home</a></li>
 			<li><a href="manager_profile.php">Profile</a></li>
+			<li><a href="clerk.php">Clerk</a></li>
 			<li><a href="customer.php">Customer</a></li>
 			<li><a href="booking.php">Booking</a></li>
 			<li><a href="sales.php">Sales</a></li>
