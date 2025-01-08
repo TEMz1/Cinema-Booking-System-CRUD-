@@ -186,7 +186,7 @@ function getTrailerLinkFromDatabase($conn, $movieID)
             <div class="row">
                 <h1 class="fw-bold font-xxl mb-0 text-center">Showtimes</h1>
                 <!-- Date Container -->
-                <div class="date-container d-flex justify-content-center gap-2 my-3">
+                <div class="date-container d-flex justify-content-center gap-2 my-3" >
                 <?php
                 $now = new DateTime();
                 for ($i = 0; $i < 7; $i++) {
@@ -249,8 +249,8 @@ function getTrailerLinkFromDatabase($conn, $movieID)
         Object.entries(groupedShowtimes).forEach(([hall, showtimes]) => {
             const hallElement = $(`
                 <div class="mt-4">
-                    <h4 class="text-white">${hall}</h4> <br>
-                    <div class="d-flex flex-wrap gap-2 justify-content-center"></div>
+                    <h4 class="text-white ">${hall}</h4> <br>
+                    <div class="d-flex flex-wrap gap-4 justify-content-center"></div>
                 </div>
             `);
             const showtimeContainer = hallElement.find("div");
