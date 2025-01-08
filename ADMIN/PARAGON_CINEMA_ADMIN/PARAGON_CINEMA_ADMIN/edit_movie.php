@@ -1,13 +1,16 @@
 <?php
+    session_name('admin_session');
+    session_start();
     define('APP_ACCESS', true);
-    include 'movie.process.php';
+
+    include 'movie_process.php';
     
     if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'Clerk') {
         header("Location: login.php");
         exit();
     }
 
-    session_start();
+   
 
     $hostname = "localhost";
     $username = "root";
@@ -43,6 +46,7 @@
                     $movieResult = mysqli_query($connect, $movieQuery);
                     $movieData = mysqli_fetch_assoc($movieResult);
                 ?>
+                
                 <div class="form-group">
                     <label for="movieid">Movie Id:</label>
                     <input type="text" name="movieid" value="<?php echo $movieData["movieid"] ?>"readonly/>

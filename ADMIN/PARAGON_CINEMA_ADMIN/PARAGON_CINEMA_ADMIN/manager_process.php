@@ -25,9 +25,11 @@
         $result = mysqli_query($connect, $updateSql);
 
         if ($result) {
+            session_unset();
+            session_destroy();
             ?><script>
                 alert("Please login using the new credential");
-                window.location = "manager_login.php";
+                window.location = "login.php";
             </script><?php
             exit();
         } else {

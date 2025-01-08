@@ -1,35 +1,32 @@
 <?php
-    if (!defined('APP_ACCESS')) {
-        header("HTTP/1.0 403 Forbidden"); // Kirim respon 403 Forbidden
-        exit(); // Hentikan eksekusi
-    }
+
     
-    session_start();
 
     include 'dbConnect.php';
 
     if (isset($_POST["update"])) {
-        $movieId = $_POST["movieid"];
-        $newTitle = $_POST["title"];
-        $newPoster = $_POST["poster"];
-        $newGenre = $_POST["genre"];
-        $newDescription = $_POST["desc"];
-        $newDuration = $_POST["duration"];
-        $newReleaseDate = $_POST["releaseDate"];
-        $newTrailer = $_POST["trailer"];
+        $movieId = mysqli_real_escape_string($conn, $_POST["movieid"]); 
+        $newTitle = mysqli_real_escape_string($conn, $_POST["title"]);
+        $newPoster = mysqli_real_escape_string($conn, $_POST["poster"]);
+        $newGenre = mysqli_real_escape_string($conn, $_POST["genre"]);
+        $newDescription = mysqli_real_escape_string($conn, $_POST["desc"]);
+        $newDuration = mysqli_real_escape_string($conn, $_POST["duration"]);
+        $newReleaseDate = mysqli_real_escape_string($conn, $_POST["releaseDate"]);
+        $newTrailer = mysqli_real_escape_string($conn, $_POST["trailer"]);
 
         $updateSql = "UPDATE MOVIE SET poster = '$newPoster', title = '$newTitle', genre = '$newGenre', description = '$newDescription', duration = '$newDuration', releaseDate = '$newReleaseDate', trailer = '$newTrailer' WHERE movieid = '$movieId'";
 
-        $result = mysqli_query($connect, $updateSql);
+        $result = mysqli_query($conn, $updateSql);
 
         if ($result) {
-            ?><script>
+            ?>
+            <script>
                 alert("Data has been updated");
                 window.location = "movie.php";
             </script><?php
             exit();
         } else {
-            echo "Error updating movie data: " . mysqli_error($connect);
+            echo "Error updating movie data: " . mysqli_error($conn);
         }
     }
 ?>

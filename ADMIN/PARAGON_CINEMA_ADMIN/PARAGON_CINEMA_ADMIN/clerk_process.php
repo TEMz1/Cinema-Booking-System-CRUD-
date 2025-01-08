@@ -1,10 +1,12 @@
 <?php
-    if (!defined('APP_ACCESS')) {
-        // Berikan respons error (status HTTP 403) atau redirect
-        header("HTTP/1.0 403 Forbidden");
+
+    session_name('admin_session');
+    session_start();
+
+    if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'Clerk') {
+        header("Location: login.php");
         exit();
     }
-    session_start();
 
     $hostname = "localhost";
     $username = "root";
@@ -27,9 +29,11 @@
         $result = mysqli_query($connect, $updateSql);
 
         if ($result) {
+            session_unset();
+            session_destroy();
             ?><script>
                 alert("Please login using the new credential");
-                window.location = "index.php";
+                window.location = "login.php";
             </script><?php
             exit();
         } else {

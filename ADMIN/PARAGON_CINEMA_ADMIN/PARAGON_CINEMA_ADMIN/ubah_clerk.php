@@ -78,7 +78,7 @@
                     </div>
                     
                     <br>
-                    <input type="submit" name="update" value="UPDATE"/>
+                    <button  type="submit" name="update" onclick="updateClerk()">UPDATE</button>
                 </form>
             </div>
 	    </body>
@@ -99,10 +99,17 @@
         $result = mysqli_query($conn, $updateSql);
 
         if ($result) {
-            header("Location: manager_home.php");
-            exit();
+            echo "<script>
+            // Menampilkan notifikasi berhasil
+            alert('Update Successful!');
+            // Redirect ke clerk.php
+            window.location.href = 'clerk.php';
+        </script>";
+        exit(); 
         } else {
-            echo "Error updating clerk data: " . mysqli_error($connect);
+            echo "<script>
+            alert('Error updating clerk data: " . mysqli_error($conn) . "');
+        </script>";
         }
     }
 
@@ -162,7 +169,7 @@ h1 {
     margin: 5px 0;
 }
 
-input[type="submit"] {
+button[type="submit"] {
     background-color: #BF0885;
     color: white;
     font-size: 18px;

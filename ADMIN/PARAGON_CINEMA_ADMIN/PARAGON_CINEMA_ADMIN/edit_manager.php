@@ -1,5 +1,6 @@
 <?php
-    session_name('admin_Session');
+
+    session_name('admin_session');
     session_start();
 
     if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'Manager') {

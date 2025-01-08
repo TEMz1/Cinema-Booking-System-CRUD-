@@ -84,32 +84,20 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="showtime_start"></label>
-                    <select name="showtime_start" required>
-                        <option value="">Start Showtime</option>
-                        <option value="2023-06-07 09:30:00">1) 2023-06-07 09:30:00</option>
-                        <option value="2023-06-20 09:00:00">2) 2023-06-20 09:00:00</option>
-                        <option value="2023-07-18 13:00:00">3) 2023-07-18 13:00:00</option>
-                        <option value="2023-07-20 12:00:00">4) 2023-07-20 12:00:00</option>
-                    </select>
+                <label for="showtime_start">Showtime Start</label>
+                <input type="datetime-local" name="showtime_start" id="showtime_start" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="showtime_end"></label>
-                    <select name="showtime_end" required>
-                        <option value="">End Showtime</option>
-                        <option value="2023-06-07 11:30:00">1) 2023-06-07 11:30:00</option>
-                        <option value="2023-06-20 12:00:00">2) 2023-06-20 12:00:00</option>
-                        <option value="2023-07-18 17:00:00">3) 2023-07-18 17:00:00</option>
-                        <option value="2023-07-20 15:00:00">4) 2023-07-20 15:00:00</option>
-                    </select>
+                <label for="showtime_end">Showtime End</label>
+                <input type="datetime-local" name="showtime_end" id="showtime_end" required>
                 </div>
 
                 <br>
                 <input type="submit" name="add" value="ADD"/>
             </form>
         </div>
-    </body>
+    </body> 
 
     <style>
 		body {
@@ -130,6 +118,12 @@
     width: 60%;
 }
 
+input[type="datetime-local"]::placeholder {
+    font-size: 16px;
+    color: #BF0885; /* Warna teks placeholder */
+    font-style: italic;
+}
+
 h1 {
     font-size: 48px;
     color: #BF0885; /* Bold, eye-catching pink for the header */
@@ -147,10 +141,11 @@ form {
 
 .form-group {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column; /* Ubah dari row ke column untuk lebih rapi */
+    align-items: center; /* Pusatkan elemen secara horizontal */
+    justify-content: center; /* Pusatkan elemen secara vertikal */
     margin-bottom: 15px;
+    text-align: center; /* Tambahkan agar teks di tengah */
 }
 
 .form-group label {
@@ -211,4 +206,8 @@ input[type="submit"]:hover {
 }
 
 	</style>
+    <script>
+        document.querySelector('input[type="datetime-local"]').setAttribute('placeholder', 'yyyy-mm-ddThh:mm');
+
+    </script>
 </html>

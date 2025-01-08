@@ -7,6 +7,11 @@ session_name('cust');
 session_start();
 include 'dbConnect.php';
 
+if (!isset($_SESSION['USER_ID'])) {
+    header("location:login.php");
+    exit();
+}
+
 
 // Jika terdapat sesi transaction_id, hapus data terkait di database
 if (isset($_SESSION['transaction_id'])) {

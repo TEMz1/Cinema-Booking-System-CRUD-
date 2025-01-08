@@ -277,6 +277,34 @@ function getTrailerLinkFromDatabase($conn, $movieID)
         dataContainer.html('<p class="text-white overflow-hidden text-center mt-4">No showtimes available for this date.</p>');
     }
 }
+$(document).ready(function () {
+    // Klik pada ikon play circle
+    $(".bi-play-circle-fill").click(function () {
+        // Mendapatkan link trailer dari PHP
+        const trailerLink = "<?php echo getTrailerLinkFromDatabase($conn, $movieID); ?>";
+
+        // Menampilkan modal dan iframe trailer
+        $("#trailer-iframe").attr("src", trailerLink);
+        $("#trailer-modal").fadeIn();
+    });
+
+    // Klik pada tulisan "WATCH TRAILER"
+    $(".watch-trailer").click(function () {
+        // Mendapatkan link trailer dari PHP
+        const trailerLink = "<?php echo getTrailerLinkFromDatabase($conn, $movieID); ?>";
+
+        // Menampilkan modal dan iframe trailer
+        $("#trailer-iframe").attr("src", trailerLink);
+        $("#trailer-modal").fadeIn();
+    });
+
+    // Klik untuk menutup trailer
+    $("#close-trailer").click(function () {
+        $("#trailer-modal").fadeOut();
+        $("#trailer-iframe").attr("src", "");
+    });
+});
+
 
         // Event klik tombol tanggal
         $(".date-btn").click(function () {
@@ -313,7 +341,19 @@ function getTrailerLinkFromDatabase($conn, $movieID)
     margin-top: 20px;
 }
 
+.bi-play-circle-fill {
+    cursor: pointer;
+}
 
+/* Tulisan "WATCH TRAILER" */
+.watch-trailer {
+    cursor: pointer;
+}
+
+/* Jika ingin mengubah kursor pada saat hover */
+.bi-play-circle-fill:hover, .watch-trailer:hover {
+    cursor: pointer;
+}
 
 /* Button styling */
 .date-btn {

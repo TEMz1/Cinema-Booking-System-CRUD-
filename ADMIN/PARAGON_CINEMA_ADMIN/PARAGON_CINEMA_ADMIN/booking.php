@@ -1,13 +1,14 @@
 <?php
 define('APP_ACCESS', true);
 session_name('admin_session');
+session_start();
 
 if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'Manager') {
     header("Location: login.php");
     exit();
 }
 
-session_start();
+
 
 $hostname = "localhost";
 $username = "root";

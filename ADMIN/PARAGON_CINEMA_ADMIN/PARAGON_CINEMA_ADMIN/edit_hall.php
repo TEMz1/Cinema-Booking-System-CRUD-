@@ -42,7 +42,12 @@
         $result = mysqli_query($connect, $updateSql);
 
         if ($result) {
-            header("Location: hall.php");
+            ?>
+            <script>
+                alert("Data has been updated");
+                window.location = "hall.php";
+            </script><?php
+            exit();
             exit();
         } else {
             echo "Error updating hall data: " . mysqli_error($connect);
