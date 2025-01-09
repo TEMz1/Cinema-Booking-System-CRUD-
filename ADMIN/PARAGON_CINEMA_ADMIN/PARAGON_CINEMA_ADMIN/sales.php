@@ -24,7 +24,7 @@
 <html>
     <head>
         <title>MANAGER | PARAGON</title>
-		<link rel="shortcut icon" href="img/paragon_logo.png" type="image/png">
+        <link rel="shortcut icon" href="img/ten-logo.png" type="image/png">
     </head>
 
     <?php include "manager_sidenav.php"; ?>

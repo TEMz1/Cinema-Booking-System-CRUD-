@@ -24,9 +24,9 @@ if (!defined('APP_ACCESS')) {
             <div class="container py-4">
                 <div class="row gy-4 gx-5">
                     <div class="col-lg-4 col-md-6">
-                        <h5 class="h1 text-white">Paragon Cinema</h5>
+                        <h5 class="h1 text-white">TEN Cinema</h5>
                         <p class="small text-secondary"> Where dreams ignite, and stories unfold, Book your seat, let the magic enfold.</p>
-                        <p class="small text-secondary mb-3">&copy; Copyrights. All rights reserved. <a class="text-cust" href="#">Paragon.com</a></p>
+                        <p class="small text-secondary mb-3">&copy; Copyrights. All rights reserved. <a class="text-cust" href="https://github.com/TEMz1/Cinema-Booking-System-CRUD-">TenCinema.com</a></p>
                     </div>
                     <div class="col-lg-2 col-md-6">
                         <h5 class="text-white mb-3">Quick links</h5>

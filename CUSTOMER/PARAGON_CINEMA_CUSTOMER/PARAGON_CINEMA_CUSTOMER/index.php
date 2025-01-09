@@ -53,7 +53,7 @@ if (!empty($_SESSION)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paragon Cinema - Finest Online Cinema throughout Malaysia</title>
     <!-- ::::::::::::::Icon Tab::::::::::::::-->
-    <link rel="shortcut icon" href="assets/images/logo/paragon_logo.png" type="image/png">
+    <link rel="shortcut icon" href="assets/images/logo/ten-logo.png" type="image/png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/_homeStyles.css" />
     <link rel="stylesheet" href="assets/_navbarStyles.css" />
@@ -85,14 +85,14 @@ if (!empty($_SESSION)) {
     <section class="main swiper mySwiper">
         <div class="wrapper swiper-wrapper">
             <div class="slide swiper-slide">
-                <img src="assets/images/carousel/barbie_hori.jpg" alt="" class="image" />
+                <img src="assets/images/carousel/1kakak_hori.png" alt="" class="image" />
                 <div class="image-data">
                     <div class="container">
-                        <img style="width:auto;height:200px;padding:0;" src="assets/images/carousel/barbie_bg.png" alt="" class="image" />
+                        <img style="width:auto;height:200px;padding:0;" src="assets/images/carousel/1kakak7_logo.png" alt="" class="image" />
                     </div>
                     <h2>Coming Soon</h2>
                     <?php
-                    $query = "SELECT movieid FROM movie WHERE title = 'Barbie'";
+                    $query = "SELECT movieid FROM movie WHERE movieId = 40";
                     $result = mysqli_query($conn, $query);
 
                     if ($result && $row = mysqli_fetch_assoc($result)) {
@@ -103,14 +103,14 @@ if (!empty($_SESSION)) {
                 </div>
             </div>
             <div class="slide swiper-slide">
-                <img src="assets/images/carousel/opp_hori.jpg" alt="" class="image" />
+                <img src="assets/images/carousel/1imam-hori.jpeg" alt="" class="image" />
                 <div class="image-data">
                     <div class="container">
-                        <img style="width:418.3px;height:200px;padding:0;" src="assets/images/carousel/opp_bgs.png" alt="" class="image" />
+                        <img style="width:418.3px;height:200px;padding:0;" src="assets/images/carousel/1imam-logo.png" alt="" class="image" />
                     </div>
                     <h2>Coming Soon</h2>
                     <?php
-                    $query = "SELECT movieid FROM movie WHERE title = 'Oppenheimer'";
+                    $query = "SELECT movieid FROM movie WHERE movieId = 42";
                     $result = mysqli_query($conn, $query);
 
                     if ($result && $row = mysqli_fetch_assoc($result)) {
@@ -121,14 +121,14 @@ if (!empty($_SESSION)) {
                 </div>
             </div>
             <div class="slide swiper-slide">
-                <img src="assets/images/carousel/dune_hori.jpg" alt="" class="image" />
+                <img src="assets/images/carousel/matirasa_hori.png" alt="" class="image" />
                 <div class="image-data">
                     <div class="container">
-                        <img style="width:auto;height:200px;padding:0;" src="assets/images/carousel/dune_bg.png" alt="" class="image" />
+                        <img style="width:auto;height:200px;padding:0;" src="assets/images/carousel/mati-rasalogo.png" alt="" class="image" />
                     </div>
                     <h2>Coming Soon</h2>
                     <?php
-                    $query = "SELECT movieid FROM movie WHERE title = 'Dune: Part Two'";
+                    $query = "SELECT movieid FROM movie WHERE movieId = 44";
                     $result = mysqli_query($conn, $query);
 
                     if ($result && $row = mysqli_fetch_assoc($result)) {
@@ -139,14 +139,14 @@ if (!empty($_SESSION)) {
                 </div>
             </div>
             <div class="slide swiper-slide">
-                <img src="assets/images/carousel/batman_hori.jpg" alt="" class="image" />
+                <img src="assets/images/carousel/2ndmiracle_hori.png" alt="" class="image" />
                 <div class="image-data">
                     <div class="container">
-                        <img style="width:auto;height:200px;padding:0;" src="assets/images/carousel/batman_bg.png" alt="" class="image" />
+                        <img style="width:auto;height:200px;padding:0;" src="assets/images/carousel/2ndmiracle.png" alt="" class="image" />
                     </div>
                     <h2>Trending</h2>
                     <?php
-                    $query = "SELECT movieid FROM movie WHERE title = 'The Batman'";
+                    $query = "SELECT movieid FROM movie WHERE movieId = 32";
                     $result = mysqli_query($conn, $query);
 
                     if ($result && $row = mysqli_fetch_assoc($result)) {
@@ -176,10 +176,10 @@ if (!empty($_SESSION)) {
             <div class="row">
                 <div class="my-3 py-3" style="padding: 0px;">
                     <h1 style="color: #ffffff; padding: 0;" class="mb-4">Showtimes</h1>
-                    <button class="btn btn-outline btncarousel" onclick="changeCarousel('literally-me')">"Literally Me"</button>
+                    <button class="btn btn-outline btncarousel" onclick="changeCarousel('literally-me')">"Indonesia"</button>
                     <button class="btn btn-outline btncarousel" onclick="changeCarousel('now-showing')">Now Showing</button>
-                    <button class="btn btn-outline btncarousel" onclick="changeCarousel('top-selling')">Top Selling</button>
-                    <button class="btn btn-outline btncarousel" onclick="changeCarousel('aug-specials')">20<sup>th</sup> July Specials</button>
+                    <button class="btn btn-outline btncarousel" onclick="changeCarousel('top-selling')">Trending</button>
+                    <button class="btn btn-outline btncarousel" onclick="changeCarousel('coming-soon')">Coming Soon</button>
                 </div>
             </div>
             <div class="row">
@@ -196,14 +196,13 @@ if (!empty($_SESSION)) {
 
                         // Modify the SQL query based on the button type
                         if ($type === 'literally-me') {
-                            $query .= " WHERE movieid IN (12, 13, 14, 15, 16, 18, 19)";
+                            $query .= " WHERE language = 'IDN'";
                         } elseif ($type === 'now-showing') {
                             $query .= " WHERE DATE(showtime_start) <= CURDATE() AND DATE(showtime_end) >= CURDATE()";
                         } elseif ($type === 'top-selling') {
-                            $query .= " WHERE movieid IN (11, 12, 13, 14)";
-                        } elseif ($type === 'aug-specials') {
-                            $date = '2023-07-20';
-                            $query .= " WHERE DATE(showtime_start) = '$date'";
+                            $query .= " WHERE movieid IN (32, 33, 43, 39)";
+                        } elseif ($type === 'coming-soon') {
+                            $query .= " WHERE DATE(releaseDate) > CURDATE()";
                         }
 
                         $query .= " GROUP BY movieid ORDER BY movieid";
@@ -214,7 +213,7 @@ if (!empty($_SESSION)) {
                             while ($row = mysqli_fetch_assoc($result)) {
                         ?>
                                 <a href="moviedetails.php?movieid=<?php echo $row["movieid"]; ?>">
-                                    <img style="width: 240px; height: 340px; margin-right: 14px;" src="assets/images/movie_poster/<?php echo $row["poster"]; ?>" alt="img" draggable="false">
+                                    <img style="width: 240px; height: 340px; margin-right: 14px;" src="../../../ADMIN/PARAGON_CINEMA_ADMIN/PARAGON_CINEMA_ADMIN/assets/images/movie_poster/<?php echo $row["poster"]; ?>" alt="img" draggable="false">
                                 </a>
                         <?php
                             }

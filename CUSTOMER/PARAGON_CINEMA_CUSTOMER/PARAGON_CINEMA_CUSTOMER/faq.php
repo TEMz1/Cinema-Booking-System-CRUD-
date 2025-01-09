@@ -22,7 +22,7 @@ if (!isset($_SESSION['USER_ID'])) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
    <!-- ::::::::::::::Icon Tab::::::::::::::-->
-   <link rel="shortcut icon" href="assets/images/logo/paragon_logo.png" type="image/png">
+   <link rel="shortcut icon" href="assets/images/logo/ten-logo.png" type="image/png">
   <link rel="stylesheet" href="assets/_navbarStyles.css" />
   <link rel="stylesheet" href="assets/_footerStyles.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -55,7 +55,7 @@ if (!isset($_SESSION['USER_ID'])) {
           <br>- Issues pertaining to projection equipment (e.g. session breakdown, sound system and/or subpar visual quality).
         </p><br>
         <h4>What should I do if my transaction failed during payment/check out process?</h4>
-        <p>Please email us at feedback@tgv.com.my with the following details:<br>
+        <p>Please email us at feedback@tgv.com.id with the following details:<br>
 
           Full name: <br>
           Email (used during purchase): <br>
@@ -74,7 +74,7 @@ if (!isset($_SESSION['USER_ID'])) {
         <p>Do not worry, as long as you have not insert the OTP / TAC code, the purchase is not complete.<br>
 
           Please re-select your booking preference and complete your purchase journey.</p><br>
-        <h4>Can I bring in outside food into Paragon?</h4>
+        <h4>Can I bring in outside food into TEN?</h4>
         <p>- Customers are required to purchase food and beverage from TGV Cinemas' snack bars. <br>
 
           - Food purchased outside of TGV Cinemas premises will not be allowed in the cinema/movie halls. <br>

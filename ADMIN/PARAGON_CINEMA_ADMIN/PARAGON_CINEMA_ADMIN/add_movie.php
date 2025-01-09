@@ -27,6 +27,7 @@
         // Get the movie data from the form
         $title = $_POST["title"];
         $genre = $_POST["genre"];
+        $language = $_POST["language"];
         $desc = $_POST["desc"];
         $duration = $_POST["duration"];
         $releaseDate = $_POST["releaseDate"];
@@ -47,7 +48,7 @@
         }
 
         // Insert the movie data into the database
-        $insertSql = "INSERT INTO MOVIE (title, poster, genre, description, duration, releaseDate, trailer) VALUES ('$title', '$posterName', '$genre', '$desc', '$duration', '$releaseDate', '$trailer')";
+        $insertSql = "INSERT INTO MOVIE (title, poster, genre, language, description, duration, releaseDate, trailer) VALUES ('$title', '$posterName', '$genre', '$language', '$desc', '$duration', '$releaseDate', '$trailer')";
 
         $result = mysqli_query($connect, $insertSql);
 
@@ -66,7 +67,7 @@
 <html>
 	<head>
 		<title>CLERK | PARAGON</title>
-        <link rel="shortcut icon" href="img/paragon_logo.png" type="image/png">
+        <link rel="shortcut icon" href="img/ten-logo.png" type="image/png">
 	</head>
 	    <body>
             <div class="container">
@@ -76,6 +77,7 @@
                     <input type="text" name="title" placeholder="Movie Title" required/><br/>
                     <input type="file" name="poster" required/><br/>
                     <input type="text" name="genre" placeholder="Movie Genre" required/><br/>
+                    <input type="text" name="language" placeholder="Language" required/><br/>
                     <textarea name="desc" placeholder="Movie Desc" required></textarea><br/>
                     <input type="text" name="duration" placeholder="Movie Duration" required/><br/>
                     <input type="date" name="releaseDate" placeholder="Release Date" required/><br/>

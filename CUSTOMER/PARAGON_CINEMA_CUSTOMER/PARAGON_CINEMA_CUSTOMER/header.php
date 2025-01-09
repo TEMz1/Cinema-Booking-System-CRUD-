@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="shortcut icon" href="assets/images/logo/ten-logo.png" type="image/png">
+</head>
+<body>
+    
+</body>
+</html>
 <?php
 // Cek apakah APP_ACCESS sudah didefinisikan
 if (!defined('APP_ACCESS')) {
@@ -10,7 +19,7 @@ if (!defined('APP_ACCESS')) {
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark">
     <div class="container-fluid">
         <div class="image-container">
-            <a href="index.php"><img class="img-fluid" src="assets/images/logo/paragon_logo.png" alt=""></a>
+            <a href="index.php"><img class="img-fluid" src="assets/images/logo/ten-logo.png" alt=""></a>
         </div>
 
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">

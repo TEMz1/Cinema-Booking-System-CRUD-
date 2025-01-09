@@ -29,7 +29,7 @@
 <html>
 	<head>
 		<title>CLERK | PARAGON</title>
-		<link rel="shortcut icon" href="img/paragon_logo.png" type="image/png">
+        <link rel="shortcut icon" href="img/ten-logo.png" type="image/png">
 	</head>
 	
 	<?php include "sidenav.php"; ?>
@@ -55,7 +55,7 @@
 				if($sendsql){
 					echo "<table>
 					<tr>
-                        <th>No.</th>
+                        <th>ID</th>
 						<th>Cover</th>
                         <th>Title</th>
                         <th>Genre</th>

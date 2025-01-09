@@ -12,6 +12,17 @@ if (!isset($_SESSION['USER_ID'])) {
     exit();
 }
 
+// Jika terdapat sesi transaction_id, hapus data terkait di database
+if (isset($_SESSION['transaction_id'])) {
+    $transaction_id = $_SESSION['transaction_id'];
+
+    // Hapus data di database berdasarkan transaction_id
+    $query = "DELETE FROM invoice WHERE transaction_id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "s", $transaction_id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+}
 ?>
  <?php
 
@@ -25,7 +36,7 @@ if (!isset($_SESSION['USER_ID'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paragon | Movies</title>
     <!-- ::::::::::::::Icon Tab::::::::::::::-->
-    <link rel="shortcut icon" href="assets/images/logo/paragon_logo.png" type="image/png">
+    <link rel="shortcut icon" href="assets/images/logo/ten-logo.png" type="image/png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/_movieListStyles.css" />
     <link rel="stylesheet" href="assets/_navbarStyles.css" />
@@ -56,7 +67,7 @@ if (!isset($_SESSION['USER_ID'])) {
             ?>
                     <div class="gallery-item">
                         <a href="moviedetails.php?movieid=<?php echo $row["movieid"] ?>">
-                            <img class="gallery-image" src="assets/images/movie_poster/<?php echo $row["poster"]; ?>" alt="Movie Poster">
+                            <img class="gallery-image" src="../../../ADMIN/PARAGON_CINEMA_ADMIN/PARAGON_CINEMA_ADMIN/assets/images/movie_poster/<?php echo $row["poster"]; ?>" alt="Movie Poster">
                         </a>
                     </div>
             <?php

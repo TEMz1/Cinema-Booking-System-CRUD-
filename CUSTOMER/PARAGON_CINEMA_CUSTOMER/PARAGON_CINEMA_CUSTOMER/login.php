@@ -44,14 +44,14 @@ if (isset($_POST['login'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Paragon | Login</title>
      <!-- ::::::::::::::Icon Tab::::::::::::::-->
-     <link rel="shortcut icon" href="assets/images/logo/paragon_logo.png" type="image/png">
+     <link rel="shortcut icon" href="assets/images/logo/ten-logo.png" type="image/png">
     <link rel="stylesheet" href="assets/_loginStyles.css" />
   </head>
   <body>
     <div class="content">
       <div class="flex-div">
         <div class="name-content">
-          <h1 class="logo">Paragon</h1>
+          <h1 class="logo">TEN</h1>
           <h4 class="logo-2nd">Cinema</h4>
           <p>
             Where dreams ignite, and stories unfold,

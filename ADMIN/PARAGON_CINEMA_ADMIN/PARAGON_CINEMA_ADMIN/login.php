@@ -5,7 +5,7 @@
       <title>Clerk Paragon</title>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
         <link href="css/index.css" rel="stylesheet" type="text/css">
-        <link rel="shortcut icon" href="img/paragon_logo.png" type="image/png">
+        <link rel="shortcut icon" href="img/ten-logo.png" type="image/png">
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	</head>
   

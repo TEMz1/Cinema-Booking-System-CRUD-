@@ -11,6 +11,19 @@ if (!isset($_SESSION['USER_ID'])) {
     exit();
 }
 
+
+// Jika terdapat sesi transaction_id, hapus data terkait di database
+if (isset($_SESSION['transaction_id'])) {
+    $transaction_id = $_SESSION['transaction_id'];
+
+    // Hapus data di database berdasarkan transaction_id
+    $query = "DELETE FROM invoice WHERE transaction_id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "s", $transaction_id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+}
+
 $userid = $_SESSION['USER_ID'];
 
 // Query hanya untuk data pada hari ini
@@ -28,7 +41,7 @@ $result = mysqli_query($conn, $query);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paragon | View Booking</title>
     <!-- ::::::::::::::Icon Tab::::::::::::::-->
-    <link rel="shortcut icon" href="assets/images/logo/paragon_logo.png" type="image/png">
+    <link rel="shortcut icon" href="assets/images/logo/ten-logo.png" type="image/png">
     <link rel="stylesheet" href="assets/_navbarStyles.css" />
     <link rel="stylesheet" href="assets/_footerStyles.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">

@@ -52,7 +52,7 @@ if (!empty($bookingdata)) {
     <title>Paragon | Booking</title>
 
     <!-- ::::::::::::::Icon Tab::::::::::::::-->
-    <link rel="shortcut icon" href="assets/images/logo/paragon_logo.png" type="image/png">
+    <link rel="shortcut icon" href="assets/images/logo/ten-logo.png" type="image/png">
     <link rel="stylesheet" href="assets/_displaybookdetailsStyles.css" />
     <link rel="stylesheet" href="assets/toast-styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">

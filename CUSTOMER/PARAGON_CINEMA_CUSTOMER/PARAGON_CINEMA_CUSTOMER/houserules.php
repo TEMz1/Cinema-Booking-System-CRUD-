@@ -21,7 +21,7 @@ if (!isset($_SESSION['USER_ID'])) {
     <title>Paragon | House Rules</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
       <!-- ::::::::::::::Icon Tab::::::::::::::-->
-    <link rel="shortcut icon" href="assets/images/logo/paragon_logo.png" type="image/png">
+      <link rel="shortcut icon" href="assets/images/logo/ten-logo.png" type="image/png">
     <link rel="stylesheet" href="assets/_navbarStyles.css" />
     <link rel="stylesheet" href="assets/_footerStyles.css" />
     <meta charset="utf-8">
@@ -91,39 +91,39 @@ if (!isset($_SESSION['USER_ID'])) {
             <div class="row">
                 <div class="col-lg-12">
                     <h1>House Rules</h1><br>
-                    <p>DI PARAGON, KAMI SENTIASA MEMASTIKAN SEMUA PENONTON KAMI MENIKMATI PENGALAMAN MENONTON YANG MENYERONOKKAN KERJASAMA ANDA AMAT DIPERLUKAN UNTUK MEMATUHI PERATURAN YANG BERIKIUT:</p>
-                    <p>At PARAGON, we always work to provide an enjoyable cinematic experience for all our customers. We seek your cooperation to abide by our house rules as follows:</p><br>
+                    <p>DI TEN, KAMI SENTIASA MEMASTIKAN SEMUA PENONTON KAMI MENIKMATI PENGALAMAN MENONTON YANG MENYENANGKAN KERJASAMA ANDA SANGAT DIPERLUKAN UNTUK MEMATUHI PERATURAN BERIKUT INI:</p>
+                    <p>At TEN, we always work to provide an enjoyable cinematic experience for all our customers. We seek your cooperation to abide by our house rules as follows:</p><br>
                     <hr>
 
                     <!-- First image-text combination -->
                     <div class="image-with-text">
                         <img src="assets/images/icons/nosmoking.png" alt="Image 1">
-                        <p>1. DILARANG MEROKOK DI DALAM KAWASAN PAWAGAM </p>
+                        <p>1. DILARANG MEROKOK DI AREA BIOSKOP </p>
                     </div><br>
                     <!-- Second image-text combination -->
                     <div class="image-with-text">
                         <img src="assets/images/icons/nooutsidefood.png" alt="Image 2">
-                        <p>2. MAKANAN DAN MINUMAN LUAR TIDAK DIBENARKAN </p>
+                        <p>2. TIDAK BOLEH MEMBAWA MAKANAN DAN MINUMAN DARI LUAR </p>
                     </div><br>
                     <div class="image-with-text">
                         <img src="assets/images/icons/norecording.png" alt="Image 3">
-                        <p>3. SEBARANG BENTUK RAKAMAN VIDEO ATAU BUNYI DILARANG SAMA SEKALI </p>
+                        <p>3. SEGALA JENIS REKAMAN VIDEO ATAU AUDIO DILARANG </p>
                     </div> <br>
                     <div class="image-with-text">
                         <img src="assets/images/icons/eighteenplus.png" alt="Image 4">
-                        <p>4. FILEM 18+ ADALAH TERHAD KEPADA PENONTON BERUMUR 18 TAHUN DAN KE ATAS SAHAJA </p>
+                        <p>4. FILM 18+ HANYA UNTUK PENONTON BERUSIA 18 TAHUN KE ATAS </p>
                     </div> <br>
                     <div class="image-with-text">
                         <img src="assets/images/icons/cctv.png" alt="Image 5">
-                        <p>5. KAWASAN INI DI BAWAH PENGAWASAN KAMERA LITAR TERTUTUP</p>
+                        <p>5. AREA INI DIAWASI OLEH KAMERA CCTV</p>
                     </div> <br>
                     <div class="image-with-text">
                         <img src="assets/images/icons/child.png" alt="Image 6">
-                        <p>6. KANAK KANAK BERUMUR 3 TAHUN DAN KE ATAS MEMERLUKAN TIKET UNTUK MEMASUKI PAWAGAM </p>
+                        <p>6. ANAK-ANAK BERUSIA 3 TAHUN KE ATAS MEMERLUKAN TIKET UNTUK MASUK BIOSKOP </p>
                     </div> <br>
                     <div class="image-with-text">
                         <img src="assets/images/icons/silence.png" alt="Image 7">
-                        <p>7. SILA SENYAPKAN TELEFON ANDA KETIKA TAYANGAN BERLANGSUNG</p>
+                        <p>7. HARAP HENINGKAN TELEPON ANDA SELAMA PEMUTARAN FILM</p>
                     </div> <br>
                 </div>
             </div>

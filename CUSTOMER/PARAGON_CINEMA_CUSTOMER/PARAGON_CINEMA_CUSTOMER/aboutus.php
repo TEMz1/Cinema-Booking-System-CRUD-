@@ -12,17 +12,30 @@ if (!isset($_SESSION['USER_ID'])) {
     exit();
 }
 
+
+// Jika terdapat sesi transaction_id, hapus data terkait di database
+if (isset($_SESSION['transaction_id'])) {
+  $transaction_id = $_SESSION['transaction_id'];
+
+  // Hapus data di database berdasarkan transaction_id
+  $query = "DELETE FROM invoice WHERE transaction_id = ?";
+  $stmt = mysqli_prepare($conn, $query);
+  mysqli_stmt_bind_param($stmt, "s", $transaction_id);
+  mysqli_stmt_execute($stmt);
+  mysqli_stmt_close($stmt);
+}
+
 ?>
  
 <!DOCTYPE html>
 <html>
 
 <head>
-  <title>Paragon | About Us</title>
+  <title>TEN | About Us</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- ::::::::::::::Icon Tab::::::::::::::-->
-  <link rel="shortcut icon" href="assets/images/logo/paragon_logo.png" type="image/png">
+  <link rel="shortcut icon" href="assets/images/logo/ten-logo.png" type="image/png">
   <link rel="stylesheet" href="assets/_navbarStyles.css" />
   <link rel="stylesheet" href="assets/_footerStyles.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -84,9 +97,9 @@ if (!isset($_SESSION['USER_ID'])) {
         <h1>About Us</h1>
         <p>Whether you’re curious about our cinemas, in love with our service, or have feedback for us – we’d love to hear from you.</p>
         <br>
-        <h3>Paragon Email Support:</h3>
-        <h5>cs@paragon.com.my</h5><br>
-        <h3>Paragon Customer Relations Hotline:</h3>
+        <h3>TEN Email Support:</h3>
+        <h5>cs@tencinema.id</h5><br>
+        <h3>TEN Cinema Customer Relations Hotline:</h3>
         <h5>+603-7713 7888</h5><br>
         <h3>Service Hours :</h3>
         <h5>Mon to Fri 9.00am to 6.00pm</h5>

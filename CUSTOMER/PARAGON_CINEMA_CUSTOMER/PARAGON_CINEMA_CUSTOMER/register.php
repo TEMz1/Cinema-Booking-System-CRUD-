@@ -54,7 +54,7 @@ if (isset($_POST['submit'])) {
     <script src="https://use.fontawesome.com/6a4ab084c1.js"></script>
   
     <!-- ::::::::::::::Icon Tab::::::::::::::-->
-    <link rel="shortcut icon" href="assets/images/logo/paragon_logo.png" type="image/png">
+    <link rel="shortcut icon" href="assets/images/logo/ten-logo.png" type="image/png">
 
     <title>Paragon | Register</title>
 </head>

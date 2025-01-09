@@ -17,6 +17,19 @@ if (!isset($_GET['movieid']) || empty($_GET['movieid'])) {
     exit();
 }
 
+
+// Jika terdapat sesi transaction_id, hapus data terkait di database
+if (isset($_SESSION['transaction_id'])) {
+    $transaction_id = $_SESSION['transaction_id'];
+
+    // Hapus data di database berdasarkan transaction_id
+    $query = "DELETE FROM invoice WHERE transaction_id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "s", $transaction_id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+}
+
 if (!empty($_SESSION)) {
     // Simpan hanya USER_ID dan username
     $userId = $_SESSION['USER_ID'] ?? null;
@@ -78,7 +91,7 @@ function getTrailerLinkFromDatabase($conn, $movieID)
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paragon | Movies</title>
     <!-- ::::::::::::::Icon Tab::::::::::::::-->
-    <link rel="shortcut icon" href="assets/images/logo/paragon_logo.png" type="image/png">
+    <link rel="shortcut icon" href="assets/images/logo/ten-logo.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/movie-detail.css" />
     <link rel="stylesheet" href="assets/_navbarStyles.css" />
@@ -119,27 +132,27 @@ function getTrailerLinkFromDatabase($conn, $movieID)
                 <div class="container overflow-hidden text-center">
                     <div class="row">
                         <div class="col-12 col-lg-3 px-4 text-center">
-                            <img style="width:200px;height:300px;" class="gallery-image" src="assets/images/movie_poster/<?php echo $row["poster"]; ?>" alt="Movie Poster">
+                            <img style="width:200px;height:300px;" class="gallery-image" src="../../../ADMIN/PARAGON_CINEMA_ADMIN/PARAGON_CINEMA_ADMIN/assets/images/movie_poster/<?php echo $row["poster"]; ?>" alt="Movie Poster">
                         </div>
                         <div class="col-12 col-lg-9">
                             <h1 class="fw-bold font-xxl mb-0"><?php echo $row["title"] ?></h1>
                             <ul class="row px-0">
                                 <li class="col-12 col-sm-6 twi twi-xs twi-date mt-0">
                                     <?php
-                                    $oldDate = $row["releaseDate"];
-                                    $newDate = DateTime::createFromFormat('Y-d-m', $oldDate);
-                                    $formattedDate = $newDate->format('d M Y');
-                                    ?>
-                                    <strong>Release Date</strong>: <?php echo $formattedDate ?>
+                                      $oldDate = $row["releaseDate"]; // Nilai dari basis data, misalnya: 2024-08-15
+                                      $newDate = DateTime::createFromFormat('Y-m-d', $oldDate); // Format yang sesuai dengan DB
+                                      $formattedDate = $newDate->format('d M Y'); // Contoh hasil: 15 Aug 2024
+                                      ?>
+                                      <strong>Release Date</strong>: <?php echo $formattedDate ?>
                                 </li>
                                 <li class="col-12 col-sm-6 twi twi-xs twi-date mt-0">
-                                    <strong>Language</strong>: ENG
+                                    <strong>Language</strong>: <?php echo $row["language"] ?>
                                 </li>
                                 <li class="col-12 col-sm-6 twi twi-xs twi-date mt-0">
                                     <strong>Running Time</strong>: <?php echo  $row["duration"] ?>
                                 </li>
                                 <li class="col-12 col-sm-6 twi twi-xs twi-date mt-0">
-                                    <strong>Subtitles</strong>: BM
+                                    <strong>Subtitles</strong>: ID
                                 </li>
                                 <li class="col-12 col-sm-6 twi twi-xs twi-date mt-0">
                                     <strong>Genre</strong>: <?php echo  $row["genre"] ?>
@@ -165,7 +178,7 @@ function getTrailerLinkFromDatabase($conn, $movieID)
                                 <div id="trailer-content">
                                     <iframe id="trailer-iframe" src="" frameborder="0" allowfullscreen></iframe>
                                 </div>
-                                <div id="close-trailer">&#x2715;</div>
+                                <div id="close-trailer">&#x27 15;</div>
                             </div>
                             <div>
 
@@ -299,10 +312,10 @@ $(document).ready(function () {
     });
 
     // Klik untuk menutup trailer
-    $("#close-trailer").click(function () {
-        $("#trailer-modal").fadeOut();
-        $("#trailer-iframe").attr("src", "");
-    });
+    $("#trailer-modal").click(function() {
+                $("#trailer-modal").fadeOut();
+                $("#trailer-iframe").attr("src", "");
+            });
 });
 
 
