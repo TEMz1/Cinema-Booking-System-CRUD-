@@ -19,7 +19,19 @@ nav{
     color: #ffffff;
     font-weight: bold;
   }
+/* Pastikan dropdown punya lebar yang sama dengan tombol */
+.dropdown-menu {
+  width: 100%; /* Agar dropdown mengikuti lebar tombol */
+  min-width: unset; /* Hapus min-width default */
+}
 
-/* .nav-item a{
-  color: #ffffff;
-} */
+/* Biar dropdown tetap rapi dan sejajar dengan tombol */
+.nav-item.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  left: 0; /* Biar dropdown melebar ke kiri */
+  right: auto; /* Hapus efek melebar ke kanan */
+}
+

@@ -7,18 +7,13 @@
         exit();
     }
 
-    $hostname = "localhost";
-    $username = "root";
-    $dbname = "paragoncinemadb";
-
-    $connect = mysqli_connect($hostname, $username) OR DIE ("Connection failed!");
-    $selectdb = mysqli_select_db($connect, $dbname) OR DIE ("Database cannot be accessed");
+    include 'dbConnect.php';
 
     $username = $_SESSION["username"];
 
-    $sql = "SELECT * FROM CLERK WHERE username = '$username' ";
+    $sql = "SELECT * FROM clerk WHERE username = '$username' ";
 
-    $sendsql = mysqli_query($connect, $sql) OR DIE("CONNECTION ERROR");
+    $sendsql = mysqli_query($conn, $sql) OR DIE("CONNECTION ERROR");
 
     $row = mysqli_fetch_assoc($sendsql);
 
@@ -37,7 +32,7 @@
         $insertSql = "INSERT INTO clerk (username, password, name, icNum, phoneNum, gender, role) 
               VALUES ('$username', '$password', '$name', '$icNum', '$phoneNum', '$gender', '$role')";
 
-        $result = mysqli_query($connect, $insertSql);
+        $result = mysqli_query($conn, $insertSql);
 
        
             if ($result) {
@@ -47,7 +42,7 @@
                 </script><?php
                 exit();
             } else {
-                echo "Error inserting Clerk data: " . mysqli_error($connect);
+                echo "Error inserting Clerk data: " . mysqli_error($conn);
             }
         } 
         

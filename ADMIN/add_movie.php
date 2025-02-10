@@ -1,68 +1,67 @@
 <?php
-    session_name('admin_session');
-    session_start();
-    
-    if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'Clerk') {
-        header("Location: login.php");
+session_name('admin_session');
+session_start();
+
+if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'Clerk') {
+    header("Location: login.php");
+    exit();
+}
+
+include 'dbConnect.php';
+
+$username = $_SESSION["username"];
+
+$sql = "SELECT * FROM CLERK WHERE username = ?";
+$sendsql = mysqli_prepare($conn, $sql);
+mysqli_stmt_bind_param($sendsql, "s", $username);  // "s" menunjukkan bahwa parameter ini adalah string
+mysqli_stmt_execute($sendsql);
+$result = mysqli_stmt_get_result($sendsql);
+$row = mysqli_fetch_assoc($result);
+
+// Check if the form is submitted
+if (isset($_POST["add"])) {
+    // Get the movie data from the form
+    $title = $_POST["title"];
+    $genre = $_POST["genre"];
+    $language = $_POST["language"];
+    $desc = $_POST["desc"];
+    $duration = $_POST["duration"];
+    $releaseDate = $_POST["releaseDate"];
+    $trailer = $_POST["trailer"];
+
+    // Handle file upload
+    $poster = $_FILES["poster"];
+    $posterName = $poster["name"];
+    $posterTmpName = $poster["tmp_name"];
+    $posterError = $poster["error"];
+
+    // Check if a file was selected
+    if ($posterError === UPLOAD_ERR_OK) {
+        $posterDestination = "assets/images/movie_poster/" . $posterName;
+        move_uploaded_file($posterTmpName, $posterDestination);
+    } else {
+        echo "Error uploading poster: " . $posterError;
+    }
+
+    // Insert the movie data into the database with prepared statement
+    $insertSql = "INSERT INTO movie (title, poster, genre, language, description, duration, releaseDate, trailer) 
+                  VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $stmt = mysqli_prepare($conn, $insertSql);
+    mysqli_stmt_bind_param($stmt, "ssssssss", $title, $posterName, $genre, $language, $desc, $duration, $releaseDate, $trailer);  // Bind the parameters
+    $result = mysqli_stmt_execute($stmt);
+
+    if ($result) {
+        ?><script>
+            alert("Data has been added");
+            window.location = "movie.php";
+        </script><?php
         exit();
+    } else {
+        echo "Error adding new movie: " . mysqli_error($conn);
     }
-
-    $hostname = "localhost";
-    $username = "root";
-    $dbname = "paragoncinemadb";
-
-    $connect = mysqli_connect($hostname, $username) OR DIE ("Connection failed!");
-    $selectdb = mysqli_select_db($connect, $dbname) OR DIE ("Database cannot be accessed");
-
-    $username = $_SESSION["username"];
-
-    $sql = "SELECT * FROM CLERK WHERE username = '$username' ";
-
-    $sendsql = mysqli_query($connect, $sql) OR DIE("CONNECTION ERROR");
-
-    $row = mysqli_fetch_assoc($sendsql);
-
-    // Check if the form is submitted
-    if (isset($_POST["add"])) {
-        // Get the movie data from the form
-        $title = $_POST["title"];
-        $genre = $_POST["genre"];
-        $language = $_POST["language"];
-        $desc = $_POST["desc"];
-        $duration = $_POST["duration"];
-        $releaseDate = $_POST["releaseDate"];
-        $trailer = $_POST["trailer"];
-
-        // Handle file upload
-        $poster = $_FILES["poster"];
-        $posterName = $poster["name"];
-        $posterTmpName = $poster["tmp_name"];
-        $posterError = $poster["error"];
-
-        // Check if a file was selected
-        if ($posterError === UPLOAD_ERR_OK) {
-            $posterDestination = "assets/images/movie_poster/" . $posterName;
-            move_uploaded_file($posterTmpName, $posterDestination);
-        } else {
-            echo "Error uploading poster: " . $posterError;
-        }
-
-        // Insert the movie data into the database
-        $insertSql = "INSERT INTO MOVIE (title, poster, genre, language, description, duration, releaseDate, trailer) VALUES ('$title', '$posterName', '$genre', '$language', '$desc', '$duration', '$releaseDate', '$trailer')";
-
-        $result = mysqli_query($connect, $insertSql);
-
-        if ($result) {
-            ?><script>
-                alert("Data has been added");
-                window.location = "movie.php";
-            </script><?php
-            exit();
-        } else {
-            echo "Error adding new movie: " . mysqli_error($connect);
-        }
-    }
+}
 ?>
+
 <!DOCTYPE html>
 <html>
 	<head>

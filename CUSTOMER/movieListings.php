@@ -42,12 +42,7 @@ if (isset($_SESSION['transaction_id'])) {
     <link rel="stylesheet" href="assets/_movieListStyles.css" />
     <link rel="stylesheet" href="assets/_navbarStyles.css" />
     <link rel="stylesheet" href="assets/_footerStyles.css" />
-    <style>
-        body {
-            background-color: #111111;
-            color: #FFFFFF;
-        }
-    </style>
+  
 </head>
 
 <body>

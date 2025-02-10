@@ -93,27 +93,13 @@ function getTrailerLinkFromDatabase($conn, $movieID)
     <!-- ::::::::::::::Icon Tab::::::::::::::-->
     <link rel="shortcut icon" href="assets/images/logo/ten-logo.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/movie-detail.css" />
-    <link rel="stylesheet" href="assets/_navbarStyles.css" />
-    <link rel="stylesheet" href="assets/_footerStyles.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <style>
-        body {
-            background-color: #111111;
-            color: #FFFFFF;
-        }
-
-        .cust-button {
-            background-color: #FFB6C1;
-            color: #111111;
-        }
-
-        .cust-button:hover {
-            background: #FF9AA2;
-            color: #ffffff;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/_navbarStyles.css" />
+    <link rel="stylesheet" href="assets/movie-detail.css" />
+    <link rel="stylesheet" href="assets/_footerStyles.css" />
+    
+    
 </head>
 
 <body>
@@ -343,9 +329,23 @@ $(document).ready(function () {
     mysqli_close($conn);
     ?>
 </body>
-
 <style>
-    /* Container styling */
+        body {
+            background-color: #111111;
+            color: #FFFFFF;
+        }
+
+        .cust-button {
+            background-color: #FFB6C1;
+            color: #111111;
+        }
+
+        .cust-button:hover {
+            background: #FF9AA2;
+            color: #ffffff;
+        }
+
+            /* Container styling */
 .date-container {
     margin-bottom: 20px;
 }
@@ -454,6 +454,5 @@ $(document).ready(function () {
     }
 }
 
-</style>
-
+    </style>
 </html>

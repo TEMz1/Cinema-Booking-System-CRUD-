@@ -7,10 +7,6 @@ session_name('cust');
 session_start();
 include 'dbConnect.php';
 
-if (!isset($_SESSION['USER_ID'])) {
-    header("location:login.php");
-    exit();
-}
 
 
 // Jika terdapat sesi transaction_id, hapus data terkait di database
@@ -42,6 +38,23 @@ if (isset($_SESSION['transaction_id'])) {
 
 
   <style>
+
+    /* Pastikan dropdown punya lebar yang sama dengan tombol */
+.dropdown-menu {
+    width: 100%; /* Agar dropdown mengikuti lebar tombol */
+    min-width: unset; /* Hapus min-width default */
+}
+
+/* Biar dropdown tetap rapi dan sejajar dengan tombol */
+.nav-item.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    left: 0; /* Biar dropdown melebar ke kiri */
+    right: auto; /* Hapus efek melebar ke kanan */
+}
+
     body {
       background-color: #1D1D1D;
       color: #ffffff;
@@ -74,14 +87,7 @@ if (isset($_SESSION['transaction_id'])) {
       font-weight: bold;
     }
 
-    .nav-item a {
-      color: #ffffff;
-      padding-left: 0;
-    }
 
-    .nav-item a:hover {
-      color: #888888;
-    }
   </style>
 
 </head>

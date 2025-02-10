@@ -7,18 +7,13 @@
         exit();
     }
 
-    $hostname = "localhost";
-    $username = "root";
-    $dbname = "paragoncinemadb";
-
-    $connect = mysqli_connect($hostname, $username) OR DIE ("Connection failed!");
-    $selectdb = mysqli_select_db($connect, $dbname) OR DIE ("Database cannot be accessed");
+    include 'dbConnect.php';
 
     $username = $_SESSION["username"];
 
-    $sql = "SELECT * FROM CLERK WHERE username = '$username' ";
+    $sql = "SELECT * FROM clerk WHERE username = '$username' ";
 
-    $sendsql = mysqli_query($connect, $sql) OR DIE("CONNECTION ERROR");
+    $sendsql = mysqli_query($conn, $sql) OR DIE("CONNECTION ERROR");
 
     $row = mysqli_fetch_assoc($sendsql);
 
@@ -31,7 +26,7 @@
         // Insert the movie data into the database
         $insertSql = "INSERT INTO hall (hallNo, hallName) VALUES ('$hallNo', '$hallName')";
 
-        $result = mysqli_query($connect, $insertSql);
+        $result = mysqli_query($conn, $insertSql);
 
         if ($result) {
             // Automatically insert seat data for the new hall
@@ -44,7 +39,7 @@
                                 ('F1', '$hallNo'), ('F2', '$hallNo'), ('F3', '$hallNo'), ('F4', '$hallNo'), ('F5', '$hallNo'), ('F6', '$hallNo'), 
                                 ('G1', '$hallNo'), ('G2', '$hallNo'), ('G3', '$hallNo'), ('G4', '$hallNo'), ('G5', '$hallNo'), ('G6', '$hallNo'),
                                 ('H1', '$hallNo'), ('H2', '$hallNo'), ('H3', '$hallNo'), ('H4', '$hallNo'), ('H5', '$hallNo'), ('H6', '$hallNo')";
-            $resultSeat = mysqli_query($connect, $insertSeatSql);
+            $resultSeat = mysqli_query($conn, $insertSeatSql);
         
             if ($resultSeat) {
                 ?><script>
@@ -53,10 +48,10 @@
                 </script><?php
                 exit();
             } else {
-                echo "Error inserting seat data: " . mysqli_error($connect);
+                echo "Error inserting seat data: " . mysqli_error($conn);
             }
         } else {
-            echo "Error adding new hall: " . mysqli_error($connect);
+            echo "Error adding new hall: " . mysqli_error($conn);
         }
         
     }
