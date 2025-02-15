@@ -8,37 +8,37 @@ if (isset($_SESSION['USER_ID'])) {
     exit();
   }
   
-if (isset($_POST['submit'])) {
-    $Username = $_POST['Username'];
-    $Email = $_POST['Email'];
-    $Password = $_POST['Password'];
-    $phoneNo = $_POST['phoneNo'];
-    $Name = $_POST['Name'];
+// if (isset($_POST['submit'])) {
+//     $Username = $_POST['Username'];
+//     $Email = $_POST['Email'];
+//     $Password = $_POST['Password'];
+//     $phoneNo = $_POST['phoneNo'];
+//     $Name = $_POST['Name'];
 
-    $chkcust_sql = "SELECT * FROM customer WHERE email = '$Email' or username = '$Username'";//Check if email or username already exists
-    $chkcust_result = mysqli_query($conn, $chkcust_sql);
+//     $chkcust_sql = "SELECT * FROM customer WHERE email = '$Email' or username = '$Username'";//Check if email or username already exists
+//     $chkcust_result = mysqli_query($conn, $chkcust_sql);
 
-    if($chkcust_result){
-        if(mysqli_num_rows($chkcust_result) == 0){
-            $insert = mysqli_query($conn, "INSERT INTO customer (name, phoneNo, email, username, password) VALUES ('$Name','$phoneNo','$Email','$Username','$Password')");
-            if($insert){
-                ?>
-                <script>		
-					alert("You have successfuly registered.");
-					window.location = "login.php";
-				</script><?php
-            }
-        }
-        else{
-            ?>
-            <script>		
-				alert("The email or username has been taken. Please change.");
-				window.location = "register.php";
-			</script><?php
-        }
-    }
+//     if($chkcust_result){
+//         if(mysqli_num_rows($chkcust_result) == 0){
+//             $insert = mysqli_query($conn, "INSERT INTO customer (name, phoneNo, email, username, password) VALUES ('$Name','$phoneNo','$Email','$Username','$Password')");
+//             if($insert){
+//                 ?>
+                 <script>		
+// 					alert("You have successfuly registered.");
+// 					window.location = "login.php";
+// 				</script><?php
+//             }
+//         }
+//         else{
+//             ?>
+           <script>		
+// 				alert("The email or username has been taken. Please change.");
+// 				window.location = "register.php";
+// 			</script><?php
+//         }
+//     }
 
-}
+// }
 ?>
 
 
@@ -63,7 +63,7 @@ if (isset($_POST['submit'])) {
     <div class="testbox">
         <h1>Registration</h1>
 
-        <form action="" method="post">
+        <form action="process.php" method="post">
             <hr>
             <label id="icon" for="name"><i class="icon-text-width" aria-hidden="true"></i></label>
             <input type="text" name="Name" id="name" placeholder="Name" required/>

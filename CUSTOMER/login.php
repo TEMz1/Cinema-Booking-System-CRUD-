@@ -14,7 +14,7 @@ if (isset($_POST['login'])) {
     $Username = mysqli_real_escape_string($conn, $_POST['Username']);
     $Password = mysqli_real_escape_string($conn, $_POST['Password']);
 
-    $sql = mysqli_query($conn, "SELECT * FROM customer WHERE (username='$Username' OR email='$Username') && password='$Password'");
+    $sql = mysqli_query($conn, "SELECT * FROM customer WHERE (username='$Username' OR email='$Username') AND password='$Password' AND is_verif=1");
     $num = mysqli_num_rows($sql);
 
     if ($num > 0) {
