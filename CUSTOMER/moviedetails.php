@@ -155,7 +155,7 @@ function getTrailerLinkFromDatabase($conn, $movieID)
                             <div class="row">
                                 <div class="col-sm-9">
                                     <div class="d-flex align-items-center">
-                                        <i class="bi bi-play-circle-fill" style="font-size: 2rem;"></i>
+                                        <i class="bi bi-play-circle-fill iconn" style="font-size: 2rem;"></i>
                                         <span class="watch-trailer ml-2" style="padding: 5px 2px; margin-left: 10px; cursor: pointer;">WATCH TRAILER</span>
                                     </div>
                                 </div>
@@ -323,136 +323,17 @@ $(document).ready(function () {
 </script>
 
     <!-- Bootstrap JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script> -->
     <?php
     // Close the database connection
     mysqli_close($conn);
     ?>
+    <br> <br>
 </body>
+<?php
+include 'footer.php';
+?>
 <style>
-        body {
-            background-color: #111111;
-            color: #FFFFFF;
-        }
-
-        .cust-button {
-            background-color: #FFB6C1;
-            color: #111111;
-        }
-
-        .cust-button:hover {
-            background: #FF9AA2;
-            color: #ffffff;
-        }
-
-            /* Container styling */
-.date-container {
-    margin-bottom: 20px;
-}
-
-.data-container {
-    margin-top: 20px;
-}
-
-.bi-play-circle-fill {
-    cursor: pointer;
-}
-
-/* Tulisan "WATCH TRAILER" */
-.watch-trailer {
-    cursor: pointer;
-}
-
-/* Jika ingin mengubah kursor pada saat hover */
-.bi-play-circle-fill:hover, .watch-trailer:hover {
-    cursor: pointer;
-}
-
-/* Button styling */
-.date-btn {
-    border: 1px solid #ccc;
-    background-color: #f8f9fa;
-    color: #111111;
-    padding: 6px 12px;
-    font-size: 14px;
-    border-radius: 4px;
-    transition: all 0.2s ease-in-out;
-    font-weight: 650;
-}
-
-.date-btn:hover {
-    background-color: rgb(255, 163, 177);
-    color:  #111111;
-    border-color: rgb(255, 163, 177);
-}
-
-.date-btn.active {
-    background-color: rgb(255, 163, 177);
-    color: #111111;
-    border-color: rgb(180, 85, 99);
-}
-
-/* Showtime button styles */
-.showtime-btn {
-    background-color: #f8f9fa; /* Green for active showtimes */
-    color: #111111;
-    padding: 8px 16px;
-    font-size: 14px;
-    border-radius: 4px;
-    border: none;
-    transition: background-color 0.2s ease-in-out;
-}
-
-.showtime-btn:hover {
-    background-color:rgb(255, 163, 177);
-    color: #111111;
-}
-
-/* Disabled button styling */
-.btn-secondary {
-    background-color: #6c757d;
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    font-size: 14px;
-    border-radius: 4px;
-}
-
-/* Hall container styling */
-.hall-container {
-    margin-top: 30px;
-    padding: 10px;
-    background-color: #343a40;
-    border-radius: 8px;
-}
-
-.hall-container h4 {
-    color: #fff;
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-.hall-container .d-flex {
-    justify-content: center;
-    gap: 10px;
-}
-
-.data-container {
-    margin-top: 10px; /* Tambahkan jarak lebih besar */
-    text-align: center;
-}
-
-/* General styling for responsiveness */
-@media (max-width: 768px) {
-    .date-btn, .showtime-btn, .btn-secondary {
-        font-size: 12px;
-        padding: 6px 10px;
-    }
-
-    .hall-container h4 {
-        font-size: 14px;
-    }
-}
 
     </style>
 </html>
