@@ -21,11 +21,16 @@ if (!isset($_SESSION['hall_id']) || empty($_SESSION['hall_id'])) {
 // (A) LOAD LIBRARY
 require "booking-lib.php";
 
+// echo '<pre>'; // Untuk format tampilan yang lebih rapi
+// print_r($_SESSION); // Cetak seluruh isi session
+// echo '</pre>';
+
 // GET BOOKING SEAT DATA
 $userid = $_SESSION['USER_ID'];
 $transaction_id = $_SESSION['transaction_id'];
 $hallno = $_SESSION['hall_id'];
 $bookingdata = $_RSV->getseatchosen($userid, $transaction_id);
+
 //$_SESSION['seat'] = implode(', ',$seats);
 
 // Access individual booking details
@@ -41,7 +46,13 @@ if (!empty($bookingdata)) {
     $hallno = "";
     $seatNo = "";
 }
+
+$code = "SELECT email, phoneNo from customer WHERE custid = '$userid' ";
+$sql = mysqli_query($conn, $code);
+$row = mysqli_fetch_assoc($sql);
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -70,6 +81,11 @@ if (!empty($bookingdata)) {
       font-weight: bold;
     }
   </style>
+
+<script type="text/javascript"
+    src="https://app.sandbox.midtrans.com/snap/snap.js"
+    data-client-key="SB-Mid-client-kfFM5ZGr7d8tLWYs"></script>
+
 </head>
 
 <body>
@@ -143,7 +159,63 @@ if (!empty($bookingdata)) {
                     </tr>
                 </tbody>
             </table>
-            <button  class="btn btn-primary btn-lg mt-2 btncarousel" onclick="confirmBooking()">Confirm</button>
+           <button id="pay-button" class="btn btn-primary btn-lg mt-2 btncarousel">Confirm</button>
+        
+
+           <script>
+document.getElementById('pay-button').addEventListener('click', function () {
+    let seatData = "<?php echo implode(', ', $seats); ?>";
+    let username = "<?php echo $_SESSION['USER_NAME'] ?? 'Guest'; ?>";
+    let email = "<?php echo $row['email'] ?>"; 
+    let phoneNo = "<?php echo $row['phoneNo'] ?>"; 
+
+//    setTimeout(() => {
+//     alert("Sedang mengambil token pembayaran...");
+// }, 100); 
+
+    fetch('midtrans_token.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            seat: seatData,
+            username: username,
+            email: email,
+            phoneNum: phoneNo
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data); // Debugging
+
+        if (data.token) {
+            window.snap.pay(data.token, {
+           // embedId: null,
+                onSuccess: function (result) {
+                    location.replace("bookingSuccess.php?order_id=" + result.order_id);
+                },
+                onPending: function (result) {
+                    alert("Pembayaran sedang diproses!");
+                },
+                onError: function (result) {
+                    alert("Pembayaran gagal!");
+                },
+                onClose: function () {
+                    alert("Anda menutup pembayaran sebelum selesai!");
+                }
+            });
+        } else {
+            alert("Gagal mendapatkan token pembayaran.");
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert("Terjadi kesalahan saat menghubungi server!");
+    });
+});
+</script>
+`
         </div>
     </section>
 
@@ -155,16 +227,10 @@ if (!empty($bookingdata)) {
      <?php
 
 $_SESSION['seat'] = implode(', ',$seats);
+
     ?>
 
-    <script>
-    function confirmBooking() {
-        // Menampilkan notifikasi berhasil booking
-        alert("Booking Successful!")
-        // Redirect langsung ke bookingsuccess.php
-        window.location.href = "bookingsuccess.php";
-    }
-</script>
+
 </body>
 
 </html>

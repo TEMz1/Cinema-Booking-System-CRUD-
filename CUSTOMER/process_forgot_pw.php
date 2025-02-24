@@ -34,7 +34,7 @@ if (isset($_POST['submit'])) {
         }
     }
 }else {
-    header('Location: index.php');
+    header('HTTP/1.1 405 Method Not Allowed');
         exit();
 }
         $row = mysqli_fetch_assoc($chkcust_result);
@@ -63,7 +63,7 @@ if (isset($_POST['submit'])) {
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port       = 587;
 
-                $mail->setFrom('no-reply@yourwebsite.com', 'Password Reset');
+                $mail->setFrom('no-reply@tencinema.com', 'Password Reset');
                 $mail->addAddress($Email, $Username);
 
                 $mail->isHTML(true);

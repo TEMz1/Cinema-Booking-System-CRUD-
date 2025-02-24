@@ -23,6 +23,8 @@ if (isset($_SESSION['USER_ID'])) {
   if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
         $customer_id = $row['customer_id'];
+        $password = $row['password'];
+        
     if (isset($_POST['submit'])) {
         $NewPassword = $_POST['NewPassword'];
     
@@ -37,7 +39,15 @@ if (isset($_SESSION['USER_ID'])) {
                     window.location = "forgotpassword.php";
                 </script>
                 <?php
-            } else {
+            } elseif ($NewPassword == $password){
+                ?>
+                <script>		
+                    alert("New password cannot be same with old password");
+                    window.location = "forgotpassword.php";
+                </script>
+                <?php
+            }
+             else {
                 $updatepass_result = mysqli_query($conn, "UPDATE customer SET password = '$NewPassword' WHERE custid = '$customer_id'");
                 mysqli_query($conn, "UPDATE password_reset_request SET is_change = 1 WHERE customer_id = '$customer_id'");
                 ?>

@@ -10,7 +10,7 @@
         exit();
     }
     if (!isset($_GET['code']) || empty($_GET['code'])) {
-        header("location: index.php"); // Redirect jika tidak ada kode
+        header("location: HTTP/1.1 405 Method Not Allowed"); // Redirect jika tidak ada kode
         exit();
     }
     

@@ -3,7 +3,7 @@ session_name('cust');
 session_start();
 
 if (!isset($_POST["sessid"], $_POST["userid"], $_POST["hallno"], $_POST["seats"], $_POST["transaction"])) {
-    header("Location: index.php");
+    header("HTTP/1.1 405 Method Not Allowed");
     exit();
 }
 

@@ -7,10 +7,32 @@ session_name('cust');
 session_start();
 include 'dbConnect.php';
 
-if (!isset($_SESSION['USER_ID'])) {
-    header("location:login.php");
-    exit();
-}
+// if (!isset($_SESSION['USER_ID'])) {
+//     header("location:login.php");
+//     exit();
+// }
+
+
+  // Validasi session
+  if (isset($_SESSION['hall_id']) && isset($_SESSION['transaction_id'])) {
+    $hall_no = $_SESSION['hall_id'];           // Ambil dari session
+    $transaction_id = $_SESSION['transaction_id']; // Ambil dari session
+  
+   // Query untuk menghapus data
+   $sql = "DELETE FROM bookings WHERE transaction_id = ? AND hallNo = ?";
+   $stmt = mysqli_prepare($conn, $sql);
+  
+   if ($stmt) {
+       // Bind parameter
+       mysqli_stmt_bind_param($stmt, "ss", $transaction_id, $hall_no);
+  
+       // Eksekusi query
+       mysqli_stmt_execute($stmt);
+   }
+    // Hapus session terkait (Opsional)
+    unset($_SESSION['hall_id']);
+    unset($_SESSION['transaction_id']);
+  }
 
 // Jika terdapat sesi transaction_id, hapus data terkait di database
 if (isset($_SESSION['transaction_id'])) {

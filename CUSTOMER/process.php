@@ -39,7 +39,7 @@
         }
     }else {
         //Redirect to register page if form is not submitted
-        header('Location: index.php');
+        header('HTTP/1.1 405 Method Not Allowed');
         exit();
     }
 

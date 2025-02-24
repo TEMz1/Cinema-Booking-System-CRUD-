@@ -17,16 +17,19 @@
         exit();
     }
 
-    echo '<pre>'; // Untuk format tampilan yang lebih rapi
-print_r($_SESSION); // Cetak seluruh isi session
-echo '</pre>';
-    ?>
+  ?>
 
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark">
         <div class="container-fluid">
             <div class="image-container">
                 <a href="index.php"><img class="img-fluid" src="assets/images/logo/ten-logo.png" alt=""></a>
             </div>
+
+
+            <!-- Tombol Navbar Toggler (Burger Menu di Mobile) -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                 <ul class="navbar-nav mb-2 mb-lg-0">
@@ -43,10 +46,12 @@ echo '</pre>';
                         <a class="nav-link <?php if (basename($_SERVER['PHP_SELF']) == 'faq.php') echo 'active'; ?>" href="faq.php">FAQ</a>
                     </li>
                     
-                        <li class="nav-item">
-                            <a style="color:#FF9AA2;" class="nav-link <?php if (basename($_SERVER['PHP_SELF']) == 'viewbooking.php') echo 'active'; ?>" href="viewbooking.php">View Booking</a>
-                        </li>
-                    
+                     <!-- View Booking hanya muncul jika user sudah login -->
+                <?php if (isset($_SESSION['USER_ID'])) { ?>
+                    <li class="nav-item">
+                        <a style="color:#FF9AA2;" class="nav-link <?php if (basename($_SERVER['PHP_SELF']) == 'viewbooking.php') echo 'active'; ?>" href="viewbooking.php">View Booking</a>
+                    </li>
+                <?php } ?>
 
                     <?php if (isset($_SESSION['USER_ID' ])) { ?>
                         <li class="nav-item dropdown">
@@ -79,5 +84,15 @@ echo '</pre>';
     }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    let toggler = document.querySelector(".navbar-toggler");
+    let menu = document.querySelector("#navbarSupportedContent");
+
+    toggler.addEventListener("click", function () {
+        menu.classList.toggle("show"); // Toggle menu agar bisa muncul
+    });
+});
+</script>
 
     <style> </style>
