@@ -60,7 +60,7 @@
 <html>
 	<head>
 		<title>CLERK | TEN</title>
-        <link rel="shortcut icon" href="img/ten-logo.png" type="image/png">
+        <link rel="shortcut icon" href="img/ten-icon.png" type="image/png">
 	</head>
 	    <body>
             <div class="container">

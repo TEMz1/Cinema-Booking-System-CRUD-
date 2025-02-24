@@ -18,7 +18,7 @@ $nama = $_SESSION['nama'];
 	<head>
 		<title>CLERK | TEN</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
-        <link rel="shortcut icon" href="img/ten-logo.png" type="image/png">
+        <link rel="shortcut icon" href="img/ten-icon.png" type="image/png">
 	</head>
 	
 	<?php include "sidenav.php"; ?>

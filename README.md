@@ -22,10 +22,10 @@
 9th Step: Proceed to the URL below
 
 If Customer's System:-
-“http://localhost/PARAGON_CINEMA_CUSTOMER/login.php”
+“http://localhost/Cinema-Booking-System-CRUD-/login.php”
 
 If Admin(Manager/Clerk) system:-
-“http://localhost/PARAGON_CINEMA_ADMIN/"
+“http://localhost/Cinema-Booking-System-CRUD-/ADMIN"
 
 10th Step: You can login into Customer's System by using existing account or register for a new one through phpmyadmin. 
 Admin's System on the other hand doesn't have any registration so you must use existing account by referring to the table Clerk or Manager respectively in the database.

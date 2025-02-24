@@ -8,7 +8,7 @@ if (!isset($_SESSION['USER_ID'])) {
     exit();
 }
 
-// Pastikan `transaction_id` dan `hall_id` ada
+// Pastikan transaction_id dan hall_id ada
 if (!isset($_SESSION['transaction_id']) || empty($_SESSION['transaction_id'])) {
     header("location:booking_seat.php");
     exit();
@@ -17,6 +17,7 @@ if (!isset($_SESSION['hall_id']) || empty($_SESSION['hall_id'])) {
     header("location:booking_seat.php");
     exit();
 }
+
 
 // (A) LOAD LIBRARY
 require "booking-lib.php";
@@ -63,7 +64,7 @@ $row = mysqli_fetch_assoc($sql);
     <title>TEN | Booking</title>
 
     <!-- ::::::::::::::Icon Tab::::::::::::::-->
-    <link rel="shortcut icon" href="assets/images/logo/ten-logo.png" type="image/png">
+    <link rel="shortcut icon" href="assets/images/logo/ten-icon.png" type="image/png">
     <link rel="stylesheet" href="assets/_displaybookdetailsStyles.css" />
     <link rel="stylesheet" href="assets/toast-styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
@@ -160,14 +161,65 @@ $row = mysqli_fetch_assoc($sql);
                 </tbody>
             </table>
            <button id="pay-button" class="btn btn-primary btn-lg mt-2 btncarousel">Confirm</button>
+           <br><br>
         
 
-           <script>
-document.getElementById('pay-button').addEventListener('click', function () {
-    let seatData = "<?php echo implode(', ', $seats); ?>";
-    let username = "<?php echo $_SESSION['USER_NAME'] ?? 'Guest'; ?>";
-    let email = "<?php echo $row['email'] ?>"; 
-    let phoneNo = "<?php echo $row['phoneNo'] ?>"; 
+           <p>Waktu tersisa: <span id="countdown">10:00</span></p>
+
+        <script>
+            let timerInterval;
+            let remainingTime;
+            const TOTAL_TIME = 600000; // 10 menit dalam milidetik
+
+            function startTimer() {
+                clearInterval(timerInterval);
+                let expiryTime = localStorage.getItem('expiryTime');
+
+                if (!expiryTime) {
+                    expiryTime = Date.now() + TOTAL_TIME; // Mulai dari awal
+                    localStorage.setItem('expiryTime', expiryTime);
+                }
+
+                timerInterval = setInterval(() => {
+                    let currentTime = Date.now();
+                    remainingTime = expiryTime - currentTime;
+
+                    if (remainingTime <= 0) {
+                        clearInterval(timerInterval);
+                        localStorage.removeItem('expiryTime');
+                        alert("Sesi Anda telah habis! Silakan lakukan pemesanan ulang.");
+                        window.location.href = "index.php"; // Redirect ke halaman awal
+                    }
+
+                    updateCountdownDisplay(remainingTime);
+                }, 1000);
+            }
+
+            function updateCountdownDisplay(time) {
+                let minutes = Math.floor(time / 60000);
+                let seconds = Math.floor((time % 60000) / 1000);
+                document.getElementById("countdown").innerText =
+                    `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            }
+
+            // **Saat halaman dimuat, timer mulai dari awal**
+            document.addEventListener("DOMContentLoaded", function () {
+                localStorage.removeItem('expiryTime'); // Hapus timer sebelumnya
+                startTimer();
+            });
+
+            // **Hapus timer saat user keluar dari halaman**
+            window.addEventListener("beforeunload", function () {
+                localStorage.removeItem('expiryTime');
+            });
+
+            document.getElementById('pay-button').addEventListener('click', function () {
+                pauseTimer();
+
+            let seatData = "<?php echo implode(', ', $seats); ?>";
+            let username = "<?php echo $_SESSION['USER_NAME'] ?? 'Guest'; ?>";
+            let email = "<?php echo $row['email'] ?>"; 
+            let phoneNo = "<?php echo $row['phoneNo'] ?>"; 
 
 //    setTimeout(() => {
 //     alert("Sedang mengambil token pembayaran...");
@@ -193,15 +245,18 @@ document.getElementById('pay-button').addEventListener('click', function () {
             window.snap.pay(data.token, {
            // embedId: null,
                 onSuccess: function (result) {
+                    clearTimer();
                     location.replace("bookingSuccess.php?order_id=" + result.order_id);
                 },
                 onPending: function (result) {
                     alert("Pembayaran sedang diproses!");
                 },
                 onError: function (result) {
+                    clearTimer();
                     alert("Pembayaran gagal!");
                 },
                 onClose: function () {
+                    resumeTimer();
                     alert("Anda menutup pembayaran sebelum selesai!");
                 }
             });
@@ -214,8 +269,25 @@ document.getElementById('pay-button').addEventListener('click', function () {
         alert("Terjadi kesalahan saat menghubungi server!");
     });
 });
+
+function pauseTimer() {
+        clearInterval(timerInterval);
+        localStorage.setItem('expiryTime', Date.now() + remainingTime);
+    }
+
+    function resumeTimer() {
+        let expiryTime = Date.now() + remainingTime;
+        localStorage.setItem('expiryTime', expiryTime);
+        startTimer();
+    }
+
+    function clearTimer() {
+        clearInterval(timerInterval);
+        localStorage.removeItem('expiryTime');
+        document.getElementById("countdown").innerText = "00:00";
+    }
 </script>
-`
+
         </div>
     </section>
 

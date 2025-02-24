@@ -3,6 +3,11 @@ session_name('cust');
 session_start();
 include 'dbConnect.php';
 
+echo "<pre>";
+print_r($_SESSION); // Menampilkan semua session dalam format yang lebih mudah dibaca
+echo "</pre>";
+
+
 if (!isset($_SESSION['USER_ID'])) {
   header("location: login.php");
   exit();
@@ -47,6 +52,7 @@ if (isset($_SESSION['hall_id']) && isset($_SESSION['transaction_id'])) {
   unset($_SESSION['transaction_id']);
 }
 
+
 // (B) GET SESSION SEATS
 require "booking-lib.php";
 $seats = $_RSV->get($sessid);
@@ -60,7 +66,7 @@ $seats = $_RSV->get($sessid);
   <meta charset="utf-8">
 
   <!-- ::::::::::::::Icon Tab::::::::::::::-->
-  <link rel="shortcut icon" href="assets/images/logo/ten-logo.png" type="image/png">
+  <link rel="shortcut icon" href="assets/images/logo/ten-icon.png" type="image/png">
   <link rel="stylesheet" href="assets/_seatLayoutStyles.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -78,6 +84,13 @@ $seats = $_RSV->get($sessid);
       font-weight: bold;
     }
   </style>
+  <script>
+    window.addEventListener("pageshow", function (event) {
+    if (event.persisted) {
+        location.reload(); // Refresh halaman jika diambil dari cache
+    }
+});
+  </script>
 </head>
 
 <body>

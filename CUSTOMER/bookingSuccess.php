@@ -78,13 +78,6 @@ if ($order_id) {
         echo "Error inserting data: " . mysqli_error($conn);
         }
 
-    // } elseif ($transaction_status == 'pending') {
-    //     $payment_status = 'pending';
-    // } elseif ($transaction_status == 'cancel' || $transaction_status == 'deny' || $transaction_status == 'expire') {
-    //     $payment_status = 'cancel';
-    // } else {
-    //     $payment_status = 'failure';
-    // }
 } else {
     ?>
                 <script>		

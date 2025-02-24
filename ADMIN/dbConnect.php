@@ -1,3 +1,11 @@
+<?php
+if (basename($_SERVER['PHP_SELF']) == basename(__FILE__)) {
+    header("HTTP/1.1 405 Method Not Allowed");
+    exit();
+}
+?>
+
+
 <?php 
 $servername = 'localhost';
 $username = 'root';

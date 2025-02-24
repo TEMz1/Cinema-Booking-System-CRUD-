@@ -13,27 +13,6 @@ include 'dbConnect.php';
 // }
 
 
-  // Validasi session
-  if (isset($_SESSION['hall_id']) && isset($_SESSION['transaction_id'])) {
-    $hall_no = $_SESSION['hall_id'];           // Ambil dari session
-    $transaction_id = $_SESSION['transaction_id']; // Ambil dari session
-  
-   // Query untuk menghapus data
-   $sql = "DELETE FROM bookings WHERE transaction_id = ? AND hallNo = ?";
-   $stmt = mysqli_prepare($conn, $sql);
-  
-   if ($stmt) {
-       // Bind parameter
-       mysqli_stmt_bind_param($stmt, "ss", $transaction_id, $hall_no);
-  
-       // Eksekusi query
-       mysqli_stmt_execute($stmt);
-   }
-    // Hapus session terkait (Opsional)
-    unset($_SESSION['hall_id']);
-    unset($_SESSION['transaction_id']);
-  }
-
 if (!isset($_GET['movieid']) || empty($_GET['movieid'])) {
     header("location:index.php"); // Redirect to home if no movie ID
     exit();
@@ -45,7 +24,7 @@ if (isset($_SESSION['transaction_id'])) {
     $transaction_id = $_SESSION['transaction_id'];
 
     // Hapus data di database berdasarkan transaction_id
-    $query = "DELETE FROM invoice WHERE transaction_id = ?";
+    $query = "DELETE FROM bookings WHERE transaction_id = ?";
     $stmt = mysqli_prepare($conn, $query);
     mysqli_stmt_bind_param($stmt, "s", $transaction_id);
     mysqli_stmt_execute($stmt);
@@ -113,7 +92,7 @@ function getTrailerLinkFromDatabase($conn, $movieID)
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TEN | Movies</title>
     <!-- ::::::::::::::Icon Tab::::::::::::::-->
-    <link rel="shortcut icon" href="assets/images/logo/ten-logo.png" type="image/png">
+    <link rel="shortcut icon" href="assets/images/logo/ten-icon.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">

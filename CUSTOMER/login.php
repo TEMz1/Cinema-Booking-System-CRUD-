@@ -44,7 +44,7 @@ if (isset($_POST['login'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TEN | Login</title>
      <!-- ::::::::::::::Icon Tab::::::::::::::-->
-     <link rel="shortcut icon" href="assets/images/logo/ten-logo.png" type="image/png">
+     <link rel="shortcut icon" href="assets/images/logo/ten-icon.png" type="image/png">
     <link rel="stylesheet" href="assets/_loginStyles.css" />
   </head>
   <body>
