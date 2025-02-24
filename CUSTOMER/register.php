@@ -8,37 +8,6 @@ if (isset($_SESSION['USER_ID'])) {
     exit();
   }
   
-// if (isset($_POST['submit'])) {
-//     $Username = $_POST['Username'];
-//     $Email = $_POST['Email'];
-//     $Password = $_POST['Password'];
-//     $phoneNo = $_POST['phoneNo'];
-//     $Name = $_POST['Name'];
-
-//     $chkcust_sql = "SELECT * FROM customer WHERE email = '$Email' or username = '$Username'";//Check if email or username already exists
-//     $chkcust_result = mysqli_query($conn, $chkcust_sql);
-
-//     if($chkcust_result){
-//         if(mysqli_num_rows($chkcust_result) == 0){
-//             $insert = mysqli_query($conn, "INSERT INTO customer (name, phoneNo, email, username, password) VALUES ('$Name','$phoneNo','$Email','$Username','$Password')");
-//             if($insert){
-//                 ?>
-                 <script>		
-// 					alert("You have successfuly registered.");
-// 					window.location = "login.php";
-// 				</script><?php
-//             }
-//         }
-//         else{
-//             ?>
-           <script>		
-// 				alert("The email or username has been taken. Please change.");
-// 				window.location = "register.php";
-// 			</script><?php
-//         }
-//     }
-
-// }
 ?>
 
 

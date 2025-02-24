@@ -3,11 +3,6 @@ session_name('cust');
 session_start();
 include 'dbConnect.php';
 
-echo "<pre>";
-print_r($_SESSION); // Menampilkan semua session dalam format yang lebih mudah dibaca
-echo "</pre>";
-
-
 if (!isset($_SESSION['USER_ID'])) {
   header("location: login.php");
   exit();
