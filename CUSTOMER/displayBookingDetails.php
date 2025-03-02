@@ -69,6 +69,9 @@ $row = mysqli_fetch_assoc($sql);
     <link rel="stylesheet" href="assets/toast-styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
     .btncarousel {
       background: #FFB6C1;
@@ -160,11 +163,16 @@ $row = mysqli_fetch_assoc($sql);
                     </tr>
                 </tbody>
             </table>
-           <button id="pay-button" class="btn btn-primary btn-lg mt-2 btncarousel">Confirm</button>
-           <br><br>
-        
+           <button id="pay-button" class="btn btn-primary btn-lg mt-2 btncarousel">Pay</button>
+           <br>
+           <button id="cancel-button" class="btn btn-primary btn-lg mt-2 btncarousel">Cancel</button>
 
-           <p>Waktu tersisa: <span id="countdown">10:00</span></p>
+           <p>Time Remaining : <span id="countdown">10:00</span></p>
+
+           <!-- Loader -->
+        <div id="loadingOverlay">
+            <div class="spinner"></div>
+        </div>
 
         <script>
             let timerInterval;
@@ -185,11 +193,17 @@ $row = mysqli_fetch_assoc($sql);
                     remainingTime = expiryTime - currentTime;
 
                     if (remainingTime <= 0) {
-                        clearInterval(timerInterval);
-                        localStorage.removeItem('expiryTime');
-                        alert("Sesi Anda telah habis! Silakan lakukan pemesanan ulang.");
-                        window.location.href = "index.php"; // Redirect ke halaman awal
-                    }
+                clearInterval(timerInterval);
+                localStorage.removeItem('expiryTime');
+                Swal.fire({
+                    title: "Session Expired!",
+                    text: "Please place your order again.",
+                    icon: "error",
+                    confirmButtonText: "OK"
+                }).then(() => {
+                    window.location.href = "index.php"; // Redirect to home page
+                });
+            }
 
                     updateCountdownDisplay(remainingTime);
                 }, 1000);
@@ -213,6 +227,33 @@ $row = mysqli_fetch_assoc($sql);
                 localStorage.removeItem('expiryTime');
             });
 
+             // Fungsi konfirmasi sebelum cancel
+    document.getElementById('cancel-button').addEventListener('click', function () {
+        Swal.fire({
+            title: "Cancel Order?",
+            text: "Your order will be canceled and cannot be recovered.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, Cancel",
+            cancelButtonText: "No"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                localStorage.removeItem('expiryTime'); // Hapus timer
+                Swal.fire({
+                    title: "Canceled!",
+                    text: "Your order has been canceled.",
+                    icon: "success",
+                    confirmButtonText: "OK"
+                }).then(() => {
+                    window.location.href = "index.php"; // Redirect ke halaman awal
+                });
+            }
+        });
+    });
+
+            //pay-button function
             document.getElementById('pay-button').addEventListener('click', function () {
                 pauseTimer();
 
@@ -242,27 +283,57 @@ $row = mysqli_fetch_assoc($sql);
         console.log(data); // Debugging
 
         if (data.token) {
-            window.snap.pay(data.token, {
-           // embedId: null,
-                onSuccess: function (result) {
-                    clearTimer();
-                    location.replace("bookingSuccess.php?order_id=" + result.order_id);
-                },
-                onPending: function (result) {
-                    alert("Pembayaran sedang diproses!");
-                },
-                onError: function (result) {
-                    clearTimer();
-                    alert("Pembayaran gagal!");
-                },
-                onClose: function () {
-                    resumeTimer();
-                    alert("Anda menutup pembayaran sebelum selesai!");
-                }
+    window.snap.pay(data.token, {
+        onSuccess: function (result) {
+            clearTimer();
+           
+            Swal.fire({
+                title: "Payment Successful!",
+                html: `<p>Your order has been confirmed.</p>
+                         <p style="font-size: 14px; color: gray;">Please wait while we process your order. <br> Once done, please check your email.</p>`,
+                icon: "success",
+                confirmButtonText: "OK",
+                backdrop: true // Pastikan backdrop aktif untuk mencegah tumpang tindih
+            }).then(() => {
+                
+                location.replace("bookingSuccess.php?order_id=" + result.order_id);
             });
-        } else {
-            alert("Gagal mendapatkan token pembayaran.");
+        },
+        onPending: function (result) {
+            Swal.fire({
+                title: "Payment Processing!",
+                text: "Your payment is being processed. Please wait.",
+                icon: "info",
+                confirmButtonText: "OK"
+            });
+        },
+        onError: function (result) {
+            clearTimer();
+            Swal.fire({
+                title: "Payment Failed!",
+                text: "Your payment could not be processed. Please try again.",
+                icon: "error",
+                confirmButtonText: "OK"
+            });
+        },
+        onClose: function () {
+            resumeTimer();
+            Swal.fire({
+                title: "Payment Incomplete!",
+                text: "You closed the payment window before completing the transaction.",
+                icon: "warning",
+                confirmButtonText: "OK"
+            });
         }
+    });
+} else {
+    Swal.fire({
+        title: "Error!",
+        text: "Failed to retrieve payment token.",
+        icon: "error",
+        confirmButtonText: "OK"
+    });
+}
     })
     .catch(error => {
         console.error('Error:', error);

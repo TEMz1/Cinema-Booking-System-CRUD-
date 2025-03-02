@@ -75,12 +75,23 @@
             </div>
         </div>
     </nav>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-    function confirmLogout() {
-        let confirmAction = confirm("Apakah Anda yakin ingin logout?");
-        if (confirmAction) {
-            window.location.href = "logout.php"; // Redirect ke halaman logout
-        }
+        function confirmLogout() {
+        Swal.fire({
+            title: "Log out Confirmation",
+            text: "Are you sure you want to log out?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, Logout",
+            cancelButtonText: "Cancel"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "logout.php"; // Redirect ke halaman logout
+            }
+        });
     }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>

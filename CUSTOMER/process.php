@@ -29,11 +29,17 @@
 
         if($chkcust_result){    
             if(mysqli_num_rows($chkcust_result) > 0){
-                ?>
-                <script>		
-                    alert("The email or username has been taken. Please change.");
-                    window.location = "register.php";
-                </script><?php
+                echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
+                    echo '<script>
+                        Swal.fire({
+                            title: "Failed!",
+                            text: "The email or username has been taken. Please change.",
+                            icon: "error",
+                            confirmButtonText: "OK"
+                        }).then(() => {
+                            window.location = "register.php";
+                        });
+                    </script>';
             exit();  
         }
         }
@@ -81,11 +87,31 @@
         if ($mail->send()) {
             $insert = mysqli_query($conn, "INSERT INTO customer (name, phoneNo, email, username, password, verification_code, token_expiry) VALUES ('$Name','$phoneNo','$Email','$Username','$Password', '$code', '$expired')");
             if ($insert) {
-                echo "<script>alert('You have successfully registered. Please check your email for verification!'); window.location = 'login.php';</script>";
-            }
+                echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
+                echo '<script>
+                    Swal.fire({
+                        title: "Success!",
+                        text: "You have successfully registered. Please check your email for verification!",
+                        icon: "success",
+                        confirmButtonText: "OK"
+                    }).then(() => {
+                        window.location = "login.php";
+                    });
+                </script>';
+                }
         }
     } catch (Exception $e) {
-        echo "<script>alert('The email doesn't exist Please input your valid email!'); window.location = 'register.php';</script>";
+        echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
+                    echo '<script>
+                        Swal.fire({
+                            title: "Failed!",
+                            text: "The email does\'nt exist Please input your valid email!",
+                            icon: "error",
+                            confirmButtonText: "OK"
+                        }).then(() => {
+                            window.location = "register.php";
+                        });
+                    </script>';
     }
 
 

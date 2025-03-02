@@ -165,16 +165,25 @@ if ($order_id) {
 
         // Redirect ke halaman index
         ?>
-                <script>		
-                     alert("Booking successful!!");
-                    window.location = "index.php";
-                </script>
-                <?php
-                
+        <script>
+            window.location.href = "index.php";
+        </script>
+        <?php
         exit();
 
     } catch (Exception $e) {
-        echo "Email gagal dikirim: {$mail->ErrorInfo}";
+        echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
+        echo '<script>
+            Swal.fire({
+                title: "Email Sending Failed",
+                text: "'.$mail->ErrorInfo.'",
+                icon: "error",
+                confirmButtonText: "OK"
+            }).then(() => {
+                window.location = "index.php";
+            });
+        </script>';
+        exit();
     }
         } else {
         // Jika gagal, tampilkan pesan error
@@ -182,13 +191,19 @@ if ($order_id) {
         }
 
 } else {
-    ?>
-                <script>		
-                    alert("Pembayaran Gagal!!, Silahkan ulangi pemesanan!");
-                    window.location = "index.php";
-                </script>
-                <?php
-                die();
+     // Jika pembayaran gagal
+     echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
+     echo '<script>
+         Swal.fire({
+             title: "Payment Failed!",
+             text: "Please try placing your order again.",
+             icon: "error",
+             confirmButtonText: "OK"
+         }).then(() => {
+             window.location = "index.php";
+         });
+     </script>';
+     exit();
 }
 }
 

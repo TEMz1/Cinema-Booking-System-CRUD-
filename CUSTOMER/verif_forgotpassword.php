@@ -23,13 +23,41 @@
         $customer_id = $row['customer_id'];
 
         if ($row['is_change'] == 1) {
-            echo "<script>alert('You have already changed your password. Please log in.'); window.location='login.php';</script>";
+            echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
+            echo '<script>
+                Swal.fire({
+                    title: "Password Already Changed!",
+                    text: "You have already changed your password. Please log in.",
+                    icon: "info",
+                    confirmButtonText: "OK"
+                }).then(() => {
+                    window.location = "login.php";
+                });
+            </script>';
             exit();
-        }
-    
-        // Jika token valid dan password belum diganti, arahkan ke halaman ubah password
-        echo "<script>alert('Verification successful, please change your password!'); window.location='change_password.php?code=$token';</script>";
+        }else
+        echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
+        echo '<script>
+            Swal.fire({
+                title: "Verification Successful!",
+                text: "Please change your password.",
+                icon: "success",
+                confirmButtonText: "OK"
+            }).then(() => {
+                window.location = "change_password.php?code=' . $token . '";
+            });
+        </script>';
         exit();
     }else {
-        echo "<script>alert('Token tidak valid atau sudah kadaluarsa!'); window.location='login.php';</script>";
+        echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
+    echo '<script>
+        Swal.fire({
+            title: "Invalid or Expired Token!",
+            text: "Your reset link is invalid or has expired.",
+            icon: "error",
+            confirmButtonText: "OK"
+        }).then(() => {
+            window.location = "login.php";
+        });
+    </script>';
     } 

@@ -9,34 +9,6 @@ if (isset($_SESSION['USER_ID'])) {
     header("location: index.php");
     exit();
   }
-
-// if (isset($_POST['submit'])) {
-//     $Username = $_POST['Username'];
-//     $OldPassword = $_POST['OldPassword'];
-//     $NewPassword = $_POST['NewPassword'];
-
-//     $chkpass_sql = "SELECT * FROM customer WHERE username = '$Username'";
-//     $chkpass_result = mysqli_query($conn, $chkpass_sql);
-
-//     if ($chkpass_result) {
-//         if (mysqli_num_rows($chkpass_result) == 0) {
-//             ?>
-            <script>		
-//                 alert("Username not found in record");
-//                 window.location = "forgotpassword.php";
-//             </script>
-            <?php
-//         } else {
-//             $updatepass_result = mysqli_query($conn, "UPDATE customer SET password = '$NewPassword' WHERE username = '$Username'");
-//             ?>
-            <script>		
-//                 alert("Password successfully updated.");
-//                 window.location = "login.php";
-//             </script>
-            <?php
-//         }
-//     }
-// }
 ?>
 
 <!DOCTYPE html>

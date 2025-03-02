@@ -28,7 +28,7 @@ if (!defined('APP_ACCESS')) {
                     <div class="col-lg-4 col-md-6">
                         <h5 class="h1 text-white">TEN Cinema</h5>
                         <p class="small text-secondary"> Where dreams ignite, and stories unfold, Book your seat, let the magic enfold.</p>
-                        <p class="small text-secondary mb-3">&copy; Copyrights. All rights reserved. <a class="text-cust" href="https://github.com/TEMz1/Cinema-Booking-System-CRUD-">TenCinema.com</a></p>
+                        <p class="small text-secondary mb-3">&copy; Copyrights. All rights reserved. <a class="text-cust" target="_blank" href="https://github.com/TEMz1/Cinema-Booking-System-CRUD-">TenCinema.com</a></p>
                     </div>
                     <div class="col-lg-2 col-md-6">
                         <h5 class="text-white mb-3">Quick links</h5>

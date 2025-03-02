@@ -16,55 +16,12 @@ if (isset($_SESSION['USER_ID'])) {
 }
 
   $token = $_GET['code'];
+
+  
   
   $result = mysqli_query($conn, "SELECT * FROM password_reset_request WHERE token='$token' AND token_expiry > NOW()");
 
 
-  if (mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $customer_id = $row['customer_id'];
-        $password = $row['password'];
-        
-    if (isset($_POST['submit'])) {
-        $NewPassword = $_POST['NewPassword'];
-    
-        $chkpass_sql = "SELECT * FROM password_reset_request WHERE token = '$token' ";
-        $chkpass_result = mysqli_query($conn, $chkpass_sql);
-    
-        if ($chkpass_result) {
-            if (mysqli_num_rows($chkpass_result) == 0) {
-                ?>
-                <script>		
-                    alert("Username not found in record");
-                    window.location = "forgotpassword.php";
-                </script>
-                <?php
-            } elseif ($NewPassword == $password){
-                ?>
-                <script>		
-                    alert("New password cannot be same with old password");
-                    window.location = "forgotpassword.php";
-                </script>
-                <?php
-            }
-             else {
-                $updatepass_result = mysqli_query($conn, "UPDATE customer SET password = '$NewPassword' WHERE custid = '$customer_id'");
-                mysqli_query($conn, "UPDATE password_reset_request SET is_change = 1 WHERE customer_id = '$customer_id'");
-                ?>
-                ?>
-                <script>		
-                    alert("Password successfully updated.");
-                    window.location = "login.php";
-                </script>
-                <?php
-            }
-        }
-    }
-  }else {
-    header("location: login.php");
-    exit();
-  }
-  
 ?>
 <style>
     input[type=password]{
@@ -129,6 +86,74 @@ input[type=password]{
 
 
     </div>
+
+    <?php
+    
+  if (mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_assoc($result);
+    $customer_id = $row['customer_id'];
+    $user = mysqli_query($conn, "SELECT password FROM customer WHERE custid = '$customer_id'");
+    $rowPW = mysqli_fetch_assoc($user);
+    $password = $rowPW['password'];
+    
+if (isset($_POST['submit'])) {
+    $NewPassword = $_POST['NewPassword'];
+
+    $chkpass_sql = "SELECT * FROM password_reset_request WHERE token = '$token' ";
+    $chkpass_result = mysqli_query($conn, $chkpass_sql);
+
+    if ($chkpass_result) {
+        if (mysqli_num_rows($chkpass_result) == 0) {
+            echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
+            echo '<script>
+                Swal.fire({
+                    title: "User Not Found",
+                    text: "No user found with the given reset token.",
+                    icon: "error",
+                    confirmButtonText: "OK"
+                }).then(() => {
+                    window.location = "forgotpassword.php";
+                });
+            </script>';
+            exit();
+        } elseif ($NewPassword == $password){
+            echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
+                echo '<script>
+                    Swal.fire({
+                        title: "Invalid Password",
+                        text: "New password cannot be the same as the old password.",
+                        icon: "warning",
+                        confirmButtonText: "OK"
+                    }).then(() => {
+                        window.location = "forgotpassword.php";
+                    });
+                </script>';
+                exit();
+        }
+         else {
+            $updatepass_result = mysqli_query($conn, "UPDATE customer SET password = '$NewPassword' WHERE custid = '$customer_id'");
+            mysqli_query($conn, "UPDATE password_reset_request SET is_change = 1 WHERE customer_id = '$customer_id'");
+            echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
+            echo '<script>
+                Swal.fire({
+                    title: "Password Updated",
+                    text: "Your password has been successfully updated.",
+                    icon: "success",
+                    confirmButtonText: "OK"
+                }).then(() => {
+                    window.location = "login.php";
+                });
+            </script>';
+            exit();
+        }
+    }
+}
+}else {
+header("location: login.php");
+exit();
+}
+
+    ?>
 </body>
 <script>
 document.getElementById("resetForm").addEventListener("submit", function(event) {

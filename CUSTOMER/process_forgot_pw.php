@@ -25,12 +25,18 @@ if (isset($_POST['submit'])) {
     
     if ($chkcust_result) {
         if (mysqli_num_rows($chkcust_result) == 0 ) {
-            ?>
-            <script>		
-                alert("The email or username doesn't exist. Please fill correctly.");
-                window.location = "forgotpassword.php";
-            </script><?php 
-            exit();
+            echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
+                echo '<script>
+                    Swal.fire({
+                        title: "User Not Found",
+                        text: "The email or username doesn\'t exist. Please fill correctly.",
+                        icon: "error",
+                        confirmButtonText: "OK"
+                    }).then(() => {
+                        window.location = "forgotpassword.php";
+                    });
+                </script>';
+                exit();
         }
     }
 }else {
@@ -41,17 +47,7 @@ if (isset($_POST['submit'])) {
       
         $customer_id = $row['custid'];
         $customer_name = $row['name'];
-
-        // Generate token unik
-        
-        // Hapus token lama sebelum menyimpan yang baru
-        // mysqli_query($conn, "DELETE FROM password_reset_request WHERE customer_id = '$customer_id'");
-
-
-        // Simpan token reset password baru
-        
-
-        
+    
             // Kirim Email dengan PHPMailer
             $mail = new PHPMailer(true);
             try {
@@ -77,18 +73,42 @@ if (isset($_POST['submit'])) {
 
                 if ($mail->send()) {
                     mysqli_query($conn, "INSERT INTO password_reset_request (customer_id, token, token_expiry) VALUES ('$customer_id', '$token', '$expired')");
-                    echo "<script>alert('Cek email untuk verifikasi!'); window.location = 'login.php';</script>";
+                    echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
+                    echo '<script>
+                        Swal.fire({
+                            title: "Email Sent!",
+                            text: "Check your email for verification.",
+                            icon: "success",
+                            confirmButtonText: "OK"
+                        }).then(() => {
+                            window.location = "login.php";
+                        });
+                    </script>';
                 } else {
-                    echo "<script>alert('Gagal mengirim email!'); window.location = 'forgotpassword.php';</script>";
+                    echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
+                    echo '<script>
+                        Swal.fire({
+                            title: "Email Failed!",
+                            text: "Failed to send email. Please try again.",
+                            icon: "error",
+                            confirmButtonText: "OK"
+                        }).then(() => {
+                            window.location = "forgotpassword.php";
+                        });
+                    </script>';
                 }   
             } catch (Exception $e) {
-                echo "<script>alert('Kesalahan saat mengirim email!'); window.location = 'forgotpassword.php';</script>";
-            }
-//         } else {
-//             echo "<script>alert('Gagal menyimpan token reset password!'); window.location = 'forgotpassword.php';</script>";
-//         }
-//     } else {
-//         echo "<script>alert('Username atau Email tidak ditemukan!'); window.location = 'forgotpassword.php';</script>";
-//     }
-// }
+                echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
+            echo '<script>
+                Swal.fire({
+                    title: "Error!",
+                    text: "An error occurred while sending the email.",
+                    icon: "error",
+                    confirmButtonText: "OK"
+                }).then(() => {
+                    window.location = "forgotpassword.php";
+                });
+            </script>';
+        }
+
 ?>

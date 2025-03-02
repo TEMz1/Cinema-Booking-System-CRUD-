@@ -19,40 +19,6 @@ if (!isset($_SESSION['USER_ID'])) {
   $user = mysqli_fetch_assoc($result);
   $password = $user['password'];
 
-  if (isset($_POST['submit'])) {
-    $oldPassword = $_POST['oldPassword'];
-    $NewPassword = $_POST['NewPassword'];
-
-    if ($NewPassword == $password) {
-        ?>
-        <script>		
-            alert("New password cannot be same as old password, Please change your password!!");
-            window.location = "changePassword.php";
-        </script>
-        <?php
-    }
-
-    elseif ($oldPassword == $password) {
-    $updatepass_result = mysqli_query($conn, "UPDATE customer SET password = '$NewPassword' WHERE custid = '$customer_id'");
-    ?>
-    <script>		
-        alert("Password successfully updated, please login again");
-        <?php session_destroy(); ?>
-        window.location = "login.php";
-    </script>
-    <?php
-    
-    } else {
-        ?>
-        <script>		
-            alert("Wrong Password!!!, please input password correctly");
-            window.location = "changePassword.php";
-        </script>
-        <?php
-    }
-   
-}
-  
 ?>
 
 <style>
@@ -124,6 +90,57 @@ input[type=password]{
 
 
     </div>
+
+    <?php
+    if (isset($_POST['submit'])) {
+        $oldPassword = $_POST['oldPassword'];
+        $NewPassword = $_POST['NewPassword'];
+    
+        echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
+    
+        if ($NewPassword == $password) {
+            echo '<script>
+                Swal.fire({
+                    title: "Invalid Password",
+                    text: "New password cannot be the same as the old password. Please change your password!",
+                    icon: "warning",
+                    confirmButtonText: "OK"
+                }).then(() => {
+                    window.location = "changePassword.php";
+                });
+            </script>';
+            exit();
+        } elseif ($oldPassword == $password) {
+            $updatepass_result = mysqli_query($conn, "UPDATE customer SET password = '$NewPassword' WHERE custid = '$customer_id'");
+    
+            echo '<script>
+                Swal.fire({
+                    title: "Password Updated",
+                    text: "Your password has been successfully updated. Please login again.",
+                    icon: "success",
+                    confirmButtonText: "OK"
+                }).then(() => {
+                    ' . session_destroy() . '
+                    window.location = "login.php";
+                });
+            </script>';
+            exit();
+        } else {
+            echo '<script>
+                Swal.fire({
+                    title: "Wrong Password!",
+                    text: "Incorrect password entered. Please try again.",
+                    icon: "error",
+                    confirmButtonText: "OK"
+                }).then(() => {
+                    window.location = "changePassword.php";
+                });
+            </script>';
+            exit();
+        }
+    }
+    
+    ?>
 </body>
 <script>
 document.getElementById("resetForm").addEventListener("submit", function(event) {

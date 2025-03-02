@@ -36,21 +36,6 @@ $sql = "SELECT name, phoneNo, email, username FROM customer WHERE custid = $user
 $result = $conn->query($sql);
 $user = mysqli_fetch_assoc($result);
 
-// Handle form submission
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $name = mysqli_real_escape_string($conn, $_POST['name']);
-  $username = mysqli_real_escape_string($conn, $_POST['username']);
-  $email = mysqli_real_escape_string($conn, $_POST['email']);
-  $phone = mysqli_real_escape_string($conn, $_POST['phone']);
-  
-  $update_sql = "UPDATE customer SET name='$name', username='$username', email='$email', phoneNo='$phone' WHERE custid=$user_id";
-  
-  if ($conn->query($update_sql) === TRUE) {
-      echo "<script>alert('Profil berhasil diperbarui!'); window.location.href='index.php';</script>";
-  } else {
-      echo "<script>alert('Gagal memperbarui profil!');</script>";
-  }
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -58,10 +43,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <title>TEN | Edit Profile</title>
   <meta charset="utf-8">
   <link rel="shortcut icon" href="assets/images/logo/ten-icon.png" type="image/png">
+  <!-- SweetAlert2 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <!-- SweetAlert2 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <link rel="stylesheet" href="assets/_editProfileStyles.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="javascript/booking.js"></script>
+  
   <style>
     .btncarousel {
       background: #FFB6C1;
@@ -76,6 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       background: #FF9AA2;
       color: #ffffff;
     }
+    
     
   </style>
 </head>
@@ -93,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </ul>
       </div>
 
-      <form action="" method="POST" class="profile-form">
+      <form id="editProfileForm" action="" method="POST" class="profile-form">
   <div class="profile-container text-start">
     <label for="name">Nama </label>
     <input type="text" id="name" name="name" value="<?php echo ($user['name'])?>" required>
@@ -109,11 +101,104 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </div>
 
   <div class="button-profile">
-    <button class="btn btncarousel mt-3" type="submit">Save</button>
-  </div>
-</form>
+  <button class="btn btncarousel mt-3" type="button" onclick="confirmSave()">Save</button>
+</div>
+  <br>
+<div class="button-profile">
+  <button class="btn btncarousel mt-3" type="button" onclick="cancelEdit()">Cancel</button>
+</div>
 
   </section>
+
+  <script>
+  function confirmSave() {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "Do you want to save the changes?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, save it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        document.getElementById("editProfileForm").submit(); // Submit form jika dikonfirmasi
+      }
+    });
+  }
+
+  function cancelEdit() {
+    Swal.fire({
+      title: 'Cancel Changes?',
+      text: "Your changes will not be saved.",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, cancel!',
+      cancelButtonText: 'No, stay here'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = 'profile.php'; // Kembali ke profile.php jika user memilih cancel
+      }
+    });
+  }
+</script>
+
+  <?php
+  
+// Handle form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $name = mysqli_real_escape_string($conn, $_POST['name']);
+  $username = mysqli_real_escape_string($conn, $_POST['username']);
+  $email = mysqli_real_escape_string($conn, $_POST['email']);
+  $phone = mysqli_real_escape_string($conn, $_POST['phone']);
+  
+  $sql2 = "SELECT username FROM customer WHERE custid != $user_id AND username = '$username'";
+  $result2 = $conn->query($sql2);
+  
+
+  if ($result2->num_rows > 0) {
+    echo "<script>
+    Swal.fire({
+        title: 'Failed to Change!',
+        text: 'Username is already taken!',
+        icon: 'error',
+        confirmButtonText: 'OK'
+    }).then(() => {
+        window.location = 'editProfile.php';
+    });
+    </script>";
+    exit();
+  }
+
+  // Jika username belum dipakai, update data di database
+  $update_sql = "UPDATE customer SET name='$name', username='$username', email='$email', phoneNo='$phone' WHERE custid=$user_id";
+
+  if ($conn->query($update_sql) === TRUE) {
+    echo "<script>
+    Swal.fire({
+        title: 'Profile Updated!',
+        text: 'Successfully updated your profile.',
+        icon: 'success',
+        confirmButtonText: 'OK'
+    }).then(() => {
+        window.location = 'profile.php';
+    });
+    </script>";
+    exit();
+  } else {
+    echo "<script>
+    Swal.fire({
+        title: 'Update Failed!',
+        text: 'There was an error updating your profile.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+    });
+    </script>";
+  }
+}
+?>
 </body>
 <style>
   .profile-container input[type="text"], input[type="number"], input[type="email"]{

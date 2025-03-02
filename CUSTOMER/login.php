@@ -10,29 +10,7 @@ if (isset($_SESSION['USER_ID'])) {
   exit();
 }
 
-if (isset($_POST['login'])) {
-    $Username = mysqli_real_escape_string($conn, $_POST['Username']);
-    $Password = mysqli_real_escape_string($conn, $_POST['Password']);
 
-    $sql = mysqli_query($conn, "SELECT * FROM customer WHERE (username='$Username' OR email='$Username') AND password='$Password' AND is_verif=1");
-    $num = mysqli_num_rows($sql);
-
-    if ($num > 0) {
-        $row = mysqli_fetch_assoc($sql);
-
-        $_SESSION['USER_ID'] = $row['custid'];
-        $_SESSION['USER_NAME'] = $row['username'];
-
-        ?>
-        <script>
-            alert("You have successfully logged in. Please press OK to proceed.");
-            window.location = "index.php";
-        </script>
-        <?php
-    } else {
-        $msg = "Please enter valid details!";
-    }
-}
 ?>
 
 
@@ -46,6 +24,10 @@ if (isset($_POST['login'])) {
      <!-- ::::::::::::::Icon Tab::::::::::::::-->
      <link rel="shortcut icon" href="assets/images/logo/ten-icon.png" type="image/png">
     <link rel="stylesheet" href="assets/_loginStyles.css" />
+      <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
   <body>
     <div class="content">
@@ -74,5 +56,49 @@ if (isset($_POST['login'])) {
       </div>
       
     </div>
+    <?php
+    if (isset($_POST['login'])) {
+      $Username = mysqli_real_escape_string($conn, $_POST['Username']);
+      $Password = mysqli_real_escape_string($conn, $_POST['Password']);
+  
+      $sql = mysqli_query($conn, "SELECT * FROM customer WHERE (username='$Username' OR email='$Username') AND password='$Password' AND is_verif=1");
+      $num = mysqli_num_rows($sql);
+  
+      if ($num > 0) {
+          $row = mysqli_fetch_assoc($sql);
+  
+          $_SESSION['USER_ID'] = $row['custid'];
+          $_SESSION['USER_NAME'] = $row['username'];
+  
+          echo "<script>
+          document.addEventListener('DOMContentLoaded', function() {
+              Swal.fire({
+                  title: 'Login Success',
+                  text: 'Welcome to TENCinema!',
+                  icon: 'success',
+                  confirmButtonText: 'OK'
+              }).then(() => {
+                  window.location = 'index.php';
+              });
+          });
+        </script>";
+  exit();
+  } else {
+  echo "<script>
+          document.addEventListener('DOMContentLoaded', function() {
+              Swal.fire({
+                  title: 'Login Failed!',
+                  text: 'Email or password is wrong!',
+                  icon: 'error',
+                  confirmButtonText: 'Try Again'
+              }).then(() => {
+                  window.location = 'login.php';
+              });
+          });
+        </script>";
+  exit();
+  }
+  }
+    ?>
   </body>
 </html>
