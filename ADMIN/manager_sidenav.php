@@ -25,6 +25,7 @@ if (!defined('APP_ACCESS')) {
 			<li><a href="customer.php">Customer</a></li>
 			<li><a href="booking.php">Booking</a></li>
 			<li><a href="sales.php">Sales</a></li>
+
 		</ul>
 		
 		<a href="javascript:void(0);" id="logout_btn" class="fa fa-sign-out" onclick="logoutConfirm();"></a>

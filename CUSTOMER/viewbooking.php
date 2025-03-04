@@ -50,7 +50,7 @@ $userid = $_SESSION['USER_ID'];
 $today = date('d M Y'); // Formatkan tanggal hari ini ke '09 Jan 2025'
 
 // Query hanya untuk data pada hari ini
-$query = "SELECT * FROM invoice WHERE custid = '$userid' AND date >= '$today' ORDER BY date DESC,
+$query = "SELECT * FROM invoice WHERE custid = '$userid'  AND STR_TO_DATE(date, '%d %b %Y') >= CURDATE() AND (isUse IS NULL OR isUse != 1) ORDER BY date DESC,
 showtime ASC";
 $result = mysqli_query($conn, $query);
 

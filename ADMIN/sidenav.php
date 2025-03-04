@@ -24,6 +24,7 @@ if (!defined('APP_ACCESS')) {
 			<li><a href="movie.php">Movies</a></li>
 			<li><a href="hall.php">Hall</a></li>
 			<li><a href="session.php">Session</a></li>
+			<li><a href="scanqr.php">SCAN QR</a></li>
 		</ul>
 		
 		<a href="javascript:void(0);" id="logout_btn" class="fa fa-sign-out" onclick="logoutConfirm();"></a>

@@ -43,6 +43,17 @@ $seatsChosen = $_SESSION['seat'];
 $amount = count(explode(', ', $seatsChosen)) * 40000;
 $transaction_id = $_SESSION['transaction_id'];
 
+$sess_id = $_SESSION['SESS_ID'];
+
+$sql = "SELECT m.title 
+        FROM sessions s 
+        JOIN movie m ON s.movieid = m.movieid 
+        WHERE s.session_id = $sess_id";
+
+$result = $conn->query($sql);
+$row =  mysqli_fetch_assoc($result);
+$judul = $row['title'];
+
 if ($order_id) {
     $status = \Midtrans\Transaction::status($order_id);
     $transaction_status = $status->transaction_status;
@@ -69,59 +80,84 @@ if ($order_id) {
             mysqli_stmt_bind_result($emailStmt, $customerEmail, $username);
             mysqli_stmt_fetch($emailStmt);
             mysqli_stmt_close($emailStmt);
-
-            // === [ 1. BUAT INVOICE PDF DENGAN QR CODE ] === //
+                 
+            // Buat instance PDF
             $pdf = new TCPDF();
             $pdf->SetCreator(PDF_CREATOR);
             $pdf->SetAuthor('TENCinemas');
-            $pdf->SetTitle('Invoice Booking');
+            $pdf->SetTitle('Invoice Booking TENCinema');
             $pdf->SetMargins(15, 15, 15);
             $pdf->SetAutoPageBreak(TRUE, 15);
             $pdf->AddPage();
-
+                        
             // Tambahkan logo
-            $pdf->Image('assets/imaages/logo/ten-logo.png', 15, 10, 40);
-            $pdf->SetFont('Helvetica', 'B', 18);
-            $pdf->Cell(0, 15, 'TENCinemas - Invoice', 0, 1, 'C');
-
-            // Garis pemisah
-            $pdf->SetLineWidth(0.5);
-            $pdf->Line(15, 35, 195, 35);
+            $pdf->Image('assets/images/logo/ten-logo.jpg', 83, 13, 40);
             $pdf->Ln(10);
+                        
+            // Tambahkan garis pemisah
+            $pdf->SetLineWidth(0.4);
+            $pdf->Line(15, 52, 195, 52); // Ubah Y dari 55 ke 50
+            $pdf->Ln(20); // Kurangi spasi supaya lebih pas dengan konten
 
             // Detail Booking
-            $pdf->SetFont('Helvetica', 'B', 12);
-            $html = "
-                <h3>Detail Booking</h3>
-                <table border='1' cellpadding='5'>
-                    <tr><td><strong>Customer</strong></td><td>$username</td></tr>
-                    <tr><td><strong>Theater</strong></td><td>$theater</td></tr>
-                    <tr><td><strong>Hall No</strong></td><td>$hallNo</td></tr>
-                    <tr><td><strong>Date</strong></td><td>$date</td></tr>
-                    <tr><td><strong>Showtime</strong></td><td>$time</td></tr>
-                    <tr><td><strong>Seats</strong></td><td>$seatsChosen</td></tr>
-                    <tr><td><strong>Amount Paid</strong></td><td>Rp " . number_format($amount, 2) . "</td></tr>
-                </table>
-            ";
-            $pdf->writeHTML($html, true, false, true, false, '');
+            $pdf->SetFont('Helvetica', '', 18);
+            $html = '
+                        <table border="0" cellpadding="8" cellspacing="0" align="center" width="100%">
+                            <tbody>
+                                <!-- Baris untuk Detail Booking -->
+                                <tr>
+                                    <td colspan="2" style="text-align: center; font-weight: bold; font-size: 25px; padding: 12px;">DETAIL BOOKING</td>
+                                </tr>
+                                <hr>
+                                <!-- Baris untuk Perayaan Mati Rasa -->
+                                <tr>
+                                    <td colspan="2" style="text-align: center; font-weight: bold; font-size: 22px; padding: 12px;"> '.$judul .'</td>
+                                </tr>
+                                <hr>
+                                <!-- Data Customer -->
+                                <tr><td style="padding: 12px; font-size: 14px; font-weight: bold;">Theater</td><td style="padding: 12px; font-size: 14px;">'.$theater .'</td></tr>
+                                <tr><td style="padding: 12px; font-size: 14px; font-weight: bold;">Hall No</td><td style="padding: 12px; font-size: 14px;">'.$hallNo .'</td></tr>
+                                <tr><td style="padding: 12px; font-size: 14px; font-weight: bold;">Date</td><td style="padding: 12px; font-size: 14px;">'.$date .'</td></tr>
+                                <tr><td style="padding: 12px; font-size: 14px; font-weight: bold;">Showtime</td><td style="padding: 12px; font-size: 14px;">'.$time .'</td></tr>
+                                <tr><td style="padding: 12px; font-size: 14px; font-weight: bold;">Seats</td><td style="padding: 12px; font-size: 14px;">'.$seatsChosen .'</td></tr>
+                                <hr>
+                                <!-- Total -->
+                                <tr style="background-color: #d1cfc8;">
+                                    <td style="padding: 12px; text-align: right; font-size: 18px; font-weight: bold; background-color: #d1cfc8;">Total</td>
+                                    <td style="padding: 12px; font-size: 18px; font-weight: bold; background-color: #d1cfc8;">Rp '. number_format($amount, 2, ',', '.') .'</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    ';
+                                                
+                $pdf->Ln(5); // Spasi sebelum garis
+                $pdf->SetLineWidth(0.3);
 
-            // Generate QR Code
-            $qr_code_content = "https://tencinemas.com/verify?trx=$transaction_id";
-            $style = array(
-                'border' => false,
-                'vpadding' => 'auto',
-                'hpadding' => 'auto',
-                'fgcolor' => array(0, 0, 0),
-                'bgcolor' => false
-            );
-            $pdf->write2DBarcode($qr_code_content, 'QRCODE,H', 75, 150, 50, 50, $style);
-            $pdf->Ln(60);
-            $pdf->SetFont('Helvetica', 'I', 10);
-            $pdf->Cell(0, 10, '', 0, 1, 'C');
+                $pdf->Ln(10);
 
-            // Simpan PDF
-            $invoice_pdf = __DIR__ . "/invoices/invoice_$order_id.pdf"; // Simpan di folder 'invoices'
-            $pdf->Output($invoice_pdf, 'F');
+                $pdf->writeHTML($html, true, false, true, false, '');
+                $pdf->Ln(10); // Tambahkan spasi setelah tabel
+
+
+                // Generate QR Code
+
+                $qr_code_content = $transaction_id;
+                $style = array(
+                    'border' => false,
+                    'vpadding' => 'auto',
+                    'hpadding' => 'auto',
+                    'fgcolor' => array(0, 0, 0),
+                    'bgcolor' => false
+                );
+                $pdf->write2DBarcode($qr_code_content, 'QRCODE,H', 80, 210, 50, 50, $style);
+                            $pdf->Ln(60);
+                            $pdf->SetFont('Helvetica', 'I', 10);
+                            $pdf->Cell(0, 10, '', 0, 1, 'C');
+                
+                // Atur Nama File
+                $filename = 'Invoice_' . $username . '_' . 'TENCinema' . $order_id . '.pdf';
+                // Output PDF ke dalam variabel sebagai string (tanpa menyimpannya di server)
+                $pdf_content = $pdf->Output($filename, 'S'); 
 
             // === [ 2. KIRIM EMAIL DENGAN LAMPIRAN INVOICE ] === //
             $mail = new PHPMailer(true);
@@ -137,22 +173,19 @@ if ($order_id) {
                 $mail->setFrom('batakoraja1@gmail.com', 'TENCinemas');
                 $mail->addAddress($customerEmail, $username);
 
-                // Lampiran Invoice PDF
-                $mail->addAttachment($invoice_pdf);
+                // Lampiran Invoice PDF langsung dari string
+                $mail->addStringAttachment($pdf_content, "$filename", 'base64', 'application/pdf');
 
                 $mail->isHTML(true);
                 $mail->Subject = 'TENCinemas - Booking Confirmation';
                 $mail->Body = "Dear $username, <br><br>
-                    Terima kasih telah memesan tiket di TENCinemas! <br><br>
-                    Silakan lihat invoice yang terlampir. Anda dapat memverifikasi tiket dengan memindai QR Code.<br><br>
-                    Salam,<br>
+                    Thank you for booking your ticket at TENCinemas! <br><br>
+                    Please find the attached invoice. You can verify your ticket on TENCinema by scanning the QR Code.<br><br>
+                    Best regards,<br>
                     TENCinemas";
 
                 $mail->send();
-                if (file_exists($invoice_pdf)) {
-                    unlink($invoice_pdf);
-                }
-                
+                 
                 
         // Jika berhasil, destroy session kecuali data user
         $user_id = $_SESSION['USER_ID'];
