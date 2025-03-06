@@ -37,6 +37,8 @@ If Admin(Manager/Clerk) system:-
 Admin's System on the other hand doesn't have any registration so you must use existing account by referring to the table Clerk or Manager respectively in the database.
 
 **Documentation of the system:**
+![gif-webvid](https://github.com/user-attachments/assets/92cc047a-d39f-4d00-8f24-2a03009eee4b)
+
 ![gif-webvid](https://github.com/user-attachments/assets/8e2590bf-55d0-4543-9459-e668c47b4dd3)
 
 ![image](https://github.com/user-attachments/assets/06201621-a05f-4ab9-a84f-ae3b807fe285)
