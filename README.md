@@ -1,3 +1,25 @@
+**Introduction this repository**
+Welcome to the Cinema Booking System repository! This project is built using PHP Native and includes key features such as PHPMailer for email handling and Midtrans as the payment gateway.
+
+**Key Features:**
+1. User Authentication & Email Verification:
+   • PHPMailer is utilized to send email verification links upon user registration.
+   • Users can also request password reset emails if they forget their credentials.
+
+2. Secure Online Payment with Midtrans:
+
+   • The system integrates Midtrans payment gateway to facilitate secure and seamless transactions for   ticket bookings.
+   • Once the payment is successfully processed, the system automatically generates a PDF ticket containing a QR Code, which is sent to the user’s registered email via PHPMailer.
+
+3. QR Code Scanning for Ticket Validation:
+   • At the cinema counter, clerks can scan the QR Code on the ticket to verify its authenticity and grant access to the customer.
+   • This ensures a fast and efficient check-in process for moviegoers.
+
+This project is designed to provide a smooth, secure, and efficient movie ticket booking experience, combining the power of PHP Native, PHPMailer, and Midtrans.
+
+Feel free to explore the repository, contribute, or modify the system according to your needs! 🚀🎬
+
+
 **Prerequisites**
 1. Xampp
 2. Visual Studio Code
@@ -28,22 +50,39 @@ CUSTOMER/bookingSuccess.php file and CUSTOM/displayBookingDetails.php file
 11st Step: Proceed to the URL below
 
 If Customer's System:-
-“http://localhost/Cinema-Booking-System-CRUD-/login.php”
+“http://localhost/Cinema-Booking-System-CRUD-/CUSTOMER”
 
 If Admin(Manager/Clerk) system:-
 “http://localhost/Cinema-Booking-System-CRUD-/ADMIN"
 
-10th Step: You can login into Customer's System by using existing account or register for a new one through phpmyadmin. 
+12nd Step: You can login into Customer's System by using existing account or register for a new one through phpmyadmin. 
 Admin's System on the other hand doesn't have any registration so you must use existing account by referring to the table Clerk or Manager respectively in the database.
 
 **Documentation of the system:**
-![image](https://github.com/user-attachments/assets/06201621-a05f-4ab9-a84f-ae3b807fe285)
 
-![image](https://github.com/user-attachments/assets/af3111a9-1a4f-4c7e-9801-4ed378d4ea90)
+<img src="https://github.com/user-attachments/assets/8e2590bf-55d0-4543-9459-e668c47b4dd3" width="3000">
 
-![image](https://github.com/user-attachments/assets/500bbf71-54e3-42f0-91ec-50a619c6af25)
+<br><br>
+
+<img src="https://github.com/user-attachments/assets/5901290c-9f99-4877-8a3e-7a4ac37255f6" width="3000">
+
+<br><br>
+
+<img src="https://github.com/user-attachments/assets/be79db82-f069-4d2d-b7a1-5ec5e0d7aca7" width="3000">
+
+<br><br>
+
+<img src="https://github.com/user-attachments/assets/7ce11b2f-7c51-4fe6-9a35-ad619c54fe84" width="3000">
+
+<br><br>
 
 ![image](https://github.com/user-attachments/assets/6de5310b-e8b5-44be-9285-60db2a68ffed)
+
+<br><br>
+
+<img src="https://github.com/user-attachments/assets/aca2f224-75a0-4add-8c2f-c2916b21296a" width="500">
+
+
 
 
 

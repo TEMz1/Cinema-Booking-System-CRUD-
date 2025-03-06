@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 24, 2025 at 10:04 PM
+-- Generation Time: Mar 06, 2025 at 08:51 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -58,7 +58,6 @@ CREATE TABLE `clerk` (
 --
 
 INSERT INTO `clerk` (`id`, `username`, `password`, `name`, `icNum`, `phoneNum`, `gender`, `role`) VALUES
-(1, 'amin', '1234', 'Khairul Aminn', '010713-10-0861', '01122238954', 'Male', 'Clerk'),
 (4, 'admon', '3333', 'Miftahul Tama', '25625-2526-666', '055555', 'Male', 'Clerk');
 
 -- --------------------------------------------------------
@@ -129,7 +128,8 @@ CREATE TABLE `invoice` (
   `payment_status` enum('pending','settlement','cancel','failure') DEFAULT NULL,
   `payment_type` varchar(50) DEFAULT NULL,
   `payment_time` datetime DEFAULT NULL,
-  `isUse` int(8) DEFAULT NULL
+  `isUse` int(8) DEFAULT NULL,
+  `useTime` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -220,7 +220,9 @@ INSERT INTO `password_reset_request` (`id`, `customer_id`, `token`, `token_expir
 (3, '14', '0b9515c8af84f00d7c969304f79b04ad7bcd0985452347a6bb3116d5f1e5152e', '2025-02-15 09:29:38', NULL),
 (4, '15', '98fd23f34720ee34f6b4f04fa49dcc11ae98352573e2deb7dd3c824620ab41ce', '2025-02-15 09:44:02', 1),
 (5, '16', 'ad216da0f5216b9434eb965b56bebd10b6742e1b5c749c16b51e94c7bccba5d4', '2025-02-17 00:30:45', 1),
-(6, '15', '5d340e12e6966f539f97f3574b6da791c921a767944f9778512f3a0a42cc63f6', '2025-02-17 09:41:52', 1);
+(6, '15', '5d340e12e6966f539f97f3574b6da791c921a767944f9778512f3a0a42cc63f6', '2025-02-17 09:41:52', 1),
+(7, '18', '6c3c6935c47fa802d7884db85e9fbdff8c7409852f1d39c8f0b53a52bc4c97d4', '2025-02-27 07:51:39', 1),
+(8, '18', '203e6ee3c8652b38f54cc8da1393a92196470e32aa00582d89009810c0f327f4', '2025-02-27 08:06:46', 1);
 
 -- --------------------------------------------------------
 
@@ -754,7 +756,79 @@ INSERT INTO `seats` (`seatid`, `seatNo`, `hallNo`) VALUES
 (520, 'H3', 'Hall-13'),
 (521, 'H4', 'Hall-13'),
 (522, 'H5', 'Hall-13'),
-(523, 'H6', 'Hall-13');
+(523, 'H6', 'Hall-13'),
+(524, 'A1', 'HALL-9'),
+(525, 'A2', 'HALL-9'),
+(526, 'A3', 'HALL-9'),
+(527, 'A4', 'HALL-9'),
+(528, 'A5', 'HALL-9'),
+(529, 'A6', 'HALL-9'),
+(530, 'B1', 'HALL-9'),
+(531, 'B2', 'HALL-9'),
+(532, 'B3', 'HALL-9'),
+(533, 'B4', 'HALL-9'),
+(534, 'B5', 'HALL-9'),
+(535, 'B6', 'HALL-9'),
+(536, 'C1', 'HALL-9'),
+(537, 'C2', 'HALL-9'),
+(538, 'C3', 'HALL-9'),
+(539, 'C4', 'HALL-9'),
+(540, 'C5', 'HALL-9'),
+(541, 'C6', 'HALL-9'),
+(542, 'D1', 'HALL-9'),
+(543, 'D2', 'HALL-9'),
+(544, 'D3', 'HALL-9'),
+(545, 'D4', 'HALL-9'),
+(546, 'D5', 'HALL-9'),
+(547, 'D6', 'HALL-9'),
+(548, 'E1', 'HALL-9'),
+(549, 'E2', 'HALL-9'),
+(550, 'E3', 'HALL-9'),
+(551, 'E4', 'HALL-9'),
+(552, 'E5', 'HALL-9'),
+(553, 'E6', 'HALL-9'),
+(554, 'F1', 'HALL-9'),
+(555, 'F2', 'HALL-9'),
+(556, 'F3', 'HALL-9'),
+(557, 'F4', 'HALL-9'),
+(558, 'F5', 'HALL-9'),
+(559, 'F6', 'HALL-9'),
+(560, 'E2', 'HALL-10'),
+(561, 'E1', 'HALL-10'),
+(562, 'D6', 'HALL-10'),
+(563, 'D5', 'HALL-10'),
+(564, 'D4', 'HALL-10'),
+(565, 'D3', 'HALL-10'),
+(566, 'D2', 'HALL-10'),
+(567, 'E3', 'HALL-10'),
+(568, 'E4', 'HALL-10'),
+(569, 'E5', 'HALL-10'),
+(570, 'E6', 'HALL-10'),
+(571, 'F1', 'HALL-10'),
+(572, 'F2', 'HALL-10'),
+(573, 'F3', 'HALL-10'),
+(574, 'F4', 'HALL-10'),
+(575, 'F5', 'HALL-10'),
+(576, 'F6', 'HALL-10'),
+(577, 'D1', 'HALL-10'),
+(578, 'C6', 'HALL-10'),
+(579, 'A2', 'HALL-10'),
+(580, 'A3', 'HALL-10'),
+(581, 'A4', 'HALL-10'),
+(582, 'A5', 'HALL-10'),
+(583, 'A6', 'HALL-10'),
+(584, 'B1', 'HALL-10'),
+(585, 'B2', 'HALL-10'),
+(586, 'B3', 'HALL-10'),
+(587, 'B4', 'HALL-10'),
+(588, 'B5', 'HALL-10'),
+(589, 'B6', 'HALL-10'),
+(590, 'C1', 'HALL-10'),
+(591, 'C2', 'HALL-10'),
+(592, 'C3', 'HALL-10'),
+(593, 'C4', 'HALL-10'),
+(594, 'C5', 'HALL-10'),
+(595, 'A1', 'HALL-10');
 
 -- --------------------------------------------------------
 
@@ -859,7 +933,24 @@ INSERT INTO `sessions` (`session_id`, `hallNo`, `movieid`, `showtime_start`, `sh
 (154, 'HALL-1', 33, '2025-02-23 23:50:00', '2025-02-24 04:47:00'),
 (155, 'HALL-1', 33, '2025-02-24 16:44:00', '2025-02-24 21:45:00'),
 (156, 'Hall-11', 34, '2025-02-24 12:15:00', '2025-02-24 03:15:00'),
-(157, 'HALL-1', 34, '2025-02-24 23:15:00', '2025-02-24 02:16:00');
+(157, 'HALL-1', 34, '2025-02-24 23:15:00', '2025-02-24 02:16:00'),
+(158, 'HALL-1', 32, '2025-02-27 09:00:00', '2025-02-27 11:30:00'),
+(159, 'HALL-1', 32, '2025-02-27 12:00:00', '2025-02-27 14:30:00'),
+(160, 'HALL-1', 33, '2025-02-27 15:00:00', '2025-02-27 17:35:00'),
+(161, 'HALL-1', 33, '2025-02-27 18:00:00', '2025-02-27 20:30:00'),
+(162, 'HALL-1', 33, '2025-02-27 21:00:00', '2025-02-27 23:40:00'),
+(163, 'HALL-6', 33, '2025-02-27 06:30:00', '2025-02-27 08:40:00'),
+(164, 'HALL-1', 44, '2025-03-01 21:40:00', '2025-03-01 23:40:00'),
+(165, 'HALL-1', 32, '2025-03-02 00:11:00', '2025-03-02 15:11:00'),
+(166, 'HALL-1', 32, '2025-03-02 11:12:00', '2025-03-02 15:12:00'),
+(167, 'HALL-1', 32, '2025-03-02 17:26:00', '2025-03-02 21:26:00'),
+(168, 'HALL-10', 33, '2025-03-02 23:52:00', '2025-03-02 02:52:00'),
+(169, 'HALL-1', 33, '2025-03-02 23:54:00', '2025-03-02 03:54:00'),
+(170, 'HALL-9', 33, '2025-03-02 23:52:00', '2025-03-02 01:01:00'),
+(171, 'HALL-10', 33, '2025-03-03 02:13:00', '2025-03-03 04:13:00'),
+(172, 'HALL-10', 32, '2025-03-03 11:30:00', '2025-03-03 13:21:00'),
+(173, 'HALL-10', 32, '2025-03-03 16:42:00', '2025-03-03 18:42:00'),
+(174, 'HALL-1', 32, '2025-03-04 23:21:00', '2025-03-04 02:21:00');
 
 --
 -- Indexes for dumped tables
@@ -940,7 +1031,7 @@ ALTER TABLE `sessions`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `bookid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=756;
+  MODIFY `bookid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=819;
 
 --
 -- AUTO_INCREMENT for table `clerk`
@@ -952,13 +1043,13 @@ ALTER TABLE `clerk`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `custid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `custid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `invoice`
 --
 ALTER TABLE `invoice`
-  MODIFY `invoiceno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `invoiceno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
 -- AUTO_INCREMENT for table `manager`
@@ -976,19 +1067,19 @@ ALTER TABLE `movie`
 -- AUTO_INCREMENT for table `password_reset_request`
 --
 ALTER TABLE `password_reset_request`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `seats`
 --
 ALTER TABLE `seats`
-  MODIFY `seatid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=524;
+  MODIFY `seatid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=596;
 
 --
 -- AUTO_INCREMENT for table `sessions`
 --
 ALTER TABLE `sessions`
-  MODIFY `session_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
+  MODIFY `session_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=175;
 
 --
 -- Constraints for dumped tables
