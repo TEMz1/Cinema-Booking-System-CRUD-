@@ -11,8 +11,10 @@
 
 **Changing Mailer and Payment Gateway:**
 
-4th Step: You need to change email on PHP Mailer in CUSTOMER/
-5th Step: You need to change with your Key on MidTrans (Client Key or Server Key) in CUSTOMER/
+4th Step: You need to change email on PHP Mailer in CUSTOMER/bookingSuccess.php file ,
+CUSTOMER/process.php file and CUSTOMER/process_forgot_password.php file
+5th Step: You need to change with your Key on MidTrans (Client Key or Server Key) in 
+CUSTOMER/bookingSuccess.php file and CUSTOM/displayBookingDetails.php file
 
 **Creating database:**
 

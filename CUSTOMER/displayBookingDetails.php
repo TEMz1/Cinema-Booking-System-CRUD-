@@ -87,10 +87,12 @@ $row = mysqli_fetch_assoc($sql);
     }
   </style>
 
-<script type="text/javascript"
+    <!-- use your client Key -->
+    <script type="text/javascript"
     src="https://app.sandbox.midtrans.com/snap/snap.js"
-    data-client-key="SB-Mid-client-kfFM5ZGr7d8tLWYs"></script>
-
+    data-client-key="your client key">
+    </script> 
+    
 </head>
 
 <body>
@@ -118,7 +120,7 @@ $row = mysqli_fetch_assoc($sql);
                 <tbody>
                     <tr>
                         <td scope="row">Theater</td>
-                        <td>TEN Cinema - KTCC Mall</td>
+                        <td>TEN Cinema - Pondok Indah Mall</td>
                     </tr>
                     <tr>
                         <td scope="row">Hall No.</td>

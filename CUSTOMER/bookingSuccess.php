@@ -24,8 +24,8 @@ require_once '../vendor/autoload.php';
 require_once '../vendor/midtrans/midtrans-php/Midtrans.php';
 
 
-\Midtrans\Config::$serverKey = 'SB-Mid-server-WcIELqE3mQVZmMXl-8WJvPac';
-\Midtrans\Config::$isProduction = false;
+\Midtrans\Config::$serverKey = ''; //Use your server key
+\Midtrans\Config::$isProduction = false; // Change production mode if you want production mode
 \Midtrans\Config::$isSanitized = true;
 \Midtrans\Config::$is3ds = true;
 
@@ -33,7 +33,7 @@ require_once '../vendor/midtrans/midtrans-php/Midtrans.php';
 $order_id = $_GET['order_id'] ?? null;
 
 // Ambil data dari session
-$theater = "TEN Cinema - KTCC Mall";
+$theater = "TEN Cinema - Pondok Indah Mall";
 $custid = $_SESSION['USER_ID'];
 $hallNo = $_SESSION['hall_id'];
 $showtime = $_SESSION['SHOWTIME'];
@@ -165,12 +165,12 @@ if ($order_id) {
                 $mail->isSMTP();
                 $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'batakoraja1@gmail.com';
-                $mail->Password = 'ivzl lwue qdls pjlo';
+                $mail->Username = ''; // Use your email address
+                $mail->Password = ''; // Use App Password from Google account (not password gmail account)
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
                 $mail->Port = 465;
 
-                $mail->setFrom('batakoraja1@gmail.com', 'TENCinemas');
+                $mail->setFrom('no-reply@tencinema.com', 'TENCinemas'); 
                 $mail->addAddress($customerEmail, $username);
 
                 // Lampiran Invoice PDF langsung dari string

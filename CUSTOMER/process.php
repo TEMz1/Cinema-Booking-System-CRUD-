@@ -58,13 +58,13 @@
         $mail->isSMTP();                                            //Send using SMTP
         $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-        $mail->Username   = 'batakoraja1@gmail.com';                     //SMTP username
-        $mail->Password   = 'ivzl lwue qdls pjlo';                               //SMTP password
+        $mail->Username   = '';                      //Use your email address
+        $mail->Password   = '';                     //Use App Password from Google account (not password gmail account)
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
         $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
         //Recipients
-        $mail->setFrom('from@testmailer.com', 'Verifikasi');
+        $mail->setFrom('no-reply@tencinema.com', 'Verifikasi'); 
         $mail->addAddress($Email, $Name);     //Add a recipient
         // $mail->addAddress('ellen@example.com');               //Name is optional
         // $mail->addReplyTo('info@example.com', 'Information');

@@ -121,7 +121,7 @@ $result = mysqli_query($conn, $query);
                                 <tbody>
                                     <tr>
                                         <td scope="row">Theater</td>
-                                        <td>TEN Cinema - KTCC Mall</td>
+                                        <td>TEN Cinema - Pondok Indah Mall</td>
                                     </tr>
                                     <tr>
                                         <td scope="row">Hall No.</td>
