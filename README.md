@@ -12,7 +12,7 @@ Welcome to the Cinema Booking System repository! This project is built using PHP
    • The system integrates Midtrans payment gateway to facilitate secure and seamless transactions for   ticket bookings.<br>
    • Once the payment is successfully processed, the system automatically generates a PDF ticket containing a QR Code, which is sent to the user’s registered email via PHPMailer.
 
-3. QR Code Scanning for Ticket Validation:
+3. QR Code Scanning for Ticket Validation:<br>
    • At the cinema counter, clerks can scan the QR Code on the ticket to verify its authenticity and grant access to the customer.<br>
    • This ensures a fast and efficient check-in process for moviegoers.
 
