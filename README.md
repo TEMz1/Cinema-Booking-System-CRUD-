@@ -1,4 +1,4 @@
-![gif-webvid](https://github.com/user-attachments/assets/92cc047a-d39f-4d00-8f24-2a03009eee4b)**Prerequisites**
+**Prerequisites**
 1. Xampp
 2. Visual Studio Code
 
