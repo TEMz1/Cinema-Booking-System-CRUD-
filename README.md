@@ -4,16 +4,16 @@ Welcome to the Cinema Booking System repository! This project is built using PHP
 
 **Key Features:**
 1. User Authentication & Email Verification:
-   • PHPMailer is utilized to send email verification links upon user registration.
+   • PHPMailer is utilized to send email verification links upon user registration.<br>
    • Users can also request password reset emails if they forget their credentials.
 
 2. Secure Online Payment with Midtrans:
 
-   • The system integrates Midtrans payment gateway to facilitate secure and seamless transactions for   ticket bookings.
+   • The system integrates Midtrans payment gateway to facilitate secure and seamless transactions for   ticket bookings.<br>
    • Once the payment is successfully processed, the system automatically generates a PDF ticket containing a QR Code, which is sent to the user’s registered email via PHPMailer.
 
 3. QR Code Scanning for Ticket Validation:
-   • At the cinema counter, clerks can scan the QR Code on the ticket to verify its authenticity and grant access to the customer.
+   • At the cinema counter, clerks can scan the QR Code on the ticket to verify its authenticity and grant access to the customer.<br>
    • This ensures a fast and efficient check-in process for moviegoers.
 
 This project is designed to provide a smooth, secure, and efficient movie ticket booking experience, combining the power of PHP Native, PHPMailer, and Midtrans.
