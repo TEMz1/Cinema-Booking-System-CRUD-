@@ -52,6 +52,8 @@ CUSTOMER/bookingSuccess.php file and CUSTOM/displayBookingDetails.php file
 If Customer's System:-
 “http://localhost/Cinema-Booking-System-CRUD-/CUSTOMER”
 
+
+
 If Admin(Manager/Clerk) system:-
 “http://localhost/Cinema-Booking-System-CRUD-/ADMIN"
 
