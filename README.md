@@ -1,4 +1,4 @@
-**Prerequisites**
+![gif-webvid](https://github.com/user-attachments/assets/92cc047a-d39f-4d00-8f24-2a03009eee4b)**Prerequisites**
 1. Xampp
 2. Visual Studio Code
 
@@ -28,7 +28,7 @@ CUSTOMER/bookingSuccess.php file and CUSTOM/displayBookingDetails.php file
 11st Step: Proceed to the URL below
 
 If Customer's System:-
-“http://localhost/Cinema-Booking-System-CRUD-/login.php”
+“http://localhost/Cinema-Booking-System-CRUD-/CUSTOMER/login.php”
 
 If Admin(Manager/Clerk) system:-
 “http://localhost/Cinema-Booking-System-CRUD-/ADMIN"
@@ -37,6 +37,8 @@ If Admin(Manager/Clerk) system:-
 Admin's System on the other hand doesn't have any registration so you must use existing account by referring to the table Clerk or Manager respectively in the database.
 
 **Documentation of the system:**
+![gif-webvid](https://github.com/user-attachments/assets/8e2590bf-55d0-4543-9459-e668c47b4dd3)
+
 ![image](https://github.com/user-attachments/assets/06201621-a05f-4ab9-a84f-ae3b807fe285)
 
 ![image](https://github.com/user-attachments/assets/af3111a9-1a4f-4c7e-9801-4ed378d4ea90)
