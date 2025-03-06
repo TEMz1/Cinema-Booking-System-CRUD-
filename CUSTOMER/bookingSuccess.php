@@ -155,7 +155,7 @@ if ($order_id) {
                             $pdf->Cell(0, 10, '', 0, 1, 'C');
                 
                 // Atur Nama File
-                $filename = 'Invoice_' . $username . '_' . 'TENCinema' . $order_id . '.pdf';
+                $filename = 'Invoice_' . $username . 'TENCinema' . $order_id . '.pdf';
                 // Output PDF ke dalam variabel sebagai string (tanpa menyimpannya di server)
                 $pdf_content = $pdf->Output($filename, 'S'); 
 
