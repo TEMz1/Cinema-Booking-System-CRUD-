@@ -1,0 +1,169 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+* {
+    font-family: "Poppins", sans-serif;
+    box-sizing: border-box;
+    background: #111111;
+    list-style: none;
+  }
+  
+  
+  .container {
+    perspective: 1000px;
+    margin: 40px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+  
+.ulli li {
+    width: 100px;
+    margin-right: 25px;
+    position: relative;
+    justify-content: center;
+  }
+  
+ 
+  
+  
+  .ulli li a {
+    text-align: center;
+    color: #fff;
+    font-size: 18px;
+    text-decoration: none;
+  }
+  
+  .ulli li a .icon {
+    display: block;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    margin: 0 auto 12px;
+    font-size: 22px;
+    text-align: center;
+    background: #7a7777;
+    color: #fff;
+    border-radius: 50%;
+  }
+  
+  .icon img {
+    width: 30px;
+    height: 30px;
+    background: #7a7777;
+  }
+  
+  .ulli li.active a .icon {
+    background: #ffffff;
+    color: #ffffff;
+  }
+  
+  .ulli li.active a {
+    color: #ffffff;
+  }
+
+  .screen {
+    background: #fff;
+    height: 70px;
+    width: 35%;
+    margin: 15px 0;
+    transform: rotateX(-45deg);
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+  }
+
+  .profile-container {
+    /* background: #fff; */
+    padding: 20px;
+    border-radius: 8px;
+    width: 50%;
+    /* box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7); */
+  }
+
+  
+  .profile-container input[type="text"], input[type="number"], input[type="email"]{
+    width: 500px !important;
+    background-color: white;  /* Warna latar belakang putih */
+    color: black;  /* Warna teks hitam */
+    padding: 10px;
+    border-radius: 5px;
+   
+  }
+  
+  .profile-container label{
+    color: white; /* Warna label tetap putih */
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+  }
+  .swal2-icon {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 80px !important;
+    height: 80px !important;
+    margin: 20px auto !important;
+}
+
+.swal2-success {
+    border-color: #a5dc86 !important;
+    background-color: #a5dc86 !important;
+}
+
+.swal2-success .swal2-success-ring {
+    border: 4px solid #a5dc86 !important;
+}
+
+/* Perbaikan SweetAlert2 */
+.swal2-popup {
+    background: white !important;
+    color: black !important;
+    padding: 20px !important;
+    border-radius: 10px !important;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2) !important;
+}
+
+.swal2-title {
+    font-size: 24px !important;
+    font-weight: bold !important;
+    text-align: center !important;
+}
+
+.swal2-html-container {
+    color: black !important;
+    font-size: 16px !important;
+    text-align: center !important;
+}
+
+/* Tombol */
+.swal2-actions .swal2-confirm, .swal2-actions .swal2-cancel {
+    border: none !important;
+    padding: 10px 20px !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+    border-radius: 5px !important;
+    box-shadow: none !important;
+}
+
+.swal2-actions .swal2-confirm {
+    background: #3085d6 !important;
+    color: white !important;
+}
+
+.swal2-actions .swal2-cancel {
+    background: #d33 !important;
+    color: white !important;
+}
+/* Hindari konflik background global */
+.swal2-popup * {
+  background: none !important;
+}
+
+/* Hindari konflik background global */
+.swal2-popup {
+  background: white !important;
+}
+
+.swal2-popup .swal2-icon {
+  background: inherit !important; /* Menggunakan warna default dari SweetAlert2 */
+}

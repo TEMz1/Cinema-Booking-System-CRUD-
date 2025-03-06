@@ -1,0 +1,235 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+*{
+    font-family: "Poppins", sans-serif;
+}
+h1{
+    text-align: left;
+}
+h6{
+    text-align: left;
+}
+p{
+    text-align: left;
+}
+
+ul{
+    list-style-type: none;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+}
+
+.iconn{
+    color: #FFB6C1;
+}
+
+body{
+    background-color: #111111;
+    color: #FFFFFF;
+}
+span{
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+#first-section {
+    background-color: #111111;
+    
+}
+#second-section {
+    background-color: #1D1D1D;
+}
+.btn-primary{
+    background: #FF69B4;
+}
+
+.trailer-btn{
+    border-color: #AF1964;
+    color: #ffffff;
+    background-color: #FFB6C1;
+}
+.trailer-btn:hover{
+    background-color: #66CECF;
+    border-color: #2d9596;
+    color: #fff;
+}
+
+.showtime-btn{
+    background: #FFB6C1;
+    color: #111111;
+    font-weight: bold;
+}
+
+.showtime-btn:hover{
+    background: #FF9AA2;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+#trailer-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#trailer-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#trailer-iframe {
+    width: 560px;
+  height: 315px;
+}
+
+#close-trailer {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: #888;
+    cursor: pointer;
+    z-index: 10000;
+}
+
+
+
+@media (max-width: 767px) {
+    #trailer-iframe {
+        width: 100%;
+        height: auto;
+    }
+}
+
+        body {
+            background-color: #111111;
+            color: #FFFFFF;
+        }
+
+        .cust-button {
+            background-color: #FFB6C1;
+            color: #111111;
+        }
+
+        .cust-button:hover {
+            background: #FF9AA2;
+            color: #ffffff;
+        }
+
+            /* Container styling */
+.date-container {
+    margin-bottom: 20px;
+}
+
+.data-container {
+    margin-top: 20px;
+}
+
+.bi-play-circle-fill {
+    cursor: pointer;
+}
+
+/* Tulisan "WATCH TRAILER" */
+.watch-trailer {
+    cursor: pointer;
+}
+
+/* Jika ingin mengubah kursor pada saat hover */
+.bi-play-circle-fill:hover, .watch-trailer:hover {
+    cursor: pointer;
+}
+
+/* Button styling */
+.date-btn {
+    border: 1px solid #ccc;
+    background-color: #f8f9fa;
+    color: #111111;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+    font-weight: 650;
+}
+
+.date-btn:hover {
+    background-color: rgb(255, 163, 177);
+    color:  #111111;
+    border-color: rgb(255, 163, 177);
+}
+
+.date-btn.active {
+    background-color: rgb(255, 163, 177);
+    color: #111111;
+    border-color: rgb(180, 85, 99);
+}
+
+/* Showtime button styles */
+.showtime-btn {
+    background-color: #f8f9fa; /* Green for active showtimes */
+    color: #111111;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: none;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.showtime-btn:hover {
+    background-color:rgb(255, 163, 177);
+    color: #111111;
+}
+
+/* Disabled button styling */
+.btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+/* Hall container styling */
+.hall-container {
+    margin-top: 30px;
+    padding: 10px;
+    background-color: #343a40;
+    border-radius: 8px;
+}
+
+.hall-container h4 {
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.hall-container .d-flex {
+    justify-content: center;
+    gap: 10px;
+}
+
+.data-container {
+    margin-top: 10px; /* Tambahkan jarak lebih besar */
+    text-align: center;
+}
+
+/* General styling for responsiveness */
+@media (max-width: 768px) {
+    .date-btn, .showtime-btn, .btn-secondary {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    .hall-container h4 {
+        font-size: 14px;
+    }
+}
